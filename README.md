@@ -3,6 +3,20 @@
 Keepable is a take-nothing service and productivity app designed by Codeable
 students in which users can post amazing notes.
 
+## Members (Group 40)
+* Marcelo uñez
+* Rai Delgado
+* Ricardo Huamani
+
+## Usage
+
+After cloning it, install dependencies (only live-server) and run the server with npm.
+
+```bash
+$ npm install
+$ npm start
+```
+
 ![Main view](https://res.cloudinary.com/dotconde/image/upload/v1592461051/Main_lnvoyt.png)
 
 ## Instructions
