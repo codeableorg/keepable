@@ -1,9 +1,29 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+	    <title>Keepeable</title>
+	    <link rel="stylesheet" href="style.css" rel></link>
     </head>
     <body>
-        
+	    <header>
+	    </header>
+	    <nav>
+	    </nav>
+	    <main>
+		    <section id="form">
+			    <div id="input">
+				    <input id="title" type="text" placeholder="Some great title!">
+				    <br>
+				    <textarea id="content" placeholder="Some great content!"></textarea>
+			    </div>
+			    <div id="control">
+				    <input id="color" type="color"></input>
+				    <button id="submit" onclick="app.create_note()">Keep it!</button>
+			    </div>
+		    </section>
+		    <section id="notes">
+		    </section>
+	    </main>
+	<script src="script.js"></script>
     </body>
 </html>
