@@ -12,10 +12,12 @@ class Note {
     '#FDCFE8',
   ];
 
-  constructor({ title = '', body, color }) {
+  constructor({ title = '', body, color, deleted = false, pinned = false }) {
     this.title = title;
     this.body = body;
     this.color = color;
+    this.deleted = deleted;
+    this.pinned = pinned;
     this.date = new Date();
   }
 
