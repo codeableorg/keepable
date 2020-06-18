@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #1d2128;
+  color: #ffffff;
+}
+
+/* grid layout for container */
+.header {
+  grid-area: header;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.main {
+  grid-area: main;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 20% auto;
+  grid-template-rows: 80px auto;
+  grid-template-areas:
+    'header header'
+    'sidebar main';
+}
+
+/* header styles */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid #ffffff;
+}
+
+/* sidebar styles */
+.sidebar {
+  height: 100%;
+  display: flex;
+  border-right: 3px solid #ffffff;
+}
+
+.sidebar__list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+}
+
+.sidebar__item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 5vh;
+  margin: 5px auto;
+}
+
+.sidebar__list--active {
+  background: #999b9e;
+  border-radius: 0px 25px 25px 0px;
+}
+
+.sidebar__list i {
+  margin-left: 2vw;
+  width: 22px;
+}
+
+.sidebar__text {
+  margin-left: 2vw;
+}
+
+/* main styles */
+.main {
+  height: 100%;
+}

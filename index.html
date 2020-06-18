@@ -3,19 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.1/normalize.css" />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/de8d320d41.js" crossorigin="anonymous"></script>
     <title>Keepable</title>
   </head>
   <body>
     <div class="container">
-      <header>Keepable</header>
-      <section>Sidebar</section>
+      <header class="header">
+        <div class="header__logo">
+          <a href="/">
+            <img src="/images/keepable.svg" alt="Keepable" />
+          </a>
+        </div>
+        <div class="header__weather">
+          Welcome to {keepable}. Today's Forecast for Santiago de Surco, Lima Province, Peru: 18°,
+          Cloudy
+        </div>
+      </header>
+
+      <section class="sidebar">
+        <ul class="sidebar__list">
+          <li id="sidebar_notes" class="sidebar__item sidebar__list--active">
+            <i class="fas fa-brackets-curly"></i>
+            <span class="sidebar__text">Notes</span>
+          </li>
+          <li id="sidebar_trash" class="sidebar__item">
+            <i class="far fa-trash-alt"></i>
+            <span class="sidebar__text">Trash</span>
+          </li>
+        </ul>
+      </section>
+
       <section class="main">
         <div id="new-note">
           <form action="">
-            <input type="text" name="title" id="note-title">
-            <input type="text" name="body" id="note-body">
-            <input type="button" id="note-submit" value="Keep it!">
+            <input type="text" name="title" id="note-title" />
+            <input type="text" name="body" id="note-body" />
+            <input type="button" id="note-submit" value="Keep it!" />
           </form>
         </div>
       </section>
