@@ -36,9 +36,44 @@ body {
 }
 .header {
   grid-area: 1 / 1 / 2 / 3;
+  display: grid;
+  grid-template-columns: 25% 75%;
   border-bottom: 1px solid #D1D1D1;
+  align-items: center;
 }
+
+.header-title{
+ color: #ffffff; 
+ margin: 10px 30px;
+}
+.header-title strong{
+  color: #999B9E;
+}
+
+.header-welcome{
+  font-size: 14px;
+  color: #D1D1D1;
+}
+
 .aside {
   border-right: 1px solid #D1D1D1;
+  display: flex;
+  flex-direction: column;
 }
+
+.aside-button{
+  margin-top: 10px;
+  padding: 14px 0px 14px 20px;
+  color: #ffffff;
+}
+.aside-button img{
+  margin-right: 20px;
+}
+.selected{
+  background-color: #999B9E;
+  border: 10x #999B9E solid;
+  border-radius: 0px 25px 25px 0px;
+}
+
+
 /* NEW STYLE */
