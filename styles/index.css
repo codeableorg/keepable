@@ -59,6 +59,7 @@ aside ul li i {
 aside ul li {
   font-size: 20px;
   list-style: none;
+  cursor: pointer;
 }
 aside ul li a {
   text-decoration: none;
