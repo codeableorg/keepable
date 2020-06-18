@@ -38,3 +38,11 @@ main{
 footer{
   grid-area: footer;
 }
+
+.red{
+  background-color: red;
+}
+
+.blue{
+  background-color: blue;
+}
