@@ -1,4 +1,18 @@
 /* RESET */
+
+:root{
+  --color-1:#ffffff ;
+  --color-2: #F28B82;
+  --color-3: #FBBC04;
+  --color-4: #FFF475;
+  --color-5: #CCFF90;
+  --color-6: #CCFF90;
+  --color-7: #CBF0F8;
+  --color-8: #AECBFA;
+  --color-9: #D7AEFB;
+  --color-10: #FDCFE8;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -75,5 +89,27 @@ body {
   border-radius: 0px 25px 25px 0px;
 }
 
+/* Start Paleta */
 
-/* NEW STYLE */
+.paleta{
+  display: flex;
+  flex-wrap: wrap;
+  height: 65px;
+  width: 155px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+.color1{
+  border: 1px solid #999B9E !important;
+}
+
+.paleta a{
+  width: 25px;
+  height: 25px;
+  border-radius: 100px;
+  margin: 2px;
+}
+
+/* End Paleta */
+
