@@ -9,12 +9,14 @@
 </head>
 <body>
   <header class="header">
-    <h1 class="header-title">{keepable}</h1>
+    <h1 class="header-title">{keep<strong>able</strong>}</h1>
+    <p class="header-welcome"> <strong>Welcome to {keepable}</strong> . 
+      Today's Forecast for Santiago de Surco, Lima Province, Peru: 18°, Cloudy</p>
   </header>
 
   <aside class="aside">
-    <a href="#" class="aside-button">Notes</a>
-    <a href="#" class="aside-button">Trash</a>
+    <a href="#" class="aside-button selected"><img src="images/brackets.svg">Notes</a>
+    <a href="#" class="aside-button"><img src="images/trash.svg">Trash </a>
   </aside>
 
   <main class="main">
@@ -39,7 +41,8 @@
         </div>
       </div>
     </div>
-
+  
+    <div class="paleta"></div>
   </main>
 
   <script src="note.js"></script>
