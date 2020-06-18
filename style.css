@@ -34,8 +34,16 @@ body {
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   border-bottom: 3px solid #ffffff;
+}
+
+.header__logo {
+  margin-left: 2vw;
+}
+
+.header__weather {
+  margin-left: 10vw;
 }
 
 /* sidebar styles */
@@ -62,6 +70,7 @@ body {
   align-items: center;
   height: 5vh;
   margin: 5px auto;
+  cursor: pointer;
 }
 
 .sidebar__list--active {
