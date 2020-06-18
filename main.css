@@ -42,3 +42,81 @@ body {
   border-right: 1px solid #D1D1D1;
 }
 /* NEW STYLE */
+
+.notes{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 20px 20px 0;
+
+}
+
+.note{
+  width: 240px;
+  height: 260px;
+  box-shadow: 5px 5px 15px rgba(153, 155, 158, 0.85);
+  border-radius: 8px;
+  color: #000;
+  background: rgb(179, 202, 246);
+  padding: 20px 20px 3px 20px;
+  font-size: 18px;
+  margin: 20px 0 0 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.buttons{
+  width: 80px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.palette, .trash{
+  background: rgba(255, 255, 255, 0.5);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.create-note{
+  width: 600px;
+  height: 150px;
+  background: #fff;
+  padding-bottom: 26px;
+}
+
+.container-create{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding-bottom: 30px;
+}
+
+.create-note textarea{
+  background: transparent;
+  border: none;
+  height: 40px;
+  color: #000;
+  padding: 10px 0 10px 15px;
+  font-family: "Roboto", Arial;
+  font-size: 18px;
+}
+
+.container-buttons{
+  display: flex;
+  justify-content: space-between;
+}
+
+.container-buttons button.keepit{
+  background: transparent;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 10px;
+  font-weight: 700;
+}
