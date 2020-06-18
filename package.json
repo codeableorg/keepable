@@ -1,0 +1,23 @@
+{
+  "name": "keepable",
+  "version": "0.1.0",
+  "description": "Keepable is a take-nothing service and productivity app designed by Codeable students in which users can post amazing notes.",
+  "main": "none",
+  "scripts": {
+    "start": "live-server --port=3000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drihu/keepable.git"
+  },
+  "author": "Group-40",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/drihu/keepable/issues"
+  },
+  "homepage": "https://github.com/drihu/keepable#readme",
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
