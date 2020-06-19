@@ -1,0 +1,28 @@
+.list {
+    display: flex;
+    width: 100%;
+    height: 200px;
+    background-color: black;
+}
+
+.notas{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    margin: 20px;
+}
+
+.notas-trash{
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    margin: 20px;
+}
+
+.change_view {
+    background-color: gray;
+} 
+
+.recover {
+    background-color: pink;
+}
