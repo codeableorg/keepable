@@ -29,14 +29,42 @@
       </nav>
       <section class="notes-content">
         <div id="notes-panel">
-          <section class="create-note"><h1>create notes</h1></section>
+          <section class="create-note">
+            <div id="notes__form">
+              <div class="notes__form__note" contenteditable="true"></div>
+              <div class="notes__form__footer">
+                <div class="note__footer__buttons">
+                  <button class="note__footer__button_color btn">
+                    <img class="note__footer__button__icon" src="img/icons/color.png" />
+                  </button>
+                  <button class="note__footer__button_delete btn">
+                    <img class="note__footer__button__icon" src="img/icons/delete.png" />
+                  </button>
+                  <button class="regular-btn push-right" id="keepit">Keep it!</button>
+                </div>
+              </div>
+            </div>
+          </section>
           <section class="list-notes">
-            <h1>list notes</h1>
-            <div class="noNotesText">
+            <div id="color_selector">
+              <div class="color-1 color-palette"></div>
+              <div class="color-2 color-palette"></div>
+              <div class="color-3 color-palette"></div>
+              <div class="color-4 color-palette"></div>
+              <div class="color-5 color-palette"></div>
+              <div class="color-6 color-palette"></div>
+              <div class="color-7 color-palette"></div>
+              <div class="color-8 color-palette"></div>
+              <div class="color-9 color-palette"></div>
+              <div class="color-10 color-palette"></div>
+            </div>
+
+            <div class="noNotesText" hidden>
               <p class="braces">{</p>
               <span class="braces_text">Notes you add appear here</span>
               <p class="braces">}</p>
             </div>
+            <div id="notes"></div>
           </section>
         </div>
         <div id="deleted-panel">
@@ -46,5 +74,6 @@
     </main>
     <script src="src/js/tabs-link.js"></script>
     <script src="src/js/get-weather.js"></script>
+    <script src="src/js/note.js"></script>
   </body>
 </html>
