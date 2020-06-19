@@ -75,7 +75,7 @@ function showNotes() {
 
 function openPaletteColor() {
   colorButton.addEventListener("click", () =>
-    paletteColors.classList.toggle("hidde")
+    paletteColors.classList.toggle("hidden")
   );
 }
 
@@ -86,6 +86,6 @@ document.querySelectorAll(".color").forEach((color) =>
     const buttonSelected = event.target;
     const color = buttonSelected.dataset.color;
     newNoteWrapper.style.backgroundColor = color;
-    paletteColors.classList.toggle("hidde");
+    paletteColors.classList.toggle("hidden");
   })
 );

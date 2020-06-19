@@ -1,71 +1,92 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+  --black: #1d2128;
+  --white: #ffffff;
+  --coral: #f28b82;
+  --orange: #fbbc04;
+  --yellow: #fff475;
+  --green: #ccff90;
+  --aquamarine: #a7ffeb;
+  --light-blue: #cbf0f8;
+  --blue: #aecbfa;
+  --purple: #d7aefb;
+  --pink: #fdcfe8;
 }
 
-.hidde {
-    display: none;
-}
-.palette-colors{
-    width: 155px;
-    height: 65px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    padding:5px;
-    
+body {
+  font-family: 'Roboto', sans-serif;
+  background: var(--black);
+  color: var(--white);
 }
 
-.color{
-    width: 25px;
-    height: 25px;
-    border-style: none;
-    border-radius: 100px;
-    
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.hidden {
+  display: none;
+}
+
+.palette-colors {
+  width: 155px;
+  height: 65px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 5px;
+}
+
+.color {
+  width: 25px;
+  height: 25px;
+  border-style: none;
+  border-radius: 100px;
 }
 
 .white {
-    border: 1px solid #999B9E;
-    background-color: #ffffff;
+  border: 1px solid #999b9e;
+  background-color: #ffffff;
 }
 
 .coral {
-    background-color: #f28B82;
+  background-color: var(--coral);
 }
 
 .orange {
-    background-color: #FBBC04;
+  background-color: var(--orange);
 }
 
 .yellow {
-    background-color: #FFF475;
+  background-color: var(--yellow);
 }
 
 .green {
-    background-color: #CCFF90;
+  background-color: var(--green);
 }
 
 .aquamarine {
-    background-color: #A7FFEB;
+  background-color: var(--aquamarine);
 }
 
 .light-blue {
-    background-color: #CBF0F8;
+  background-color: var(--light-blue);
 }
 
 .blue {
-    background-color: #AECBFA;
+  background-color: var(--blue);
 }
 
 .purple {
-    background-color: #D7AEFB;
+  background-color: var(--purple);
 }
 
 .pink {
-    background-color: #FDCFE8;
+  background-color: var(--pink);
 }
 
-.form__background{
-    background-color: transparent;
+.form__background {
+  background-color: transparent;
 }
