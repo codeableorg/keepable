@@ -16,7 +16,7 @@ function addNote(color, trash = false, pinned = false) {
   const note = {
     title: noteTitle,
     body: noteBody,
-    color: newNoteWrapper.style.backgroundColor,
+    color: getComputedStyle(newNoteWrapper)['background-color'],
     trash: this.trash,
     pinned: this.pinned,
     updatedAt: Date.now(),

@@ -150,7 +150,7 @@ body {
 .new-note {
   position: relative;
   width: 60%;
-  margin: 3vh auto 0;
+  margin: 3vh auto;
   padding: 1%;
   background: var(--white);
 }
@@ -192,8 +192,6 @@ body {
   width: 95%;
   margin: 1vh auto;
   background: rgba(0, 0, 0, 0);
-  /* border: none;
-  outline: none; */
 }
 
 .new-note__submit {
@@ -201,19 +199,25 @@ body {
   margin: 2.5%;
 }
 
+.new-note__input,
+.new-note__submit {
+  border: none;
+  outline: none;
+}
+
 .notes,
 .all-notes,
 .notes__pinned,
 .notes__others {
   display: grid;
-  grid-template-columns: auto auto auto auto;
-  gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1vw;
   /* grid-template-rows: 80px auto; */
 }
 
 .note {
   color: var(--black);
-  width: 260px;
+  max-width: 260px;
   height: 260px;
   padding: 10px;
 }
@@ -233,12 +237,12 @@ body {
 
 /* background colors */
 .white {
-  border: 1px solid #999b9e;
+  /* border: 1px solid #999b9e; */
   background: var(--white);
 }
 
-.red {
-  background: var(--red);
+.coral {
+  background: var(--coral);
 }
 
 .orange {
@@ -253,12 +257,12 @@ body {
   background: var(--green);
 }
 
-.cyan {
-  background: var(--cyan);
+.aquamarine {
+  background: var(--aquamarine);
 }
 
-.lightblue {
-  background: var(--lightblue);
+.light-blue {
+  background: var(--light-blue);
 }
 
 .blue {
@@ -285,6 +289,10 @@ body {
   border-radius: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding: 5px;
+}
+
+.palette-colors .white {
+  border: 1px solid #999b9e;
 }
 
 .color {
