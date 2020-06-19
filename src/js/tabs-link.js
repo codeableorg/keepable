@@ -1,4 +1,4 @@
-let activeLinkClassName = '.nav-active-link'
+let activeLinkClassName = 'nav-active-link'
 let linkTags = document.getElementsByTagName('a');
 let classHiddenName = 'hide-panel'
 let panelsNames = ['#notes-panel', '#deleted-panel']
@@ -22,7 +22,7 @@ function restructurePanels() {
 
 function removeActiveLink() {
     for (let i = 0, len = linkTags.length; i < len; i++) {
-        linkTags[i].closest('li').classList.remove('nav-active-link')
+        linkTags[i].closest('li').classList.remove(activeLinkClassName)
     }
 }
 
@@ -36,7 +36,7 @@ function tabLinks() {
                 setTimeout(function () {
                     restructurePanels()
                     removeActiveLink()
-                    elementLink.parentNode.classList.add('nav-active-link')
+                    elementLink.parentNode.classList.add(activeLinkClassName)
                     window.scrollTo(0, 0); // Fix auto-focus to div and set to top
                 }, 0)
             }
