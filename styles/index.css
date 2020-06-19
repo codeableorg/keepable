@@ -46,6 +46,13 @@ main {
 
 footer {
   grid-area: footer;
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
+footer .credits {
+  color: #ffffff;
+  text-decoration: none;
 }
 
 nav {
