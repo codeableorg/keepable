@@ -29,23 +29,24 @@ class App {
     createNote() {
         const title = document.getElementById('title').value
         const content = document.getElementById('content').value
-		if (title !== '' && content !== '') {
-			const card = new Card(this.card_count, title, content, this.new_note_color)
-			this.card_count++
-			this.cards.push(card)
-			this.render()
-		}
+	if (title !== '' && content !== '') {
+		const card = new Card(this.card_count, title, content, this.new_note_color)
+		this.card_count++
+		this.cards.push(card)
+		this.render()
+	}
     }
 
     deleteNote(id) {
-		for (let i = 0; i < this.card_count; i++) {
-			if (this.cards[i].id === id) {
-			this.cards.splice(i, 1)
+		for (let i = 0; i < this.cards.length; i++) {
+			if (this.cards[i].id == id) {
+				this.cards.splice(i, 1)
 			}
 		}
 		this.render()
     }
     injectColor(color, obj) {
+	console.log(obj instanceof Card)
 	if (obj instanceof Card) {
 		obj.color = color
 	} else {
@@ -56,25 +57,24 @@ class App {
     }
 
     showPalette(event, id) {
-	let obj
+	let obj = null
 	if (id == 'form') {
 		obj = document.getElementById('form')
 	} else {
-		for (let i = 0; i < this.card_count; i++) {
+		for (let i = 0; i < this.cards.length; i++) {
 			if (this.cards[i].id == id) {
 				obj = this.cards[i]
 			}
 		}
 	}
+	console.log(obj)
 	const palette = document.getElementById('color-palette')
 	const buttons = document.getElementsByClassName('color-palette-button')
 	for (const button of buttons) {
 		const color = (button.style.backgroundColor)
-		button.addEventListener(
-			'click', (event) => {
-				this.injectColor(color, obj)
-			}
-		)
+		button.onclick = (event) => {
+			this.injectColor(color, obj)
+		}
 	}
 	palette.style.display = 'block';
 	palette.style.top = `${event.clientX}px`;
