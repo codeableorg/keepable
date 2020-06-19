@@ -216,23 +216,23 @@ let state = {
 //callbacks
 
 function callback_trash_the_note(event) {
-  state.trash_a_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+  state.trash_a_note(Number(event.currentTarget.parentNode.parentNode.getAttribute("note_id")))
 }
 
 function callback_remove_trashed_note(event) {
-  state.remove_trashed_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+  state.remove_trashed_note(Number(event.currentTarget.parentNode.parentNode.getAttribute("note_id")))
 }
 
 function callback_restore_trashed_note(event) {
-  state.restore_trashed_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+  state.restore_trashed_note(Number(event.currentTarget.parentNode.parentNode.getAttribute("note_id")))
 }
 
 function callback_pin_a_note(params) {
-  state.pin_a_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+  state.pin_a_note(Number(event.currentTarget.parentNode.parentNode.getAttribute("note_id")))
 }
 
 function callback_unpin_a_note(params) {
-  state.unpin_a_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+  state.unpin_a_note(Number(event.parentNode.currentTarget.parentNode.getAttribute("note_id")))
 }
 
 function generate_note(note) {
