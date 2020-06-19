@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 class Note {
   constructor(title, content, color, index) {
@@ -57,8 +57,8 @@ let state = {
     this.refresh_current_page();
   },
 
-  render_note_page(){
-    new Promise(function(resolve, reject) {
+  render_note_page() {
+    new Promise(function (resolve, reject) {
       resolve(new DocumentFragment());
     }).then((fragment) => {
       return this.create_form(fragment);
@@ -174,8 +174,7 @@ let state = {
     });
     fragment.append(notes_container);
     return fragment;
-  }
-  
+  },
 };
 
 //callbacks
