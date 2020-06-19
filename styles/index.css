@@ -122,6 +122,26 @@ footer{
   padding: 20px;
 }
 
+.note_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.note_title {
+  color: #000000;
+  font-size: 14px;
+  line-height: 20px;
+  align-self: center;
+}
+
+.note_pin {
+  height: 36px;
+  width: 36px;
+  top: -12px;
+  right: -12px;
+  position: relative;
+}
+
 .note_body {
   font-size: 18px;
   line-height: 24px;
