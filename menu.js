@@ -8,15 +8,19 @@ function reset_active_menu() {
 }
 
 function click_notes() {
-  reset_active_menu();
-  let el = document.querySelector('#note-option');
-  el.classList.add("menu-state");
-  state.render_note_page();
+  if (state.current_page !== "notes") {
+    reset_active_menu();
+    let el = document.querySelector('#note-option');
+    el.classList.add("menu-state");
+    state.render_note_page();
+  }   
 }
 
 function click_trash() {
-  reset_active_menu();
-  let el = document.querySelector('#trash-option');
-  el.classList.add("menu-state");
-  state.render_trash_page();
+  if (state.current_page !== "trash") {
+    reset_active_menu();
+    let el = document.querySelector('#trash-option');
+    el.classList.add("menu-state");
+    state.render_trash_page();
+  }
 }

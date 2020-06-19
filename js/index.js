@@ -1,54 +1,60 @@
 'use strict';
 
 class Note {
-  constructor(title, content, color) {
+  constructor(title, content, color, index) {
     this.title = title;
     this.content = content;
     this.color = color;
+    this.trashed = false;
+    this.pinned = false;
+    this.index = index;
   }
 }
 
 let state = {
   main: document.querySelector('main'),
-  normal_notes: [],
-  pinned_notes: [],
-  trashed_notes: [],
+  notes: [],
+  current_page: null,
+  count_notes: 0,
   add_note (title, content, color = 'red') {
-    this.normal_notes.push(new Note(title, content, color));
+    this.notes.push(new Note(title, content, color, this.count_notes));
+    this.count_notes += 1;
   },
-  remove_normal_note(id){
-    if(id >= this.normal_notes.length){
+  trash_a_note(id){
+    const note_index = this.notes.findIndex((el) => el.index === id & el.trashed === false);
+    if(note_index === -1){
       console.log("Id no valido");
       return;
     }
-    const normal_note = this.normal_notes.splice(id, 1);
-    this.trashed_notes.push(normal_note[0]);
-    this.render_note_page();
+    this.notes[note_index].trashed = true;
+    this.refresh_current_page();
   },
-  change_color_of_normal_note(id, color){
-    if(id >= this.normal_notes.length){
+  change_color_of_note(id, color){
+    const note_index = this.notes.findIndex((el) => el.index === id);
+    if(note_index === -1){
       console.log("Id no valido");
       return;
     }
-    this.normal_notes[id].color = color;
-    this.render_note_page();
+    this.notes[note_index].color = color;
+    this.refresh_current_page();
   },
   remove_trashed_note(id){
-    if(id >= this.trashed_notes.length){
+    const note_index = this.notes.findIndex((el) => el.index === id & el.trashed === true);
+    if(note_index === -1){
       console.log("Id no valido");
       return;
     }
-    this.trashed_notes.splice(id, 1);
-    this.render_note_page();
+    delete this.notes.splice(note_index, 1);
+    this.refresh_current_page();
   },
   restore_trashed_note(id){
-    if(id >= this.trashed_notes.length){
+    const note_index = this.notes.findIndex((el) => el.index === id & el.trashed === true);
+    if(note_index === -1){
       console.log("Id no valido");
       return;
     }
-    const trashed_note = this.trashed_notes.splice(id, 1);
-    this.normal_notes.push(trashed_note[0]);
-    this.render_note_page();
+    this.notes[note_index].trashed = false;
+    this.refresh_current_page();
   },
 
   render_note_page(){
@@ -59,6 +65,7 @@ let state = {
     }).then((fragment) => {
       return this.generate_normal_notes(fragment);
     }).then((fragment) => {
+      this.current_page = "notes";
       this.main.innerHTML = "";
       this.main.append(fragment);
     });
@@ -70,9 +77,18 @@ let state = {
     }).then((fragment) => {
       return this.generate_trashed_notes(fragment);
     }).then((fragment) => {
+      this.current_page = "trash";
       this.main.innerHTML = "";
       this.main.append(fragment);
     });
+  },
+
+  refresh_current_page(){
+    if (this.current_page === "notes") {
+      this.render_note_page();
+    } else {
+      this.render_trash_page();
+    }
   },
 
   create_form: function (fragment) {
@@ -98,10 +114,10 @@ let state = {
     let notes_container = document.createElement('div');
     notes_container.className = 'notes_container';
 
-    this.normal_notes.forEach(function (note) {
+    this.notes.filter((el) => el.trashed===false).forEach(function (note) {
       let note_element = document.createElement('div');
       note_element.className = `note ${note.color}`;
-      note_element.innerText = `title: ${note.title}, content ${note.content}, color ${note.color}`;
+      note_element.innerText = `title: ${note.title}, content ${note.content}, color ${note.color}, id ${note.index}`;
       notes_container.append(note_element)
     });
     fragment.append(notes_container);
@@ -112,10 +128,10 @@ let state = {
     let notes_container = document.createElement('div');
     notes_container.className = 'notes_container';
 
-    this.trashed_notes.forEach(function (note) {
+    this.notes.filter((el) => el.trashed===true).forEach(function (note) {
       let note_element = document.createElement('div');
       note_element.className = `note ${note.color}`;
-      note_element.innerText = `content ${note.content}, color ${note.color}`;
+      note_element.innerText = `title: ${note.title}, content ${note.content}, color ${note.color}, id ${note.index}`;
       notes_container.append(note_element)
     });
     fragment.append(notes_container);
@@ -127,7 +143,7 @@ let state = {
 state.add_note('holi-title', 'holi-description');
 state.add_note('woli-title', 'woli-description', 'blue');
 state.add_note('note deleted', 'note-deleted-description', 'blue');
-state.remove_normal_note(2);
+state.trash_a_note(2);
 
 click_notes()
 // state.render_note_page()
