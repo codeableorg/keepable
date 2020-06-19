@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="">
+<html>
     <head>
 	    <title>Keepeable</title>
 		<link type="text/css" href="style.css" rel="stylesheet">
-		<!---link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"-->
+		<script src="https://kit.fontawesome.com/8139da8373.js" crossorigin="anonymous"></script>
     </head>
     <body>
 	    <nav>
@@ -16,32 +16,29 @@
 				    <textarea id="content" placeholder="Some great content!"></textarea>
 			    </div>
 			    <div id="control">
-				    <button id="submit" onclick="app.create_note()">Keep it!</button>
+				    <div id="palette" onclick="app.showPalette(event, 'form')"><i class="fas fa-palette"></i></div>
+				    <div id="submit" onclick="app.createNote()">Keep it!</div>
 			    </div>
 		    </section>
 		    <section id="notes">
 		    </section>
-			<section id = "color-palette">
-				<div>
-					<div style = "background-color: #FFFFFF; border: 1px solid #999B9E" onclick="app.inject_color('FFFFFF')"></div>
-					<div style = "background-color: #F25B82" onclick="app.inject_color('F25B82')"></div>
-					<div style = "background-color: #FBBC04" onclick="app.inject_color('FBBC04')"></div>
-					<div style = "background-color: #FFF475" onclick="app.inject_color('FFF475')"></div>
-					<div style = "background-color: #CCFF90" onclick="app.inject_color('CCFF90')"></div>
-				</div>
-				<div>
-					<div style = "background-color: #A7FFEB" onclick="app.inject_color('A7FFEB')"></div>
-					<div style = "background-color: #CBF0F8" onclick="app.inject_color('CBF0F8')"></div>
-					<div style = "background-color: #AECBFA" onclick="app.inject_color('AECBFA')"></div>
-					<div style = "background-color: #D7AEFB" onclick="app.inject_color('D7AEFB')"></div>
-					<div style = "background-color: #FDCFE8" onclick="app.inject_color('DCFE8')"></div>
-				</div>
-
-
-
-
-			</section>
+		    <div id="color-palette">
+			<div>
+				<div class="color-palette-button" style="background-color: #FFFFFF; border: 1px solid #999B9E"></div>
+				<div class="color-palette-button" style="background-color: #F25B82"></div>
+				<div class="color-palette-button" style="background-color: #FBBC04"></div>
+				<div class="color-palette-button" style="background-color: #FFF475"></div>
+				<div class="color-palette-button" style="background-color: #CCFF90"></div>
+			</div>
+			<div>
+				<div class="color-palette-button" style="background-color: #A7FFEB"></div>
+				<div class="color-palette-button" style="background-color: #CBF0F8"></div>
+				<div class="color-palette-button" style="background-color: #AECBFA"></div>
+				<div class="color-palette-button" style="background-color: #D7AEFB"></div>
+				<div class="color-palette-button" style="background-color: #FDCFE8"></div>
+			</div>
+		    </div>
 	    </main>
-	<script src="./script.js"></script>
+	<script src="script.js"></script>
     </body>
 </html>

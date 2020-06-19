@@ -42,7 +42,7 @@ body {
 }
 
 #color-palette {
-	visibility: hidden;
+	display: none;
 	position: fixed;
 	left: 0;
 	top:0;
@@ -57,6 +57,7 @@ body {
 #color-palette div {
 	display: flex;
 }
+
 #color-palette div > div {
 	background-color: red;
 	width: 25px;
