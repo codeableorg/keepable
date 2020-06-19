@@ -15,19 +15,27 @@
 <main class="main-content">
     <nav class="main-content-nav">
         <ul class="main-content-nav-links">
-            <li class="nav-active-link"><img src="src/assets/keys-icon.png" alt="notes-opt"/>Notes</li>
-            <li class=""><img src="src/assets/trash-icon.png" alt="deleted-opt"/>Trash</li>
+            <li class="nav-active-link">
+                <img src="src/assets/keys-icon.png" alt="notes-opt"/>
+                <a href="#notes-panel" data-type="link">Notes</a>
+            </li>
+            <li>
+                <img src="src/assets/trash-icon.png" alt="deleted-opt"/>
+                <a href="#deleted-panel" data-type="link">Trash</a>
+            </li>
         </ul>
     </nav>
     <section class="notes-content">
-        <section class="create-note">
-            <h1>asd</h1>
-        </section>
-        <section class="list-notes">
-            <h1>asd</h1>
-        </section>
+        <div id="notes-panel">
+            <section class="create-note"><h1>create notes</h1></section>
+            <section class="list-notes"><h1>list notes</h1></section>
+        </div>
+        <div id="deleted-panel">
+            <section class="deleted-notes"><h1>deleted</h1></section>
+        </div>
     </section>
 </main>
+<script src="src/js/tabs-link.js"></script>
 <script src="src/js/get-weather.js"></script>
 </body>
 </html>

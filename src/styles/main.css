@@ -62,18 +62,33 @@ body {
     border-radius: 0 25px 25px 0;
 }
 
+.main-content-nav-links a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
 .notes-content {
     width: 1160px;
 }
 
-.create-note, .list-notes {
+.create-note, .list-notes, .deleted-notes {
     margin: 20px;
 }
 
 
+/*----------*/
 
+/*#notes-panel, #deleted-panel {*/
+/*    display: none;*/
+/*}*/
 
+.hide-panel {
+    display: none;
+}
 
+.show-panel {
+
+}
 
 
 
