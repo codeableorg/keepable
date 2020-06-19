@@ -210,3 +210,7 @@ body {
 .hidden{
   display: none;
 }
+
+.extra{
+  padding-top: 315px;
+}
