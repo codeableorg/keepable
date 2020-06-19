@@ -245,10 +245,9 @@ function generate_note(note) {
   return note_element;
 }
 
-state.add_note('holi-title', 'holi-description');
-state.add_note('woli-title', 'woli-description', 'blue');
-state.add_note('note deleted', 'note-deleted-description', 'blue');
-state.trash_a_note(2);
+// state.add_note('holi');
+// state.add_note('woli', 'blue');
+// state.add_note('note deleted', 'note-deleted-description', 'blue');
+// state.trash_a_note(2);
 
 click_notes()
-// state.render_note_page()
