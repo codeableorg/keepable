@@ -28,29 +28,32 @@ let state = {
   },
 
   create_form: function (fragment) {
-    let form = document.createElement('form');
-    let input = document.createElement('input');
-    input.type = 'text';
-    form.append(input);
-    fragment.append(form);
+    let div = document.createElement('div');
+    div.className = 'new_note_container';
+    div.innerHTML = 
+      `<form action="" class="new_note">
+        <textarea name="" id="textarea" cols="30" rows="10" placeholder="Some great think!"></textarea> 
+        <button>Keep it!</button>
+      </form>`;
+    fragment.append(div);
     return fragment;
   },
 
   generate_notes : function (fragment){ 
+    let notes_container = document.createElement('div');
+    notes_container.className = 'notes_container';
+
     this.normal.forEach(function (note) {
       let note_element = document.createElement('div');
-      note_element.className = note.color;
-      let p_element = document.createElement('p');
-      p_element.innerText = note.content;
-      note_element.append(p_element);
-      fragment.append(note_element);
+      note_element.className = 'note';
+      note_element.innerText = note.content;
+      notes_container.append(note_element)
     });
-  
+    fragment.append(notes_container);
     return fragment;
   }
   
 };
-
 
 state.add_note('holi');
 state.add_note('woli', 'blue');
