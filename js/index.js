@@ -29,6 +29,24 @@ let state = {
     this.notes[note_index].trashed = true;
     this.refresh_current_page();
   },
+  pin_a_note(id){
+    const note_index = this.notes.findIndex((el) => el.index === id & el.trashed === false & el.pinned === false);
+    if(note_index === -1){
+      console.log("Id no valido");
+      return;
+    }
+    this.notes[note_index].pinned = true;
+    this.refresh_current_page();
+  },
+  unpin_a_note(id){
+    const note_index = this.notes.findIndex((el) => el.index === id & el.trashed === false & el.pinned === true);
+    if(note_index === -1){
+      console.log("Id no valido");
+      return;
+    }
+    this.notes[note_index].pinned = false;
+    this.refresh_current_page();
+  },
   change_color_of_note(id, color){
     const note_index = this.notes.findIndex((el) => el.index === id);
     if(note_index === -1){
@@ -118,25 +136,33 @@ let state = {
         return note.pinned ? [not_pinned_acc, [...pinned_acc, note]] : [[...not_pinned_acc, note], pinned_acc];
       }, [[], []]);
 
-      let notes_container = document.createElement('div');
-      notes_container.className = 'notes_container';
-      not_pinned.forEach(function (note) {
-        let note_element = document.createElement('div');
-        note_element.className = `note ${note.color}`;
-        note_element.setAttribute("note_id", note.index);
-        
-        let description = document.createElement('p');
-        description.innerText = `title: ${note.title}, content ${note.content}, color ${note.color}, id ${note.index}`;
-        note_element.append(description);
+      if (pinned.length !== 0) {
+        let title = document.createElement('h2');
+        title.innerText = "PINNED";
+        fragment.append(title);
 
-        let delete_item = document.createElement('div');
-        delete_item.innerText = "Click para enviar a trash";
-        delete_item.addEventListener('click', (event) => callback_trash_the_note(event));
-        note_element.append(delete_item);
-        
-        notes_container.append(note_element)
-      });
-      fragment.append(notes_container);
+        let notes_container = document.createElement('div');
+        notes_container.className = 'notes_container';
+        pinned.forEach(function (note) {
+          notes_container.append(generate_note(note))
+        });
+        fragment.append(notes_container);
+      }
+
+      if (not_pinned.length !== 0) {
+        let title = document.createElement('h2');
+        title.innerText = "OTHERS";
+        fragment.append(title);
+
+        let notes_container = document.createElement('div');
+        notes_container.className = 'notes_container';
+        not_pinned.forEach(function (note) {
+          notes_container.append(generate_note(note))
+        });
+        fragment.append(notes_container);
+      }
+      
+
     } else {
       let message = document.createElement('p');
       message.innerText = 'no notes, create more please';
@@ -151,26 +177,7 @@ let state = {
     notes_container.className = 'notes_container';
 
     this.notes.filter((el) => el.trashed===true).forEach(function (note) {
-      let note_element = document.createElement('div');
-      note_element.className = `note ${note.color}`;
-      note_element.setAttribute("note_id", note.index);
-
-
-      let description = document.createElement('p');
-        description.innerText = `title: ${note.title}, content ${note.content}, color ${note.color}, id ${note.index}`;
-        note_element.append(description);
-
-      let delete_item = document.createElement('div');
-      delete_item.innerText = "Eliminar permanentemente";
-      delete_item.addEventListener('click', (event) => callback_remove_trashed_note(event));
-      note_element.append(delete_item);
-
-      let restore_item = document.createElement('div');
-      restore_item.innerText = "Click para restaurar el note";
-      restore_item.addEventListener('click', (event) => callback_restore_trashed_note(event));
-      note_element.append(restore_item);
-      
-      notes_container.append(note_element)
+      notes_container.append(generate_note(note))
     });
     fragment.append(notes_container);
     return fragment;
@@ -191,6 +198,54 @@ function callback_restore_trashed_note(event) {
   state.restore_trashed_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
 }
 
+function callback_pin_a_note(params) {
+  state.pin_a_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+}
+
+function callback_unpin_a_note(params) {
+  state.unpin_a_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+}
+
+function generate_note(note) {
+  let note_element = document.createElement('div');
+  note_element.className = `note ${note.color}`;
+  note_element.setAttribute("note_id", note.index);
+
+  let description = document.createElement('p');
+    description.innerText = `title: ${note.title}, content ${note.content}, color ${note.color}, id ${note.index}`;
+    note_element.append(description);
+
+  if (note.trashed) {
+    let delete_item = document.createElement('div');
+    delete_item.innerText = "Click para Eliminar permanentemente";
+    delete_item.addEventListener('click', (event) => callback_remove_trashed_note(event));
+    note_element.append(delete_item);
+
+    let restore_item = document.createElement('div');
+    restore_item.innerText = "Click para restaurar";
+    restore_item.addEventListener('click', (event) => callback_restore_trashed_note(event));
+    note_element.append(restore_item);
+  } else {
+    let trash_item = document.createElement('div');
+    trash_item.innerText = "Click para Enviar a trash";
+    trash_item.addEventListener('click', (event) => callback_trash_the_note(event));
+    note_element.append(trash_item);
+
+    if (note.pinned) {
+      let trash_item = document.createElement('div');
+      trash_item.innerText = "Click para hacer unpin a una nota";
+      trash_item.addEventListener('click', (event) => callback_unpin_a_note(event));
+      note_element.append(trash_item);
+    } else {
+      let trash_item = document.createElement('div');
+      trash_item.innerText = "Click para hacer pin a una nota";
+      trash_item.addEventListener('click', (event) => callback_pin_a_note(event));
+      note_element.append(trash_item);
+    }
+  }
+
+  return note_element;
+}
 
 state.add_note('holi-title', 'holi-description');
 state.add_note('woli-title', 'woli-description', 'blue');
