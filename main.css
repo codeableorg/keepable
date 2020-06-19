@@ -57,7 +57,9 @@ body {
 }
 
 .header-title{
- color: #ffffff; 
+ color: #ffffff;
+ font-family: "Roboto Slab";
+ font-weight: bold;
  margin: 10px 30px;
 }
 .header-title strong{
@@ -74,6 +76,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+<<<<<<< HEAD
 
 .aside-button{
   margin-top: 10px;
@@ -114,16 +117,58 @@ body {
 /* End Paleta */
 
 /* NEW STYLE */
+=======
+>>>>>>> 74b5fbeffc925552e4b151124e973b34f287be97
 
-.notes{
+.aside-button{
+  margin-top: 10px;
+  padding: 14px 0px 14px 20px;
+  color: #ffffff;
+}
+.aside-button img{
+  margin-right: 20px;
+}
+.selected{
+  background-color: #999B9E;
+  border: 10x #999B9E solid;
+  border-radius: 0px 25px 25px 0px;
+}
+
+/* Start Paleta */
+
+.paleta{
   display: flex;
   flex-wrap: wrap;
-  padding: 0 20px 20px 0;
+  height: 65px;
+  width: 155px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+}
+.color1{
+  border: 1px solid #999B9E !important;
+}
 
+.paleta a{
+  width: 25px;
+  height: 25px;
+  border-radius: 100px;
+  margin: 2px;
+}
+.main {
+  padding: 15px;
+}
+
+/* NEW STYLE */
+.main__notes,
+.main__trash {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 15px;
+  margin-bottom: 15px;
 }
 
 .note{
-  width: 240px;
   height: 260px;
   box-shadow: 5px 5px 15px rgba(153, 155, 158, 0.85);
   border-radius: 8px;
@@ -131,7 +176,6 @@ body {
   background: rgb(179, 202, 246);
   padding: 20px 20px 3px 20px;
   font-size: 18px;
-  margin: 20px 0 0 25px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -155,27 +199,24 @@ body {
 }
 
 .create-note{
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   height: 150px;
+  margin: auto;
   background: #fff;
+  margin-bottom: 15px;
   padding-bottom: 26px;
 }
 
-.container-create{
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  padding-bottom: 30px;
-}
-
-.create-note textarea{
+.create-note__textarea {
   background: transparent;
   border: none;
-  height: 40px;
   color: #000;
   padding: 10px 0 10px 15px;
   font-family: "Roboto", Arial;
   font-size: 18px;
+  resize: none;
+  outline: 0;
 }
 
 .container-buttons{
