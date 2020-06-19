@@ -1,58 +1,253 @@
-'use strict';
+"use strict";
 
 class Note {
-  constructor(content, color) {
+  constructor(title, content, color, index) {
+    this.title = title;
     this.content = content;
     this.color = color;
+    this.trashed = false;
+    this.pinned = false;
+    this.index = index;
   }
 }
 
 let state = {
   main: document.querySelector('main'),
-  normal: [],
-  trashed: [],
-  add_note (description, color = 'red') {
-    this.normal.push(new Note(description, color));
+  notes: [],
+  current_page: null,
+  count_notes: 0,
+  add_note (title, content, color = 'red') {
+    this.notes.push(new Note(title, content, color, this.count_notes));
+    this.count_notes += 1;
   },
-  render_note_page(){
-    new Promise(function(resolve, reject) {
+  trash_a_note(id){
+    const note_index = this.notes.findIndex((el) => el.index === id & el.trashed === false);
+    if(note_index === -1){
+      console.log("Id no valido");
+      return;
+    }
+    this.notes[note_index].trashed = true;
+    this.refresh_current_page();
+  },
+  pin_a_note(id){
+    const note_index = this.notes.findIndex((el) => el.index === id & el.trashed === false & el.pinned === false);
+    if(note_index === -1){
+      console.log("Id no valido");
+      return;
+    }
+    this.notes[note_index].pinned = true;
+    this.refresh_current_page();
+  },
+  unpin_a_note(id){
+    const note_index = this.notes.findIndex((el) => el.index === id & el.trashed === false & el.pinned === true);
+    if(note_index === -1){
+      console.log("Id no valido");
+      return;
+    }
+    this.notes[note_index].pinned = false;
+    this.refresh_current_page();
+  },
+  change_color_of_note(id, color){
+    const note_index = this.notes.findIndex((el) => el.index === id);
+    if(note_index === -1){
+      console.log("Id no valido");
+      return;
+    }
+    this.notes[note_index].color = color;
+    this.refresh_current_page();
+  },
+  remove_trashed_note(id){
+    const note_index = this.notes.findIndex((el) => el.index === id & el.trashed === true);
+    if(note_index === -1){
+      console.log("Id no valido");
+      return;
+    }
+    delete this.notes.splice(note_index, 1);
+    this.refresh_current_page();
+  },
+  restore_trashed_note(id){
+    const note_index = this.notes.findIndex((el) => el.index === id & el.trashed === true);
+    if(note_index === -1){
+      console.log("Id no valido");
+      return;
+    }
+    this.notes[note_index].trashed = false;
+    this.refresh_current_page();
+  },
+
+  render_note_page() {
+    new Promise(function (resolve, reject) {
       resolve(new DocumentFragment());
     }).then((fragment) => {
       return this.create_form(fragment);
     }).then((fragment) => {
-      return this.generate_notes(fragment);
+      return this.generate_not_trashed_notes(fragment);
     }).then((fragment) => {
+      this.current_page = "notes";
       this.main.innerHTML = "";
       this.main.append(fragment);
     });
   },
 
+  render_trash_page(){
+    new Promise(function(resolve, reject) {
+      resolve(new DocumentFragment());
+    }).then((fragment) => {
+      return this.generate_trashed_notes(fragment);
+    }).then((fragment) => {
+      this.current_page = "trash";
+      this.main.innerHTML = "";
+      this.main.append(fragment);
+    });
+  },
+
+  refresh_current_page(){
+    if (this.current_page === "notes") {
+      this.render_note_page();
+    } else {
+      this.render_trash_page();
+    }
+  },
+
   create_form: function (fragment) {
-    let form = document.createElement('form');
-    let input = document.createElement('input');
-    input.type = 'text';
-    form.append(input);
-    fragment.append(form);
+    const create_note_from_form = function (event) {
+      state.add_note(event.target.textarea.value);
+      state.render_note_page();
+      event.preventDefault();
+    }
+
+    let div = document.createElement('div');
+    div.className = 'new_note_container';
+    div.innerHTML = 
+      `<form action="" class="new_note">
+        <textarea name="note" id="textarea" cols="30" rows="10" placeholder="Some great think!"></textarea> 
+        <button>Keep it!</button>
+      </form>`;
+    fragment.append(div);
+    fragment.firstChild.addEventListener('submit', (event) => create_note_from_form(event));
     return fragment;
   },
 
-  generate_notes : function (fragment){ 
-    this.normal.forEach(function (note) {
-      let note_element = document.createElement('div');
-      note_element.className = note.color;
-      let p_element = document.createElement('p');
-      p_element.innerText = note.content;
-      note_element.append(p_element);
-      fragment.append(note_element);
-    });
-  
+  generate_not_trashed_notes : function (fragment){
+    const not_trashed_notes = this.notes.filter((el) => el.trashed===false);
+
+    if (not_trashed_notes.length !== 0) {
+      const [not_pinned, pinned] = not_trashed_notes.reduce(([not_pinned_acc, pinned_acc], note) => {
+        return note.pinned ? [not_pinned_acc, [...pinned_acc, note]] : [[...not_pinned_acc, note], pinned_acc];
+      }, [[], []]);
+
+      if (pinned.length !== 0) {
+        let title = document.createElement('h2');
+        title.innerText = "PINNED";
+        fragment.append(title);
+
+        let notes_container = document.createElement('div');
+        notes_container.className = 'notes_container';
+        pinned.forEach(function (note) {
+          notes_container.append(generate_note(note))
+        });
+        fragment.append(notes_container);
+      }
+
+      if (not_pinned.length !== 0) {
+        let title = document.createElement('h2');
+        title.innerText = "OTHERS";
+        fragment.append(title);
+
+        let notes_container = document.createElement('div');
+        notes_container.className = 'notes_container';
+        not_pinned.forEach(function (note) {
+          notes_container.append(generate_note(note))
+        });
+        fragment.append(notes_container);
+      }
+      
+
+    } else {
+      let message = document.createElement('p');
+      message.innerText = 'no notes, create more please';
+      fragment.append(message);
+    }
+    
     return fragment;
-  }
-  
+  },
+
+  generate_trashed_notes : function (fragment){
+    let notes_container = document.createElement('div');
+    notes_container.className = 'notes_container';
+
+    this.notes.filter((el) => el.trashed===true).forEach(function (note) {
+      notes_container.append(generate_note(note))
+    });
+    fragment.append(notes_container);
+    return fragment;
+  },
 };
 
+//callbacks
+
+function callback_trash_the_note(event) {
+  state.trash_a_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+}
+
+function callback_remove_trashed_note(event) {
+  state.remove_trashed_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+}
+
+function callback_restore_trashed_note(event) {
+  state.restore_trashed_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+}
+
+function callback_pin_a_note(params) {
+  state.pin_a_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+}
+
+function callback_unpin_a_note(params) {
+  state.unpin_a_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+}
+
+function generate_note(note) {
+  let note_element = document.createElement('div');
+  note_element.className = `note ${note.color}`;
+  note_element.setAttribute("note_id", note.index);
+
+  let description = document.createElement('p');
+    description.innerText = `title: ${note.title}, content ${note.content}, color ${note.color}, id ${note.index}`;
+    note_element.append(description);
+
+  if (note.trashed) {
+    let delete_item = document.createElement('div');
+    delete_item.innerText = "Click para Eliminar permanentemente";
+    delete_item.addEventListener('click', (event) => callback_remove_trashed_note(event));
+    note_element.append(delete_item);
+
+    let restore_item = document.createElement('div');
+    restore_item.innerText = "Click para restaurar";
+    restore_item.addEventListener('click', (event) => callback_restore_trashed_note(event));
+    note_element.append(restore_item);
+  } else {
+    let trash_item = document.createElement('div');
+    trash_item.innerText = "Click para Enviar a trash";
+    trash_item.addEventListener('click', (event) => callback_trash_the_note(event));
+    note_element.append(trash_item);
+
+    let pin_option_item = document.createElement('div');
+    if (note.pinned) {
+      pin_option_item.innerText = "Click para hacer unpin a una nota";
+      pin_option_item.addEventListener('click', (event) => callback_unpin_a_note(event));
+    } else {
+      pin_option_item.innerText = "Click para hacer pin a una nota";
+      pin_option_item.addEventListener('click', (event) => callback_pin_a_note(event));
+    }
+    note_element.append(pin_option_item);
+  }
+
+  return note_element;
+}
 
 // state.add_note('holi');
 // state.add_note('woli', 'blue');
+// state.add_note('note deleted', 'note-deleted-description', 'blue');
+// state.trash_a_note(2);
 
-// state.render_note_page()
+click_notes()

@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Keepable</title>
-  <link rel="stylesheet" href="styles/index.css">
-  
-</head>
-<body>
-  <header>
-    <div class="header_panel_left">
-      <img src="images/logo.svg" alt="">
-    </div>
-    <div class="header_panel_right">
-      <p class="ubication">jsdjsmnddk</p>
-    </div>  
-  </header>
-  <aside>
-    <img src="images/logo.svg" alt="">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keepable</title>
+    <link rel="stylesheet" href="styles/index.css" />
+    <script
+      src="https://kit.fontawesome.com/b146b26bd0.js"
+      crossorigin="anonymous"
+    ></script>
+    <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
 
-  </aside>
-  <main>
-
-    <div class="new_note_container"> 
+  </head>
+  <body>
+    <header>
+      <img src="images/logo.svg" alt="" />
+    </header>
+    <aside>
+      <nav>
+        <div id="note-option" class="menu-item" onclick="click_notes()">
+          <button class="notes"><span>{ }</span>Notes</button>
+        </div>
+        <div id="trash-option" class="menu-item" onclick="click_trash()">
+          <button class="trash"><i class="far fa-trash-alt"></i>Trash</button>
+        </div>
+      </nav>
+    </aside>
+    <main>
+      <div class="new_note_container"> 
       <form action="" class="new_note">
         <input class="title" type="text" placeholder="The title for my new note">
         <textarea name="" id="textarea" cols="30" rows="10" placeholder="Some great think!"></textarea> 
@@ -94,24 +99,13 @@
         </div>
         
       </div>
-      
-      
-      <script type="text/javascript">
-      if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-          console.log(position.coords);
-          });
-        } else {
-          console.error("Geolocation is not supported by this browser!");
-        }
-        </script>
-
-
-</main>
-<footer>
-  Desarrollado por
-</footer>
-<script src="script.js"></script>
-<script src="js/index.js"></script>
-</body>
+    </main>
+    <footer>
+      Desarrollado por <a class="credits" target="__blank" href="https://github.com/acastemoreno">Albert Castellano</a>, <a class="credits" target="__blank" href="https://github.com/BenMaRe-Dev">Benjamin Maguiña</a> y <a class="credits" target="__blank" href="https://github.com/NicolleQuispeArotinco">Nicolle Quispe</a>
+    </footer>
+    <script src="script.js"></script>
+    <script src="menu.js"></script>
+    <script src="js/index.js"></script>
+    <script src="geo.js"></script>
+  </body>
 </html>
