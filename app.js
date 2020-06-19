@@ -31,15 +31,11 @@ function clearElement(element) {
   element.innerHTML = '';
 }
 
-function removeChild(parent, child) {
-  parent.removeChild(child);
-}
-
 noteSubmit.addEventListener('click', () => {
   if (document.querySelector('.no-notes')) {
-    removeChild(mainContainer, document.querySelector('.no-notes'));
+    mainContainer.removeChild(document.querySelector('.no-notes'));
   }
-  clearElement(allNotes);
+  clearElement(allNotes); // remove all notes to inmediately re-create them
   addNote();
   createAllNotes(notes);
   newNoteWrapper.style.backgroundColor = '#ffffff';
