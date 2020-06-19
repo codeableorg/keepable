@@ -36,24 +36,41 @@
       </aside>
 
       <section class="main">
-        <div class="new-note border-shadow" id="new-note">
+        <div class="new-note" id="new-note">
           <form class="new-note__form form__background">
-            <input type="text" name="title" id="note-title" class="form__background new-note__input">
-            <input type="text" name="body" id="note-body" class="form__background new-note__input">
-            <input type="button" id="note-submit" value="Keep it!" class="form__background new-note__submit">
+            <input
+              type="text"
+              name="title"
+              id="note-title"
+              class="form__background new-note__input"
+              placeholder="Note title"
+            />
+            <input
+              type="text"
+              name="body"
+              id="note-body"
+              class="form__background new-note__input"
+              placeholder="Something great!"
+            />
+            <input
+              type="button"
+              id="note-submit"
+              value="Keep it!"
+              class="form__background new-note__submit"
+            />
           </form>
-          <button class="new-note__color"><img src="images/Frame 7.svg"></button>
+          <button class="new-note__color"><img src="images/Frame 7.svg" /></button>
           <div class="palette-colors hidden">
             <button class="color white" data-color="#ffffff"></button>
-            <button class="color coral" data-color= "#f28B82"></button>
-            <button class="color orange" data-color= "#FBBC04"></button>
-            <button class="color yellow" data-color= "#FFF475"></button>
-            <button class="color green" data-color= "#CCFF90"></button>
-            <button class="color aquamarine" data-color= "#A7FFEB"></button>
-            <button class="color light-blue" data-color= "#CBF0F8"></button>
-            <button class="color blue" data-color= "#AECBFA"></button>
-            <button class="color purple" data-color= "#D7AEFB"></button>
-            <button class="color pink" data-color= "#FDCFE8"></button>
+            <button class="color coral" data-color="#f28B82"></button>
+            <button class="color orange" data-color="#FBBC04"></button>
+            <button class="color yellow" data-color="#FFF475"></button>
+            <button class="color green" data-color="#CCFF90"></button>
+            <button class="color aquamarine" data-color="#A7FFEB"></button>
+            <button class="color light-blue" data-color="#CBF0F8"></button>
+            <button class="color blue" data-color="#AECBFA"></button>
+            <button class="color purple" data-color="#D7AEFB"></button>
+            <button class="color pink" data-color="#FDCFE8"></button>
           </div>
         </div>
         <div class="all-notes"></div>

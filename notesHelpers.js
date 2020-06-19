@@ -14,7 +14,7 @@ function populateNotes() {
   notes.push({
     title: 'Title',
     body: 'This is the body for the note.',
-    color: 'red',
+    color: '#f28b82',
     trash: false,
     pinned: false,
     updatedAt: Date.now(),
@@ -22,7 +22,7 @@ function populateNotes() {
   notes.push({
     title: 'Title',
     body: 'This is the body for the note.',
-    color: 'orange',
+    color: '#fbbc04',
     trash: false,
     pinned: false,
     updatedAt: Date.now(),
@@ -30,7 +30,7 @@ function populateNotes() {
   notes.push({
     title: 'Title',
     body: 'This is the body for the note.',
-    color: 'yellow',
+    color: '#fff475',
     trash: false,
     pinned: false,
     updatedAt: Date.now(),
@@ -38,7 +38,7 @@ function populateNotes() {
   notes.push({
     title: 'Title',
     body: 'This is the body for the note.',
-    color: 'green',
+    color: '#ccff90',
     trash: false,
     pinned: true,
     updatedAt: Date.now(),
@@ -46,7 +46,7 @@ function populateNotes() {
   notes.push({
     title: 'Title',
     body: 'This is the body for the note.',
-    color: 'cyan',
+    color: '#a7ffeb',
     trash: true,
     pinned: false,
     updatedAt: Date.now(),
@@ -54,7 +54,7 @@ function populateNotes() {
   notes.push({
     title: 'Title',
     body: 'This is the body for the note.',
-    color: 'lightblue',
+    color: '#cbf0f8',
     trash: false,
     pinned: false,
     updatedAt: Date.now(),
@@ -62,7 +62,7 @@ function populateNotes() {
   notes.push({
     title: 'Title',
     body: 'This is the body for the note.',
-    color: 'blue',
+    color: '#aecbfa',
     trash: false,
     pinned: false,
     updatedAt: Date.now(),
@@ -70,7 +70,7 @@ function populateNotes() {
   notes.push({
     title: 'Title',
     body: 'This is the body for the note.',
-    color: 'purple',
+    color: '#d7aefb',
     trash: false,
     pinned: true,
     updatedAt: Date.now(),
@@ -78,9 +78,11 @@ function populateNotes() {
   notes.push({
     title: 'Title',
     body: 'This is the body for the note.',
-    color: 'pink',
+    color: '#fdcfe8',
     trash: false,
     pinned: false,
     updatedAt: Date.now(),
   });
+  clearElement(allNotes);
+  createAllNotes(notes);
 }

@@ -1,6 +1,8 @@
+const notes = [];
 const mainContainer = document.querySelector(".main");
 const allNotes = document.querySelector(".all-notes");
-let notes = [];
+const notesSidebar = document.querySelector("#sidebar_notes");
+const trashSidebar = document.querySelector("#sidebar_trash");
 
 // AÑADIR NOTAS
 const noteSubmit = document.getElementById("note-submit");
@@ -9,14 +11,14 @@ const colorButton = document.querySelector(".new-note__color");
 const paletteColors = document.querySelector(".palette-colors");
 const newNoteWrapper = document.getElementById("new-note");
 
-function addNote(color, trash = false, pinned = false) {
+function addNote(trash = false, pinned = false) {
   const noteTitle = document.getElementById("note-title").value;
   const noteBody = document.getElementById("note-body").value;
 
   const note = {
     title: noteTitle,
     body: noteBody,
-    color: newNoteWrapper.style.backgroundColor,
+    color: getComputedStyle(newNoteWrapper)["background-color"],
     trash: this.trash,
     pinned: this.pinned,
     updatedAt: Date.now(),
@@ -31,15 +33,11 @@ function clearElement(element) {
   element.innerHTML = "";
 }
 
-function removeChild(parent, child) {
-  parent.removeChild(child);
-}
-
 noteSubmit.addEventListener("click", () => {
   if (document.querySelector(".no-notes")) {
-    removeChild(mainContainer, document.querySelector(".no-notes"));
+    mainContainer.removeChild(document.querySelector(".no-notes"));
   }
-  clearElement(allNotes);
+  clearElement(allNotes); // remove all notes to inmediately re-create them
   addNote();
   createAllNotes(notes);
   deleteNote();
@@ -50,7 +48,7 @@ noteSubmit.addEventListener("click", () => {
 function createNote(note) {
   const noteContainer = document.createElement("article");
   noteContainer.classList.add("note");
-  noteContainer.classList.add("border-shadow");
+  noteContainer.setAttribute("data-index", `${notes.indexOf(note)}`);
   noteContainer.style.backgroundColor = note.color;
   allNotes.insertBefore(noteContainer, allNotes.firstChild);
 
@@ -72,6 +70,7 @@ function createNote(note) {
 
   const paletteImage = document.createElement("img");
   paletteImage.src = "images/Frame 7.svg";
+  paletteImage.id = "colorSelector";
   iconsContainer.appendChild(paletteImage);
 
   const trashImage = document.createElement("img");
@@ -97,11 +96,27 @@ function deleteNote() {
 }
 
 // function to show all notes
-function createAllNotes(notes) {
+// shows non-deleted notes by default
+function createAllNotes(notes, trash = true) {
   notes.forEach((note) => {
-    createNote(note);
+    if (note.trash !== trash) createNote(note);
   });
 }
+
+// sidebar selector functions
+notesSidebar.addEventListener("click", (event) => {
+  clearElement(allNotes);
+  createAllNotes(notes);
+  trashSidebar.classList.remove("sidebar__list--active");
+  notesSidebar.classList.add("sidebar__list--active");
+});
+
+trashSidebar.addEventListener("click", (event) => {
+  clearElement(allNotes);
+  createAllNotes(notes, false);
+  notesSidebar.classList.remove("sidebar__list--active");
+  trashSidebar.classList.add("sidebar__list--active");
+});
 
 // UNUSED FUNCTION
 // function showNotes() {
