@@ -93,6 +93,10 @@ body {
 
 /* Start Paleta */
 
+#weather{
+  text-transform: capitalize;
+}
+
 .paleta{
   display: flex;
   flex-wrap: wrap;
@@ -189,4 +193,20 @@ body {
   font-size: 16px;
   padding: 0 10px;
   font-weight: 700;
+}
+
+.no_notes{
+  display: flex;
+  color: #fff;
+  font-weight: bold;
+  font-size: 36px;
+  width: 350px;
+  text-align: center;
+  align-items: center;
+  margin: auto;
+  padding-top: 150px;
+}
+
+.hidden{
+  display: none;
 }

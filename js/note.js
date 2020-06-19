@@ -24,15 +24,18 @@ class Note {
   // This method returns a <div class="note">
   createCard() {
     const div = document.createElement('DIV');
+    let message = document.querySelector('.no_notes');
     div.classList.add('note');
     div.style.background = this.color;
     div.innerHTML = `
-      <p>${this.body}</p>
-      <div class="buttons">
-        <div class="palette"><img src="images/palette.svg" alt="palette"></div>
-        <div class="trash"><img src="images/trash2.svg" alt="trash"></div>
-      </div>
+    <p>${this.body}</p>
+    <div class="buttons">
+    <div class="palette"><img src="images/palette.svg" alt="palette"></div>
+    <div class="trash"><img src="images/trash2.svg" alt="trash"></div>
+    </div>
     `;
+
+    message.classList.add('hidden');
     return div;
   }
 }
