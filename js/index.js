@@ -23,6 +23,14 @@ let state = {
     this.trashed_notes.push(normal_note);
     this.render_note_page();
   },
+  change_color_of_normal_note(id, color){
+    if(id >= this.normal_notes.length){
+      console.log("Id no valido");
+      return;
+    }
+    this.normal_notes[id].color = color;
+    this.render_note_page();
+  },
   remove_trashed_note(id){
     if(id >= this.trashed_notes.length){
       console.log("Id no valido");
@@ -64,7 +72,7 @@ let state = {
     this.normal_notes.forEach(function (note) {
       let note_element = document.createElement('div');
       note_element.className = 'note';
-      note_element.innerText = note.content;
+      note_element.innerText = `content ${note.content}, color ${note.color}`;
       notes_container.append(note_element)
     });
     fragment.append(notes_container);
