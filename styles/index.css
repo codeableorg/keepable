@@ -200,6 +200,10 @@ nav div button {
   
 }
 
+.note_footer_imgs .pointer {
+  cursor: pointer;
+}
+
 .note_img {
   height: 36px;
   width: 36px;
