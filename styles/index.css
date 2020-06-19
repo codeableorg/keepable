@@ -41,11 +41,43 @@ main {
   grid-area: main;
   display: flex;
   flex-direction: column;
-  border: 1px solid #ffffff;
+  border-top: 1.5px solid white;
 }
 
 footer {
   grid-area: footer;
+}
+
+nav {
+  width: 15em;
+  margin-top: 1.5em;
+}
+nav div {
+  cursor: pointer;
+}
+nav div button span,
+nav div button i {
+  margin-right: 20px;
+}
+nav div button i {
+  margin-left: 3px;
+}
+nav div button {
+  font-size: 20px;
+  color: white;
+  background: transparent;
+  border: none;
+  outline: 0px;
+  cursor: pointer;
+}
+
+.menu-item {
+  margin-bottom: 1em;
+  padding: 10px 0px 10px 14px;
+}
+.menu-state {
+  background: #999b9e;
+  border-radius: 0px 25px 25px 0px;
 }
 
 .new_note_container {
@@ -102,6 +134,7 @@ footer {
 .blue {
   background-color: blue;
 }
+
 /*menu*/
 nav {
   width: 14em;
