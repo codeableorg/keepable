@@ -56,8 +56,8 @@ const triggerColorPalette = (e) => {
   showColorPalette();
   state.selectedNote = e.target.dataset.id;
   const el = document.querySelector("#color_selector");
-  el.style.left = e.pageX;
-  el.style.top = e.pageY - 100;
+  el.style.left = e.pageX - 100;
+  el.style.top = e.pageY;
 
   console.log(state.selectedNote);
 };
