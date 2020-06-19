@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <aside>
+        <nav>
+            <ul>
+                <li><a class="deep-link" href="/">Notes</a></li>
+                <li><a class="deep-link" href="#trash">Trash</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <form id="note-form">
+        <textarea name="note-body" class="note-form__body" placeholder="Some great thought!" maxlength="144"></textarea>
+        <div class="note-form__controls">
+            <!-- Reserved space for color palette btn -->
+            <button type="submit" class="note-form__submit">Keep it!</button>
+        </div>
+    </form>
+    <script src="note-form.js"></script>
+    <script src="weather.js"></script>
+    <script src="location.js"></script>
+</body>
+
+</html>
