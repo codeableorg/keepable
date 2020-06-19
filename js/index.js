@@ -52,7 +52,7 @@ let state = {
 };
 
 
-state.add_note('holi');
-state.add_note('woli', 'blue');
+// state.add_note('holi');
+// state.add_note('woli', 'blue');
 
-state.render_note_page()
+// state.render_note_page()
