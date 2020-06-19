@@ -6,11 +6,12 @@
   <title>Keepable</title>
   <link rel="stylesheet" href="main.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="header">
     <h1 class="header-title">{keep<strong>able</strong>}</h1>
-    <p class="header-welcome"> <strong>Welcome to {keepable}</strong> . 
+    <p class="header-welcome"> <strong>Welcome to {keepable}</strong> .
       Today's Forecast for Santiago de Surco, Lima Province, Peru: 18°, Cloudy</p>
   </header>
 
@@ -20,32 +21,27 @@
   </aside>
 
   <main class="main">
-    <div class="container-create">
-      <div class="note create-note">
-        <textarea placeholder="Some great think!" cols="30" rows="10"></textarea>
-        <div class="container-buttons">
-          <div class="buttons">
-            <div class="palette"><img src="./source/palette.svg" alt="palette"></div>
-          </div>
-          <button class="keepit">Keep it!</button>
-        </div>
-      </div>
-    </div>
-    
-    <div class="notes">
-      <div class="note">
-        <p>This is the body of thee note.</p>
+    <form class="note create-note" id="create-note-form">
+      <textarea
+        class="create-note__textarea"
+        name="note-body"
+        placeholder="Some great think!"
+        rows="10"></textarea>
+      <div class="container-buttons">
         <div class="buttons">
-          <div class="palette"><img src="./source/palette.svg" alt="palette"></div>
-          <div class="trash"><img src="./source/trash.svg" alt="trash"></div>
+          <div class="palette"><img src="images/palette.svg" alt="palette"></div>
         </div>
+        <button type="submit" class="keepit">Keep it!</button>
       </div>
-    </div>
-  
+    </form>
+
+    <div class="main__notes" id="notes-container"></div>
+    <div class="main__trash" id="trash-container"></div>
     <div class="paleta"></div>
   </main>
 
-  <script src="note.js"></script>
+  <script src="js/note.js"></script>
+  <script src="js/app.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

@@ -12,25 +12,25 @@ class Note {
     '#FDCFE8',
   ];
 
-  constructor({ title = '', body, color, deleted = false, pinned = false }) {
+  constructor({ title = '', body, color }) {
     this.title = title;
     this.body = body;
     this.color = color;
-    this.deleted = deleted;
-    this.pinned = pinned;
+    this.deleted = false;
+    this.pinned = false;
     this.date = new Date();
   }
 
   // This method returns a <div class="note">
   createCard() {
     const div = document.createElement('DIV');
+    div.classList.add('note');
+    div.style.background = this.color;
     div.innerHTML = `
-      <div class="note" style="background: ${this.color}">
-        <p>${this.body}</p>
-        <div class="buttons">
-          <div class="palette"><img src="./source/palette.svg" alt="palette"></div>
-          <div class="trash"><img src="./source/trash.svg" alt="trash"></div>
-        </div>
+      <p>${this.body}</p>
+      <div class="buttons">
+        <div class="palette"><img src="images/palette.svg" alt="palette"></div>
+        <div class="trash"><img src="images/trash2.svg" alt="trash"></div>
       </div>
     `;
     return div;

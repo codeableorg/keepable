@@ -12,23 +12,17 @@ for(let i =1; i<11; i++){
     paleta.append(newColor);
 }
 
-class App {
-  static render(container, notes) {
-    notes.forEach((note) => {
-      container.append(note.createCard());
-    });
-  }
-}
+let app = new App({
+  notesContainer: document.querySelector('#notes-container'),
+});
 
-let container = document.querySelector('.notes');
-let notes = [
-  new Note({ body: 'A simple note body', color: Note.colors[0] }),
-  new Note({ body: 'A simple note body', color: Note.colors[1] }),
-  new Note({ body: 'A simple note body', color: Note.colors[2] }),
-  new Note({ body: 'A simple note body', color: Note.colors[3] }),
-  new Note({ body: 'A simple note body', color: Note.colors[4] }),
-  new Note({ body: 'A simple note body', color: Note.colors[5] }),
-  new Note({ body: 'A simple note body', color: Note.colors[6] }),
-];
+const createNoteForm = document.querySelector('#create-note-form');
+createNoteForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  let textarea = e.target[0];
+  if (!textarea.value) return;
 
-App.render(container, notes);
+  app.createNote({ body: textarea.value });
+  textarea.value = '';
+  app.renderNotes();
+});
