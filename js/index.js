@@ -111,16 +111,24 @@ let state = {
   },
 
   generate_normal_notes : function (fragment){
-    let notes_container = document.createElement('div');
-    notes_container.className = 'notes_container';
+    const normal_notes = this.notes.filter((el) => el.trashed===false);
 
-    this.notes.filter((el) => el.trashed===false).forEach(function (note) {
-      let note_element = document.createElement('div');
-      note_element.className = `note ${note.color}`;
-      note_element.innerText = `title: ${note.title}, content ${note.content}, color ${note.color}, id ${note.index}`;
-      notes_container.append(note_element)
-    });
-    fragment.append(notes_container);
+    if (normal_notes.length !== 0) {
+      let notes_container = document.createElement('div');
+      notes_container.className = 'notes_container';
+      normal_notes.forEach(function (note) {
+        let note_element = document.createElement('div');
+        note_element.className = `note ${note.color}`;
+        note_element.innerText = `title: ${note.title}, content ${note.content}, color ${note.color}, id ${note.index}`;
+        notes_container.append(note_element)
+      });
+      fragment.append(notes_container);
+    } else {
+      let message = document.createElement('p');
+      message.innerText = 'no notes, create more please';
+      fragment.append(message);
+    }
+    
     return fragment;
   },
 
@@ -140,10 +148,10 @@ let state = {
   
 };
 
-state.add_note('holi-title', 'holi-description');
-state.add_note('woli-title', 'woli-description', 'blue');
-state.add_note('note deleted', 'note-deleted-description', 'blue');
-state.trash_a_note(2);
+// state.add_note('holi-title', 'holi-description');
+// state.add_note('woli-title', 'woli-description', 'blue');
+// state.add_note('note deleted', 'note-deleted-description', 'blue');
+// state.trash_a_note(2);
 
 click_notes()
 // state.render_note_page()
