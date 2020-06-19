@@ -39,6 +39,15 @@ let state = {
     this.trashed_notes.splice(id, 1);
     this.render_note_page();
   },
+  restore_trashed_note(id) {
+    if (id >= this.trashed_notes.length) {
+      console.log("Id no valido");
+      return;
+    }
+    const trashed_note = this.trashed_notes.splice(id, 1);
+    this.normal_notes.push(trashed_note);
+    this.render_note_page();
+  },
 
   render_note_page() {
     new Promise(function (resolve, reject) {
@@ -56,14 +65,24 @@ let state = {
       });
   },
 
+  create_note_from_form: function (event, caller) {
+    console.log(caller);
+    caller.add_note(event.target.textarea.value);
+    caller.render_note_page();
+    event.preventDefault();
+  },
+
   create_form: function (fragment) {
     let div = document.createElement("div");
     div.className = "new_note_container";
     div.innerHTML = `<form action="" class="new_note">
-        <textarea name="" id="textarea" cols="30" rows="10" placeholder="Some great think!"></textarea> 
+        <textarea name="note" id="textarea" cols="30" rows="10" placeholder="Some great think!"></textarea> 
         <button>Keep it!</button>
       </form>`;
     fragment.append(div);
+    fragment.firstChild.addEventListener("submit", (event) =>
+      this.create_note_from_form(event, this)
+    );
     return fragment;
   },
 
@@ -73,7 +92,7 @@ let state = {
 
     this.normal_notes.forEach(function (note) {
       let note_element = document.createElement("div");
-      note_element.className = "note";
+      note_element.className = `note ${note.color}`;
       note_element.innerText = `content ${note.content}, color ${note.color}`;
       notes_container.append(note_element);
     });
