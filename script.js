@@ -14,7 +14,7 @@ class Card {
 		        <div class="content">
 					${this.content}
 		         </div>
-		         <p onclick="app.click_color(event,${this.id})">hi<!--i class="fa fa-search"--></i></p>
+		         <p onclick="app.click_color(event,${this.id})"><i class="fas fa-palette"></i></p>
 		        <button onclick="app.delete_note(${this.id})" class="delete">Delete</button>
 		    </div>
 		    `
@@ -58,6 +58,20 @@ class App {
 		palette.style.visibility = 'visible';
 		palette.style.top = `${y}px`;
 		palette.style.left = `${x}px`;
+	}
+
+	inject_color() {
+
+	}
+
+	get_location() {
+    	navigator.geolocation.getCurrentPosition((position)=>{
+			console.log(position)
+			fetch("http://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + ',' + position.coords.longitude + '&sensor=false')
+				.then(response => {
+					console.log(response)
+				})
+		})
 	}
     render() {
 		document.getElementById('notes').innerHTML = ``
