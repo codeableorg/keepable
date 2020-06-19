@@ -1,6 +1,8 @@
+const notes = [];
 const mainContainer = document.querySelector('.main');
 const allNotes = document.querySelector('.all-notes');
-let notes = [];
+const notesSidebar = document.querySelector('#sidebar_notes');
+const trashSidebar = document.querySelector('#sidebar_trash');
 
 // AÑADIR NOTAS
 const noteSubmit = document.getElementById('note-submit');
@@ -66,6 +68,7 @@ function createNote(note) {
 
   const paletteImage = document.createElement('img');
   paletteImage.src = 'images/Frame 7.svg';
+  paletteImage.id = 'colorSelector';
   iconsContainer.appendChild(paletteImage);
 
   const trashImage = document.createElement('img');
@@ -76,13 +79,26 @@ function createNote(note) {
 }
 
 // function to show all notes
-function createAllNotes(notes) {
+function createAllNotes(notes, trash = true) {
   notes.forEach((note) => {
-    if (!note.trash) {
-      createNote(note);
-    }
+    if (note.trash !== trash) createNote(note);
   });
 }
+
+// sidebar selector functions
+notesSidebar.addEventListener('click', (event) => {
+  clearElement(allNotes);
+  createAllNotes(notes);
+  trashSidebar.classList.remove('sidebar__list--active');
+  notesSidebar.classList.add('sidebar__list--active');
+});
+
+trashSidebar.addEventListener('click', (event) => {
+  clearElement(allNotes);
+  createAllNotes(notes, false);
+  notesSidebar.classList.remove('sidebar__list--active');
+  trashSidebar.classList.add('sidebar__list--active');
+});
 
 // UNUSED FUNCTION
 // function showNotes() {
