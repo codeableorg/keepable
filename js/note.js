@@ -12,11 +12,11 @@ class Note {
     '#FDCFE8',
   ];
 
-  constructor({ title = '', body, color, deleted = false }) {
+  constructor({ title = '', body, color }) {
     this.title = title;
     this.body = body;
     this.color = color;
-    this.deleted = deleted;
+    this.deleted = false;
     this.pinned = false;
     this.date = new Date();
   }
@@ -29,8 +29,8 @@ class Note {
     div.innerHTML = `
       <p>${this.body}</p>
       <div class="buttons">
-        <div class="palette"><img src="./source/palette.svg" alt="palette"></div>
-        <div class="trash"><img src="./source/trash.svg" alt="trash"></div>
+        <div class="palette"><img src="images/palette.svg" alt="palette"></div>
+        <div class="trash"><img src="images/trash2.svg" alt="trash"></div>
       </div>
     `;
     return div;

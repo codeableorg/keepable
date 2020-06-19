@@ -6,6 +6,7 @@
   <title>Keepable</title>
   <link rel="stylesheet" href="main.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="header">
@@ -28,18 +29,19 @@
         rows="10"></textarea>
       <div class="container-buttons">
         <div class="buttons">
-          <div class="palette"><img src="./source/palette.svg" alt="palette"></div>
+          <div class="palette"><img src="images/palette.svg" alt="palette"></div>
         </div>
         <button type="submit" class="keepit">Keep it!</button>
       </div>
     </form>
 
-    <div class="main__notes" id="notes"></div>
-    <div class="main__trash" id="trash"></div>
+    <div class="main__notes" id="notes-container"></div>
+    <div class="main__trash" id="trash-container"></div>
     <div class="paleta"></div>
   </main>
 
-  <script src="note.js"></script>
+  <script src="js/note.js"></script>
+  <script src="js/app.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

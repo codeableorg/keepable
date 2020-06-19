@@ -58,6 +58,8 @@ body {
 
 .header-title{
  color: #ffffff;
+ font-family: "Roboto Slab";
+ font-weight: bold;
  margin: 10px 30px;
 }
 .header-title strong{
@@ -120,6 +122,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 15px;
+  margin-bottom: 15px;
 }
 
 .note{
