@@ -231,17 +231,15 @@ function generate_note(note) {
     trash_item.addEventListener('click', (event) => callback_trash_the_note(event));
     note_element.append(trash_item);
 
+    let pin_option_item = document.createElement('div');
     if (note.pinned) {
-      let trash_item = document.createElement('div');
-      trash_item.innerText = "Click para hacer unpin a una nota";
-      trash_item.addEventListener('click', (event) => callback_unpin_a_note(event));
-      note_element.append(trash_item);
+      pin_option_item.innerText = "Click para hacer unpin a una nota";
+      pin_option_item.addEventListener('click', (event) => callback_unpin_a_note(event));
     } else {
-      let trash_item = document.createElement('div');
-      trash_item.innerText = "Click para hacer pin a una nota";
-      trash_item.addEventListener('click', (event) => callback_pin_a_note(event));
-      note_element.append(trash_item);
+      pin_option_item.innerText = "Click para hacer pin a una nota";
+      pin_option_item.addEventListener('click', (event) => callback_pin_a_note(event));
     }
+    note_element.append(pin_option_item);
   }
 
   return note_element;
