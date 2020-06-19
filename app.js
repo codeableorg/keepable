@@ -35,18 +35,21 @@ noteSubmit.addEventListener("click", () => {
 
 //show list of notes
 function createNote(note) {
-  const noteContainer = document.createElement("div");
-  noteContainer.classList.add("note-container");
+  const noteContainer = document.createElement("article");
+  noteContainer.classList.add("note");
+  noteContainer.classList.add('border-shadow');
   noteContainer.style.backgroundColor = note.color;
   allNotes.insertBefore(noteContainer, allNotes.firstChild);
 
-  const noteTitleContainer = document.createElement("p");
-  noteTitleContainer.className = "note-title-content";
+  const noteTitleContainer = document.createElement("h1");
+  noteTitleContainer.className = 'note__title';
+  noteTitleContainer.id = 'note__title';
   noteTitleContainer.textContent = note.title;
   noteContainer.appendChild(noteTitleContainer);
 
   const noteBodyContainer = document.createElement("p");
-  noteBodyContainer.className = "note-body-content";
+  noteBodyContainer.className = 'note__body';
+  noteBodyContainer.id = 'note__body';
   noteBodyContainer.textContent = note.body;
   noteContainer.appendChild(noteBodyContainer);
 
