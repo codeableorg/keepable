@@ -315,8 +315,8 @@ function generate_note(note) {
   return note_element;
 }
 
-state.add_note('holi', 'woli-description');
-state.add_note('woli', 'woli', 'blue');
+state.add_note('Titulo 1', 'Description de note 1', 'orange');
+state.add_note('Titulo 2', 'Description de note 2', 'green');
 // state.add_note('note deleted', 'note-deleted-description', 'blue');
 // state.trash_a_note(2);
 
