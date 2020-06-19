@@ -1,34 +1,49 @@
-const paleta = document.querySelector(".paleta");
-
-function createColor(num){
-    const color = document.createElement("a");
-    color.style.border = `1px solid var(--color-${num})`;
-    color.style.background = `var(--color-${num})`;
-    return color;
-}
-
-for(let i =1; i<11; i++){
-    const newColor = createColor(i);
-    paleta.append(newColor);
-}
-
 class App {
-  static render(container, notes) {
-    notes.forEach((note) => {
-      container.append(note.createCard());
+  constructor({ notesContainer }) {
+    if (App._instance) return App._instance;
+    else App._instance = this;
+    this.notesContainer = notesContainer;
+    this.notes = [];
+  }
+
+  clean() {
+    this.notesContainer.innerHTML = '';
+  }
+
+  renderNotes() {
+    this.clean();
+    this.notes.forEach((note) => {
+      this.notesContainer.append(note.createCard());
     });
   }
 }
 
-let container = document.querySelector('.notes');
-let notes = [
-  new Note({ body: 'A simple note body', color: Note.colors[0] }),
-  new Note({ body: 'A simple note body', color: Note.colors[1] }),
-  new Note({ body: 'A simple note body', color: Note.colors[2] }),
-  new Note({ body: 'A simple note body', color: Note.colors[3] }),
-  new Note({ body: 'A simple note body', color: Note.colors[4] }),
-  new Note({ body: 'A simple note body', color: Note.colors[5] }),
-  new Note({ body: 'A simple note body', color: Note.colors[6] }),
-];
+// const paleta = document.querySelector(".paleta");
 
-App.render(container, notes);
+// function createColor(num){
+//     const color = document.createElement("a");
+//     color.style.border = `1px solid var(--color-${num})`;
+//     color.style.background = `var(--color-${num})`;
+//     return color;
+// }
+
+// for(let i =1; i<11; i++){
+//     const newColor = createColor(i);
+//     paleta.append(newColor);
+// }
+
+let app = new App({ notesContainer: document.querySelector('#notes') });
+
+const createNoteForm = document.querySelector('#create-note-form');
+createNoteForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  let textarea = e.target[0];
+  const note = new Note({
+    body: textarea.value,
+  });
+  textarea.value = '';
+
+  app.notes.push(note);
+  app.renderNotes();
+});
