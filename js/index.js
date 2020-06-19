@@ -20,7 +20,7 @@ let state = {
       return;
     }
     const normal_note = this.normal_notes.splice(id, 1);
-    this.trashed_notes.push(normal_note);
+    this.trashed_notes.push(normal_note[0]);
     this.render_note_page();
   },
   change_color_of_normal_note(id, color){
@@ -45,7 +45,7 @@ let state = {
       return;
     }
     const trashed_note = this.trashed_notes.splice(id, 1);
-    this.normal_notes.push(trashed_note);
+    this.normal_notes.push(trashed_note[0]);
     this.render_note_page();
   },
 
@@ -55,7 +55,18 @@ let state = {
     }).then((fragment) => {
       return this.create_form(fragment);
     }).then((fragment) => {
-      return this.generate_notes(fragment);
+      return this.generate_normal_notes(fragment);
+    }).then((fragment) => {
+      this.main.innerHTML = "";
+      this.main.append(fragment);
+    });
+  },
+
+  render_trash_page(){
+    new Promise(function(resolve, reject) {
+      resolve(new DocumentFragment());
+    }).then((fragment) => {
+      return this.generate_trashed_notes(fragment);
     }).then((fragment) => {
       this.main.innerHTML = "";
       this.main.append(fragment);
@@ -82,11 +93,25 @@ let state = {
     return fragment;
   },
 
-  generate_notes : function (fragment){
+  generate_normal_notes : function (fragment){
     let notes_container = document.createElement('div');
     notes_container.className = 'notes_container';
 
     this.normal_notes.forEach(function (note) {
+      let note_element = document.createElement('div');
+      note_element.className = `note ${note.color}`;
+      note_element.innerText = `content ${note.content}, color ${note.color}`;
+      notes_container.append(note_element)
+    });
+    fragment.append(notes_container);
+    return fragment;
+  },
+
+  generate_trashed_notes : function (fragment){
+    let notes_container = document.createElement('div');
+    notes_container.className = 'notes_container';
+
+    this.trashed_notes.forEach(function (note) {
       let note_element = document.createElement('div');
       note_element.className = `note ${note.color}`;
       note_element.innerText = `content ${note.content}, color ${note.color}`;
