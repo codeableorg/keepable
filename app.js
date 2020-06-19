@@ -49,7 +49,6 @@ noteSubmit.addEventListener('click', () => {
 function createNote(note) {
   const noteContainer = document.createElement('article');
   noteContainer.classList.add('note');
-  noteContainer.classList.add('border-shadow');
   noteContainer.style.backgroundColor = note.color;
   allNotes.insertBefore(noteContainer, allNotes.firstChild);
 
@@ -83,7 +82,9 @@ function createNote(note) {
 // function to show all notes
 function createAllNotes(notes) {
   notes.forEach((note) => {
-    createNote(note);
+    if (!note.trash) {
+      createNote(note);
+    }
   });
 }
 

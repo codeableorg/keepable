@@ -30,11 +30,6 @@ body {
   background: #999b9e;
 }
 
-.border-shadow {
-  box-shadow: 5px 5px 15px rgba(153, 155, 158, 0.85);
-  border-radius: 8px;
-}
-
 /* grid layout for container */
 .header {
   grid-area: header;
@@ -152,6 +147,7 @@ body {
   width: 60%;
   margin: 3vh auto;
   padding: 1%;
+  border-radius: 8px;
   background: var(--white);
 }
 
@@ -220,6 +216,7 @@ body {
   max-width: 260px;
   height: 260px;
   padding: 10px;
+  border-radius: 8px;
 }
 
 .note__title {
