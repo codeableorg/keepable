@@ -30,7 +30,8 @@
 						<label for="content"></label><textarea id="content" placeholder="Some great content!"></textarea>
 					</div>
 					<div id="control">
-						<a><i class="fas fa-palette"></i></a>
+						<p><i class="fas fa-palette"></i></p>
+						<p></p>
 						<button id="submit" onclick="app.create_note()">Keep it!</button>
 					</div>
 				</div>
@@ -54,7 +55,12 @@
 					<div style = "background-color: #FDCFE8" onclick="app.inject_color('DCFE8')"></div>
 				</div>
 			</section>
-	    </main>
+		</main>
+		<div id="myModal" class="modal">
+			<div class="modal-content">
+				<!---FAVORITES GOES HERE-->
+			</div>
+		</div>
 	<script src="./script.js"></script>
     </body>
 </html>

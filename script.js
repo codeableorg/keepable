@@ -7,10 +7,10 @@ class Card {
     }
     html() {
 	    return `
-		    <div class="card">
+		    <div class="card" onclick="app.edit_card(${this.id})">
 		    	<div class="title">
 					${this.title}
-		        </div>
+				</div>
 		        <div class="content">
 					${this.content}
 		         </div>
@@ -34,7 +34,7 @@ class App {
 		if (title !== '' && content !== '') {
 			const card = new Card(this.card_count, title, content)
 			this.card_count++
-			this.cards.push(card)
+			this.cards.unshift(card)
 			this.render()
 		}
 		else {
@@ -72,6 +72,26 @@ class App {
 					console.log(response)
 				})
 		})
+	}
+
+	edit_card(id) {
+		console.log(id);
+		let modal = document.getElementById('myModal');
+		let modal_body = modal.children[0];
+		modal.style.display = 'block';
+
+		window.onclick = (event) => {
+            if (event.target === modal){
+				modal.style.display = 'none';
+				modal_body.innerHTML = '';
+            }
+		}
+		let calc = (this.cards.length - id) - 1
+		let current_card = this.cards[calc];
+		modal_body.innerHTML += `
+				<h1>${current_card.title}</h1>
+				<p>${current_card.content}</p>
+		`
 	}
     render() {
 		document.getElementById('notes').innerHTML = ``
