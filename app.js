@@ -11,7 +11,7 @@ const colorButton = document.querySelector('.new-note__color');
 const paletteColors = document.querySelector('.palette-colors');
 const newNoteWrapper = document.getElementById('new-note');
 
-function addNote(color, trash = false, pinned = false) {
+function addNote(trash = false, pinned = false) {
   const noteTitle = document.getElementById('note-title').value;
   const noteBody = document.getElementById('note-body').value;
 
@@ -47,6 +47,7 @@ noteSubmit.addEventListener('click', () => {
 function createNote(note) {
   const noteContainer = document.createElement('article');
   noteContainer.classList.add('note');
+  noteContainer.setAttribute('data-index', `${notes.indexOf(note)}`);
   noteContainer.style.backgroundColor = note.color;
   allNotes.insertBefore(noteContainer, allNotes.firstChild);
 
@@ -79,6 +80,7 @@ function createNote(note) {
 }
 
 // function to show all notes
+// shows non-deleted notes by default
 function createAllNotes(notes, trash = true) {
   notes.forEach((note) => {
     if (note.trash !== trash) createNote(note);
