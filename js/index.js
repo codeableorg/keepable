@@ -1,7 +1,8 @@
 'use strict';
 
 class Note {
-  constructor(content, color) {
+  constructor(title, content, color) {
+    this.title = title;
     this.content = content;
     this.color = color;
   }
@@ -10,9 +11,10 @@ class Note {
 let state = {
   main: document.querySelector('main'),
   normal_notes: [],
+  pinned_notes: [],
   trashed_notes: [],
-  add_note (description, color = 'red') {
-    this.normal_notes.push(new Note(description, color));
+  add_note (title, content, color = 'red') {
+    this.normal_notes.push(new Note(title, content, color));
   },
   remove_normal_note(id){
     if(id >= this.normal_notes.length){
@@ -73,14 +75,13 @@ let state = {
     });
   },
 
-  create_note_from_form: function (event, caller) {
-    console.log(caller);
-    caller.add_note(event.target.textarea.value);
-    caller.render_note_page();
-    event.preventDefault();
-  },
-
   create_form: function (fragment) {
+    const create_note_from_form = function (event) {
+      state.add_note(event.target.textarea.value);
+      state.render_note_page();
+      event.preventDefault();
+    }
+
     let div = document.createElement('div');
     div.className = 'new_note_container';
     div.innerHTML = 
@@ -89,7 +90,7 @@ let state = {
         <button>Keep it!</button>
       </form>`;
     fragment.append(div);
-    fragment.firstChild.addEventListener('submit', (event) => this.create_note_from_form(event, this));
+    fragment.firstChild.addEventListener('submit', (event) => create_note_from_form(event));
     return fragment;
   },
 
@@ -100,7 +101,7 @@ let state = {
     this.normal_notes.forEach(function (note) {
       let note_element = document.createElement('div');
       note_element.className = `note ${note.color}`;
-      note_element.innerText = `content ${note.content}, color ${note.color}`;
+      note_element.innerText = `title: ${note.title}, content ${note.content}, color ${note.color}`;
       notes_container.append(note_element)
     });
     fragment.append(notes_container);
@@ -123,7 +124,7 @@ let state = {
   
 };
 
-state.add_note('holi');
-state.add_note('woli', 'blue');
+state.add_note('holi-title', 'holi-description');
+state.add_note('woli-title', 'woli-description', 'blue');
 
 state.render_note_page()
