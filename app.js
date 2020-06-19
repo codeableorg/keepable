@@ -42,6 +42,7 @@ noteSubmit.addEventListener("click", () => {
   clearElement(allNotes);
   addNote();
   createAllNotes(notes);
+  deleteNote();
   newNoteWrapper.style.backgroundColor = "#ffffff";
 });
 
@@ -85,14 +86,15 @@ function selectOneNote(notes, title) {
   let selectedNote = notes.filter((note) => note.title === title);
   console.log(selectedNote);
 }
-
-buttonTrash.addEventListener("click", () => {
-  const buttonTrash = event.target;
-  const currentNoteContainer = buttonTrash.event.target.closest(".note");
-  console.log(notes);
-  console.log(currentNoteContainer.value);
-  //selectOneNote(notes,)
-});
+function deleteNote() {
+  const buttonTrash = document.querySelectorAll(".button-trash");
+  buttonTrash.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const currentNoteContainer = event.target.closest(".note");
+      console.log(currentNoteContainer);
+    });
+  });
+}
 
 // function to show all notes
 function createAllNotes(notes) {
