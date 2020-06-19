@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+	    <title>Keepeable</title>
+		<link type="text/css" href="style.css" rel="stylesheet">
+		<!---link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"-->
+    </head>
+    <body>
+	    <nav>
+	    </nav>
+	    <main>
+		    <section id="form">
+			    <div id="input">
+				    <input id="title" type="text" placeholder="Some great title!">
+				    <br>
+				    <textarea id="content" placeholder="Some great content!"></textarea>
+			    </div>
+			    <div id="control">
+				    <button id="submit" onclick="app.create_note()">Keep it!</button>
+			    </div>
+		    </section>
+		    <section id="notes">
+		    </section>
+			<section id = "color-palette">
+				<div>
+					<div style = "background-color: #FFFFFF; border: 1px solid #999B9E" onclick="app.inject_color('FFFFFF')"></div>
+					<div style = "background-color: #F25B82" onclick="app.inject_color('F25B82')"></div>
+					<div style = "background-color: #FBBC04" onclick="app.inject_color('FBBC04')"></div>
+					<div style = "background-color: #FFF475" onclick="app.inject_color('FFF475')"></div>
+					<div style = "background-color: #CCFF90" onclick="app.inject_color('CCFF90')"></div>
+				</div>
+				<div>
+					<div style = "background-color: #A7FFEB" onclick="app.inject_color('A7FFEB')"></div>
+					<div style = "background-color: #CBF0F8" onclick="app.inject_color('CBF0F8')"></div>
+					<div style = "background-color: #AECBFA" onclick="app.inject_color('AECBFA')"></div>
+					<div style = "background-color: #D7AEFB" onclick="app.inject_color('D7AEFB')"></div>
+					<div style = "background-color: #FDCFE8" onclick="app.inject_color('DCFE8')"></div>
+				</div>
+
+
+
+
+			</section>
+	    </main>
+	<script src="./script.js"></script>
+    </body>
+</html>
