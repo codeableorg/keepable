@@ -63,7 +63,7 @@ let state = {
     }).then((fragment) => {
       return this.create_form(fragment);
     }).then((fragment) => {
-      return this.generate_normal_notes(fragment);
+      return this.generate_not_trashed_notes(fragment);
     }).then((fragment) => {
       this.current_page = "notes";
       this.main.innerHTML = "";
@@ -110,17 +110,32 @@ let state = {
     return fragment;
   },
 
-  generate_normal_notes : function (fragment){
-    let notes_container = document.createElement('div');
-    notes_container.className = 'notes_container';
+  generate_not_trashed_notes : function (fragment){
+    const not_trashed_notes = this.notes.filter((el) => el.trashed===false);
 
-    this.notes.filter((el) => el.trashed===false).forEach(function (note) {
-      let note_element = document.createElement('div');
-      note_element.className = `note ${note.color}`;
-      note_element.innerText = `title: ${note.title}, content ${note.content}, color ${note.color}, id ${note.index}`;
-      notes_container.append(note_element)
-    });
-    fragment.append(notes_container);
+    if (not_trashed_notes.length !== 0) {
+      const [not_pinned, pinned] = not_trashed_notes.reduce(([not_pinned_acc, pinned_acc], note) => {
+        return note.pinned ? [not_pinned_acc, [...pinned_acc, note]] : [[...not_pinned_acc, note], pinned_acc];
+      }, [[], []]);
+
+      console.log(not_pinned);
+      console.log(pinned);
+
+      let notes_container = document.createElement('div');
+      notes_container.className = 'notes_container';
+      not_pinned.forEach(function (note) {
+        let note_element = document.createElement('div');
+        note_element.className = `note ${note.color}`;
+        note_element.innerText = `title: ${note.title}, content ${note.content}, color ${note.color}, id ${note.index}`;
+        notes_container.append(note_element)
+      });
+      fragment.append(notes_container);
+    } else {
+      let message = document.createElement('p');
+      message.innerText = 'no notes, create more please';
+      fragment.append(message);
+    }
+    
     return fragment;
   },
 
