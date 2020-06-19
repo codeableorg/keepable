@@ -45,26 +45,29 @@ footer {
 }
 
 /*menu*/
-ul {
+nav {
   width: 15em;
-  margin-top: 1em;
+  margin-top: 1.5em;
 }
-aside ul li span,
-aside ul li i {
-  margin-right: 20px;
-}
-aside ul li i {
-  margin-left: 5px;
-}
-aside ul li {
-  font-size: 20px;
-  list-style: none;
+nav div {
   cursor: pointer;
 }
-aside ul li a {
-  text-decoration: none;
-  color: white;
+nav div button span,
+nav div button i {
+  margin-right: 20px;
 }
+nav div button i {
+  margin-left: 3px;
+}
+nav div button {
+  font-size: 20px;
+  color: white;
+  background: transparent;
+  border: none;
+  outline: 0px;
+  cursor: pointer;
+}
+
 .menu-item {
   margin-bottom: 1em;
   padding: 10px 0px 10px 14px;
