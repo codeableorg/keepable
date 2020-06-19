@@ -36,111 +36,27 @@
       </aside>
 
       <section class="main">
-        <div class="new-note border-shadow" id="new-note">
-          <div class="new-note__pin"></div>
-          <div class="note-color">
-            <div class="note-color__menu border-shadow">
-              <div class="white"></div>
-              <div class="red"></div>
-              <div class="orange"></div>
-              <div class="yellow"></div>
-              <div class="green"></div>
-              <div class="cyan"></div>
-              <div class="lightblue"></div>
-              <div class="blue"></div>
-              <div class="purple"></div>
-              <div class="pink"></div>
-            </div>
-            <i class="fas fa-brackets-curly unselected"></i>
-          </div>
-          <form class="new-note__form">
-            <input
-              type="text"
-              name="title"
-              class="new-note__input"
-              id="note-title"
-              placeholder="Note title"
-            />
-            <input
-              type="text"
-              name="body"
-              class="new-note__input"
-              id="note-body"
-              placeholder="Some great thing!"
-            />
-            <input type="button" id="note-submit" class="new-note__submit" value="Keep it!" />
+        <div id="new-note">
+          <form action="" class="new-note__form form__background">
+            <input type="text" name="title" id="note-title" class="form__background">
+            <input type="text" name="body" id="note-body" class="form__background">
+            <input type="button" id="note-submit" value="Keep it!" class="form__background">
           </form>
-        </div>
-
-        <div class="notes">
-          <h1>Pinned</h1>
-          <div class="notes__pinned" id="pinned">
-            <article class="note border-shadow white">
-              <h1 class="note__title" id="note-title">Title</h1>
-              <p class="note__body" id="note-body">
-                This is the body for the note.
-              </p>
-            </article>
-            <article class="note border-shadow red">
-              <h1 class="note__title" id="note-title">Title</h1>
-              <p class="note__body" id="note-body">
-                This is the body for the note.
-              </p>
-            </article>
-            <article class="note border-shadow orange">
-              <h1 class="note__title" id="note-title">Title</h1>
-              <p class="note__body" id="note-body">
-                This is the body for the note.
-              </p>
-            </article>
-            <article class="note border-shadow yellow">
-              <h1 class="note__title" id="note-title">Title</h1>
-              <p class="note__body" id="note-body">
-                This is the body for the note.
-              </p>
-            </article>
-            <article class="note border-shadow green">
-              <h1 class="note__title" id="note-title">Title</h1>
-              <p class="note__body" id="note-body">
-                This is the body for the note.
-              </p>
-            </article>
-          </div>
-
-          <h1>Others</h1>
-          <div class="notes__others" id="others">
-            <article class="note border-shadow cyan">
-              <h1 class="note__title" id="note-title">Title</h1>
-              <p class="note__body" id="note-body">
-                This is the body for the note.
-              </p>
-            </article>
-            <article class="note border-shadow lightblue">
-              <h1 class="note__title" id="note-title">Title</h1>
-              <p class="note__body" id="note-body">
-                This is the body for the note.
-              </p>
-            </article>
-            <article class="note border-shadow blue">
-              <h1 class="note__title" id="note-title">Title</h1>
-              <p class="note__body" id="note-body">
-                This is the body for the note.
-              </p>
-            </article>
-            <article class="note border-shadow purple">
-              <h1 class="note__title" id="note-title">Title</h1>
-              <p class="note__body" id="note-body">
-                This is the body for the note.
-              </p>
-            </article>
-            <article class="note border-shadow pink">
-              <h1 class="note__title" id="note-title">Title</h1>
-              <p class="note__body" id="note-body">
-                This is the body for the note.
-              </p>
-            </article>
+          <button class="new-note__color"><img src="images/Frame 7.svg"></button>
+          <div class="palette-colors hidden">
+            <button class="color white" data-color="#ffffff"></button>
+            <button class="color coral" data-color= "#f28B82"></button>
+            <button class="color orange" data-color= "#FBBC04"></button>
+            <button class="color yellow" data-color= "#FFF475"></button>
+            <button class="color green" data-color= "#CCFF90"></button>
+            <button class="color aquamarine" data-color= "#A7FFEB"></button>
+            <button class="color light-blue" data-color= "#CBF0F8"></button>
+            <button class="color blue" data-color= "#AECBFA"></button>
+            <button class="color purple" data-color= "#D7AEFB"></button>
+            <button class="color pink" data-color= "#FDCFE8"></button>
           </div>
         </div>
+        <div class="all-notes"></div>
       </section>
     </div>
   </body>

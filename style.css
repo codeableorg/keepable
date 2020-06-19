@@ -3,12 +3,12 @@
 :root {
   --black: #1d2128;
   --white: #ffffff;
-  --red: #f28b82;
+  --coral: #f28b82;
   --orange: #fbbc04;
   --yellow: #fff475;
   --green: #ccff90;
-  --cyan: #a7ffeb;
-  --lightblue: #cbf0f8;
+  --aquamarine: #a7ffeb;
+  --light-blue: #cbf0f8;
   --blue: #aecbfa;
   --purple: #d7aefb;
   --pink: #fdcfe8;
@@ -232,6 +232,7 @@ body {
 
 /* background colors */
 .white {
+  border: 1px solid #999b9e;
   background: var(--white);
 }
 
@@ -273,4 +274,25 @@ body {
 
 .hidden {
   display: none;
+}
+
+/* styles saida */
+.palette-colors {
+  width: 155px;
+  height: 65px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 5px;
+}
+
+.color {
+  width: 25px;
+  height: 25px;
+  border-style: none;
+  border-radius: 100px;
+}
+
+.form__background {
+  background-color: transparent;
 }
