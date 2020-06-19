@@ -44,7 +44,6 @@ footer {
   grid-area: footer;
 }
 
-/*menu*/
 nav {
   width: 15em;
   margin-top: 1.5em;
@@ -75,4 +74,59 @@ nav div button {
 .menu-state {
   background: #999b9e;
   border-radius: 0px 25px 25px 0px;
+}
+
+.new_note_container {
+  display: flex;
+  justify-content: center;
+}
+
+.new_note {
+  position: relative;
+}
+
+#textarea {
+  height: 150px;
+  width: 600px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  margin: 15px 0px;
+  resize: none;
+  padding: 20px;
+  font-size: 18px;
+}
+
+.new_note button {
+  position: absolute;
+  top: 125px;
+  right: 20px;
+  border: none;
+  background-color: #FFFFFF;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.notes_container {
+  margin: 45px 0px 0px 0px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-areas: 
+    "a1 a2 a3 a4" 
+    "b1 b2 b3 b4"; 
+}
+
+.note {
+  height: 260px;
+  width: 260px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  color: black;
+}
+
+.red{
+  background-color: red;
+}
+
+.blue{
+  background-color: blue;
 }
