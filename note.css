@@ -65,6 +65,7 @@ body {
   grid-auto-rows: 275px;
   gap: 0px 20px;
   justify-content: center;
+  transition: 200ms ease-in;
 }
 
 .note {
@@ -100,11 +101,11 @@ body {
   cursor: pointer;
 }
 
-.note__footer__buttons .btn:active {
+.note__footer__buttons, .note__form__button_color .btn:active {
   background: #999B9E;
 }
 
-.note__footer__buttons .btn:active img{
+.note__footer__buttons, .note__form__button_color .btn:active img{
   filter: brightness(100);
 }
 
@@ -187,4 +188,14 @@ body {
 .color-10 {
   background: #FDCFE8;
   transition: 200ms ease-in-out;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 100%;
+  }
+
+  100% {
+    opacity: 0%;
+  }
 }

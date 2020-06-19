@@ -1,15 +1,14 @@
 window.addEventListener("load", () => {
-  // for (let i = 0; i < 12; i++) {
-  //     document.querySelector('#notes')
-  //         .append(noteTemplate(Note("Prueba de text", 'color-2', i)));
-  // }
   renderNotes();
-  colorPaletteColorsListener();
-  colorTriggerListener();
-  hideColorPaletteListener();
+  mainListeners();
   addNoteListener();
 });
 
+const mainListeners = () =>   {
+  colorPaletteColorsListener();
+  colorTriggerListener();
+  hideColorPaletteListener();
+};
 const state = {
   selectedNote: null,
 };
@@ -17,25 +16,31 @@ const state = {
 const addNoteListener = () => addListener([document.querySelector("#keepit")], "click", addNoteHandler);
 
 const addNoteHandler = (e) => {
-  const note = e.target.parentElement.parentElement.previousElementSibling.textContent;
+  const noteForm = e.target.parentElement.parentElement.previousElementSibling;
+  const note = noteForm.textContent.trim();
+  noteForm.textContent = '';
+  if (note.length == 0) return;
   saveNote(Note(note, "color-1"));
   renderNotes();
 };
 
+
 const renderNotes = () => {
   const notes = getNotes();
   const container = document.querySelector("#notes");
-  if (notes) {
-    document.querySelector(".noNotesText").style.display = "none";
-  } else {
-    document.querySelector(".noNotesText").style.display = "flex";
-    return;
-  }
+  if (!notes) return;
+  
   container.innerHTML = "";
+  blankMessage(notes)
   notes.forEach((note, idx) => {
     container.append(noteTemplate(Object.assign(note, { id: idx })));
   });
+  mainListeners();
 };
+
+const blankMessage = () => {
+  return document.querySelector(".noNotesText").style.display = notes ? 'none' : 'flex';
+}
 
 const getNotes = () => JSON.parse(localStorage.getItem("notes"));
 
@@ -48,18 +53,24 @@ const hideColorPaletteListener = () => {
   addListener(document.querySelectorAll(".color__trigger"), "mouseleave", hideColorPalette);
 };
 
-const hideColorPalette = () => (document.querySelector("#color_selector").style.visibility = "hidden");
-const showColorPalette = () => (document.querySelector("#color_selector").style.visibility = "visible");
+const hideColorPalette = () => {
+  
+  document.querySelector("#color_selector").style.visibility = "hidden"
+  document.querySelector("#color_selector").style.display = "none"
+};
+const showColorPalette = () => {
+  document.querySelector("#color_selector").style.visibility = "visible"
+  document.querySelector("#color_selector").style.display = "flex"
+};
 
 const triggerColorPalette = (e) => {
   if (e.target.classList.contains(".fas")) return;
   showColorPalette();
   state.selectedNote = e.target.dataset.id;
   const el = document.querySelector("#color_selector");
-  el.style.left = e.pageX - 100;
-  el.style.top = e.pageY;
-
-  console.log(state.selectedNote);
+  const data = e.target.parentElement.parentElement.getBoundingClientRect()
+  el.style.left= `${data.x}px`;
+  el.style.top = `${data.y - 60}px`;
 };
 
 const colorPaletteColorsListener = () =>
