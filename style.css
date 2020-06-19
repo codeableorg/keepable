@@ -40,3 +40,27 @@ body {
 	border: none;
 	border-radius: 5px;
 }
+
+#color-palette {
+	visibility: hidden;
+	position: fixed;
+	left: 0;
+	top:0;
+	flex-direction: column;
+	background-color: white;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 8px;
+	z-index: 6;
+	width: 170px;
+}
+
+#color-palette div {
+	display: flex;
+}
+#color-palette div > div {
+	background-color: red;
+	width: 25px;
+	height: 25px;
+	margin: 5px;
+	border-radius: 100%;
+}
