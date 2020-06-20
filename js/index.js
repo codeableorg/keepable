@@ -54,7 +54,6 @@ let state = {
       return;
     }
     this.notes[note_index].color = color;
-    this.refresh_current_page();
   },
   remove_trashed_note(id){
     const note_index = this.notes.findIndex((el) => el.index === id & el.trashed === true);
@@ -133,18 +132,18 @@ let state = {
             <img class="palette_img" src="images/palette.png" alt="color palette">
             <div class="color_palette">
               <div class="color_row_options">
-                <div class="color_option white"></div>
-                <div class="color_option rose"></div>
-                <div class="color_option orange"></div>
-                <div class="color_option yellow"></div>
-                <div class="color_option green"></div>
+                <div class="color_option pointer white"></div>
+                <div class="color_option pointer rose"></div>
+                <div class="color_option pointer orange"></div>
+                <div class="color_option pointer yellow"></div>
+                <div class="color_option pointer green"></div>
               </div>
               <div class="color_row_options">
-                <div class="color_option turquoise"></div>
-                <div class="color_option light_blue"></div>
-                <div class="color_option purple"></div>
-                <div class="color_option fuchsia"></div>
-                <div class="color_option pale_rose"></div>
+                <div class="color_option pointer turquoise"></div>
+                <div class="color_option pointer light_blue"></div>
+                <div class="color_option pointer purple"></div>
+                <div class="color_option pointer fuchsia"></div>
+                <div class="color_option pointer pale_rose"></div>
               </div>
             </div>
           </div>
@@ -152,7 +151,7 @@ let state = {
         </div>
       </form>`;
     div.querySelectorAll(".color_option").forEach((option) => {
-      let classOption = option.classList.item(1);
+      let classOption = option.classList.item(2);
       option.addEventListener('click', (event) => {
         event.currentTarget.closest(".new_note").className = `new_note ${classOption}`; 
         event.currentTarget.closest(".new_note").querySelector("#color").value = classOption;
@@ -283,20 +282,28 @@ function generate_note(note) {
     `<img class="palette_img" src="images/palette.png" alt="color palette">
     <div class="color_palette">
       <div class="color_row_options">
-        <div class="color_option white"></div>
-        <div class="color_option rose"></div>
-        <div class="color_option orange"></div>
-        <div class="color_option yellow"></div>
-        <div class="color_option green"></div>
+        <div class="color_option pointer white"></div>
+        <div class="color_option pointer rose"></div>
+        <div class="color_option pointer orange"></div>
+        <div class="color_option pointer yellow"></div>
+        <div class="color_option pointer green"></div>
       </div>
       <div class="color_row_options">
-        <div class="color_option turquoise"></div>
-        <div class="color_option light_blue"></div>
-        <div class="color_option purple"></div>
-        <div class="color_option fuchsia"></div>
-        <div class="color_option pale_rose"></div>
+        <div class="color_option pointer turquoise"></div>
+        <div class="color_option pointer light_blue"></div>
+        <div class="color_option pointer purple"></div>
+        <div class="color_option pointer fuchsia"></div>
+        <div class="color_option pointer pale_rose"></div>
       </div>
     </div>`
+    palete_item.querySelectorAll(".color_option").forEach((option) => {
+      let classOption = option.classList.item(2);
+      option.addEventListener('click', (event) => {
+        event.currentTarget.closest(".note").className = `note ${classOption}`; 
+        state.change_color_of_note(note.index, classOption)
+      });
+    });
+
     note_footer.append(palete_item);
 
     let delete_item = document.createElement('div');
