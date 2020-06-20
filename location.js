@@ -16,6 +16,8 @@ function renderAppView(view) {
         color.onclick = function () {
           const [_, color] = this.className.split(' ')
           note.className = `add-keep ${color}`
+          const idx = parseInt(note.dataset.id)
+          data[idx].color = color
         }
       })
     }

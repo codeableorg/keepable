@@ -1,15 +1,18 @@
-const data = ["nota 1"];
+const buildNote = (text,color) => ({text,color})
+const data = [];
 
-const trash_data = ["jhbvddsfjd"];
+const trash_data = [buildNote("jhbvddsfjd",'white')];
+data.push(buildNote('nota 1', "white"))
+data.push(buildNote('nota 2', "red"))
 
 function softDelete(e) {
   const noteEl = e.target.closest(".add-keep");
-  const text = noteEl.querySelector(".note-text").value;
   const idx = parseInt(noteEl.dataset.id);
+  const note = data[idx];
   noteEl.remove();
 
   data.splice(idx, 1);
-  trash_data.push(text);
+  trash_data.push(note);
 }
 
 function permanentlyDelete(e) {
@@ -27,12 +30,14 @@ function recover(e) {
   trash_data.splice(idx, 1);
 }
 
-function createNote(content, idx, name) {
+function createNote(content, idx, name, color) {
   //return `<div id="${idx}" class="notas"><p>${content}</p></div>`;
   const note = document.createElement("div");
-  let controls = `<button class="btn-paleta2">
+  let controls = `<div class="btn-paleta btn-paleta2">
     <img src="/assets/icon-paleta2.png" alt="button-paleta2" />
-  </button>
+    <div class="color-picker">
+    ${"white red orange yellow green lightgreen skyblue blue purple pink".split(' ').map(c => `<div class="color-picker__color ${c}"></div>`).join('')}</div>
+  </div>
   <button class="btn-trash2 delete">
     <img src="/assets/icon-trash2.png" alt="button-trash2" />
   </button>`;
@@ -50,7 +55,7 @@ function createNote(content, idx, name) {
 
   note.id = "keep-1";
   note.dataset.id = idx;
-  note.className = "add-keep";
+  note.className = `add-keep ${color}`;
   note.innerHTML = `
     <textarea
       class="keep keep-1 note-text"
@@ -78,10 +83,10 @@ function render(name) {
     </div>`;
     return;
   }
-  list.className="content-addkeep"
+  list.className = "content-addkeep";
   if (name == "trash") notes = trash_data;
-  notes.forEach((text, idx) => {
-    const new_note = createNote(text, idx, name);
+  notes.forEach(({text,color}, idx) => {
+    const new_note = createNote(text, idx, name, color);
     list.appendChild(new_note);
   });
 }

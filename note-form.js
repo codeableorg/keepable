@@ -10,7 +10,7 @@ picker.forEach(color => color.onclick = function(){
 form.onsubmit = function (event) {
   event.preventDefault();
   const note_text = this.elements["note-body"].value;
-  data.push(note_text)
+  data.push({text: note_text, color: this.nextColor})
   router(location.href)
   //new Note(note_text)
 };
