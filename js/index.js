@@ -114,7 +114,8 @@ let state = {
       console.log(event.target.querySelector("#title").value);
       const title = event.target.querySelector("#title").value
       const textarea = event.target.querySelector("#textarea").value
-      state.add_note(title, textarea);
+      const color = event.target.querySelector("#color").value
+      state.add_note(title, textarea, color);
       state.render_note_page();
       event.preventDefault();
     }
@@ -125,6 +126,7 @@ let state = {
       `<form action="" class="new_note">
         <input id="title" class="title" type="text" placeholder="The title for my new note">
         <textarea name="" id="textarea" cols="30" rows="10" placeholder="Some great think!"></textarea> 
+        <input id="color" type="hidden" value="n_white">
 
         <div class="new_note_footer">
           <div class="note_img palette">
@@ -149,10 +151,18 @@ let state = {
           <button class="note_save">Keep it!</button>
         </div>
       </form>`;
+    div.querySelectorAll(".color_option").forEach((option) => {
+      let classOption = option.classList.item(1);
+      option.addEventListener('click', (event) => {
+        event.currentTarget.closest(".new_note").className = `new_note ${classOption}`; 
+        event.currentTarget.closest(".new_note").querySelector("#color").value = classOption;
+      });
+    });
     fragment.append(div);
     fragment.firstChild.addEventListener('submit', (event) => create_note_from_form(event));
     return fragment;
   },
+
 
   generate_not_trashed_notes : function (fragment){
     const not_trashed_notes = this.notes.filter((el) => el.trashed===false);
@@ -311,9 +321,9 @@ function generate_note(note) {
   return note_element;
 }
 
-state.add_note('Titulo 1', 'Description de note 1', 'orange');
-state.add_note('Titulo 2', 'Description de note 2', 'green');
+// state.add_note('Titulo 1', 'Description de note 1', 'orange');
+// state.add_note('Titulo 2', 'Description de note 2', 'green');
 // state.add_note('note deleted', 'note-deleted-description', 'blue');
 // state.trash_a_note(2);
 
-click_notes()
+//click_notes()

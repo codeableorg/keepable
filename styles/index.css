@@ -125,6 +125,7 @@ nav div button {
   width: 560px;
   font-weight: bold;
   border: none;
+  background: transparent;
 }
 
 #textarea {
@@ -133,6 +134,7 @@ nav div button {
   height: 80px;
   width: 560px;
   resize: none;
+  background: transparent;
 }
 
 .new_note_footer {
@@ -145,6 +147,7 @@ nav div button {
   background-color: #ffffff;
   font-size: 18px;
   cursor: pointer;
+  background: transparent;
 }
 
 .notes_container {
@@ -208,7 +211,7 @@ nav div button {
   height: 36px;
   width: 36px;
   border-radius: 100px;
-  background-color: #ffffff;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -245,44 +248,44 @@ nav div button {
   margin: 2.5px;
 }
 
-.white {
+.white, .n_white{
   border: 1px solid #999B9E;
   background-color: #ffffff;
 }
 
-.rose {
+.rose, .n_rose {
   background-color: #F28B82;
 }
 
-.orange {
+.orange, .n_orange {
   background-color: #FBBC04;
 }
 
-.yellow {
+.yellow, .n_yellow {
   background-color: #FFF475;
 }
 
-.green {
+.green, .n_green {
   background-color: #CCFF90;
 }
 
-.turquoise {
+.turquoise, .n_turquoise {
   background-color: #A7FFEB;
 }
 
-.light_blue {
+.light_blue, .n_light_blue {
   background-color: #CBF0F8;
 }
 
-.purple {
+.purple, .n_purple {
   background-color: #AECBFA;
 }
 
-.fuchsia {
+.fuchsia, .n_fuchsia {
   background-color: #D7AEFB;
 }
 
-.pale_rose {
+.pale_rose, .n_pale_rose {
   background-color: #FDCFE8;
 }
 
