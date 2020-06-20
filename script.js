@@ -26,42 +26,56 @@ class App {
 
     constructor() {
         this.vault = window.localStorage
-		this.cards = []
+		this.active_cards = []
 		this.deleted_cards = []
 		this.card_count = 0
 		this.new_note_color = '#FFFFFF'
+		this.render()
     }
-    createNote() {
-        const title = document.getElementById('title').value
-        const content = document.getElementById('content').value
+    push_note() {
+        const title = document.getElementById('title').value;
+        const content = document.getElementById('content').value;
 		if (title !== '' && content !== '') {
-			const card = new Card(this.card_count, title, content, this.new_note_color)
-			this.card_count++
-			this.cards.push(card)
-			this.render()
+			const card = new Card(this.card_count, title, content, this.new_note_color);
+			this.card_count++;
+			this.active_cards.push(card);
+			this.render();
 		}
-	document.getElementById('title').value = ''
-	document.getElementById('content').value = ''
+		document.getElementById('title').value = '';
+		document.getElementById('content').value = '';
     }
 
     deleteNote(id) {
-		for (let i = 0; i < this.cards.length; i++) {
-			if (this.cards[i].id === id) {
-				this.deleted_cards.push(this.cards[i])
-				this.cards.splice(i, 1)
+		for (let i = 0; i < this.active_cards.length; i++) {
+			if (this.active_cards[i].id === id) {
+				this.deleted_cards.push(this.active_cards[i])
+				this.active_cards.splice(i, 1)
+			}
+		}	
+		document.getElementById('myModal').style.display = 'none';
+		document.getElementById('myModal').children[0].innerHTML = '';
+		this.render()
+	}
+	
+	search_note(id) {
+
+		for (let i = 0; i < this.active_cards.length; i++) {
+			if (this.active_cards[i].id === id) {
+				return this.active_cards[i]
 			}
 		}
-		this.render()
-    }
-    injectColor(color, obj) {
-	console.log(obj instanceof Card)
-	if (obj instanceof Card) {
-		obj.color = color
-	} else {
-		this.new_note_color = color
 	}
-	document.getElementById('color-palette').style.visibility = 'hidden'
-	this.render()
+
+    injectColor(color, obj) {
+		console.log(obj instanceof Card)
+		if (obj instanceof Card) {
+			obj.color = color
+		} 
+		else {
+			this.new_note_color = color
+		}
+		document.getElementById('color-palette').style.visibility = 'hidden'
+		this.render()
     }
 
     showPalette(event, id) {
@@ -69,9 +83,9 @@ class App {
 		if (id === 'form') {
 			obj = document.getElementById('form')
 		} else {
-			for (let i = 0; i < this.cards.length; i++) {
-				if (this.cards[i].id === id) {
-					obj = this.cards[i]
+			for (let i = 0; i < this.active_cards.length; i++) {
+				if (this.active_cards[i].id === id) {
+					obj = this.active_cards[i]
 				}
 			}
 		}
@@ -82,6 +96,8 @@ class App {
 			const color = (button.style.backgroundColor)
 			button.onclick = (event) => {
 				this.injectColor(color, obj)
+				document.getElementById('myModal').style.display = 'none';
+				document.getElementById('myModal').children[0].innerHTML = '';
 			}
 		}
 		palette.style.visibility = 'visible';
@@ -90,50 +106,46 @@ class App {
 
 	}
 
-	get_location() {
-		navigator.geolocation.getCurrentPosition((position)=>{
-			console.log(position)
-			fetch("http://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.coords.latitude + ',' + position.coords.longitude + '&sensor=false')
-				.then(response => {
-					console.log(response)
-				})
-		})
-	}
-
 	edit_card(id) {
 
-		let obj = null
-		for (let i = 0; i < this.cards.length; i++) {
-			if (this.cards[i].id === id) {
-				obj = this.cards[i]
-			}
-		}
-
+		let selected_card = this.search_note(id);
 		let modal = document.getElementById('myModal');
 		let modal_body = modal.children[0];
 		modal.style.display = 'block';
-		modal.children[0].style.backgroundColor = `${obj.color}`
-
+		modal.children[0].style.backgroundColor = `${selected_card.color}`
 		window.onclick = (event) => {
 			if (event.target === modal){
 				modal.style.display = 'none';
 				modal_body.innerHTML = '';
 			}
 		}
-		let calc = (this.cards.length - id) - 1
-		let current_card = this.cards[id];
-		modal_body.innerHTML += `
-				<h1>${current_card.title}</h1>
-				<p>${current_card.content}</p>
+
+		modal_body.innerHTML += `	
+				<h1>${selected_card.title}</h1>
+				<p>${selected_card.content}</p>
+				<div class="card-options">
+					<p onclick="app.showPalette(event,${id})"><i class="fas fa-palette"></i></p>
+	        		<button onclick="app.deleteNote(${id})" class="delete">Delete</button>
+				</div>
 		`
 	}
 
 	render() {
-		document.getElementById('notes').innerHTML = ``
-		for (const card of this.cards) {
-			document.getElementById('notes').innerHTML += card.html()
+
+		let notes = document.getElementById('notes');
+			notes.innerHTML = '';
+		if (this.active_cards.length === 0) {
+			notes.innerHTML += `<img style = "justify-self:center"src = "./assets/placeholder.svg" alt = "placeholder">`;
+		}
+		else {
+			let i = this.active_cards.length;
+			while(i !== 0) {
+				notes.innerHTML += this.active_cards[i-1].html();
+				i--;
+			}
 		}
 	}
+
 	renderDeleted() {
 		document.getElementById('notes').innerHTML = ``
 		for (const card of this.deleted_cards) {
