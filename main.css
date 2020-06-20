@@ -230,3 +230,7 @@ body {
   padding: 0 10px;
   font-weight: 700;
 }
+
+.hidden{
+  display: none;
+}

@@ -16,30 +16,35 @@
   </header>
 
   <aside class="aside">
-    <a href="#" class="aside-button selected"><img src="images/brackets.svg">Notes</a>
-    <a href="#" class="aside-button"><img src="images/trash.svg">Trash </a>
+    <a id="btnNotes" href="#" class="aside-button selected"><img src="images/brackets.svg">Notes</a>
+    <a id="btnTrashNotes" href="#" class="aside-button "><img src="images/trash.svg">Trash </a>
   </aside>
 
   <main class="main">
-    <form class="note create-note" id="create-note-form">
-      <textarea
-        class="create-note__textarea"
-        name="note-body"
-        placeholder="Some great think!"
-        rows="10"></textarea>
-      <div class="container-buttons">
-        <div class="buttons">
-          <div class="palette"><img src="images/palette.svg" alt="palette"></div>
+    <section class="container-notes">
+      <form class="note create-note " id="create-note-form">
+        <textarea
+          class="create-note__textarea"
+          name="note-body"
+          placeholder="Some great think!"
+          rows="10"></textarea>
+        <div class="container-buttons">
+          <div class="buttons">
+            <div class="palette"><img src="images/palette.svg" alt="palette"></div>
+          </div>
+          <button type="submit" class="keepit">Keep it!</button>
         </div>
-        <button type="submit" class="keepit">Keep it!</button>
-      </div>
-    </form>
-
-    <div class="notes"></div>
+      </form>
   
-    <div class="main__notes" id="notes-container"></div>
-    <div class="main__trash" id="trash-container"></div>
-    <div class="paleta"></div>
+      <div class="notes"></div>
+    
+      <div class="main__notes" id="notes-container"></div>
+      <div class="main__trash" id="trash-container"></div>
+      <div class="paleta "></div>
+    </section>
+    <section class="container-trash-notes hidden">
+      <div class="main__notes" id="trash-notes"></div>
+    </section>
   </main>
 
   <script src="js/note.js"></script>

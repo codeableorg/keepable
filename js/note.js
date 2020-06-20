@@ -24,10 +24,9 @@ class Note {
   }
 
   deleteCard(){
-    console.log(app.notes);
-    app.notes.find((note,index,array)=>{
+    app.notes.forEach((note)=>{
       if(note.id === this.id){
-        console.log(array.splice(index,1));
+        note.deleted = true;
       };
     })
    app.renderNotes();
