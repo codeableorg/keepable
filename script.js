@@ -14,7 +14,7 @@ class Card {
 		    		<div class="content">${this.content}</div>
 		    	</div>
 				<div class="card-options">
-					<p onclick="app.showPalette(event,${this.id})"><i sclass="fas fa-palette"></i></p>
+					<p onclick="app.showPalette(event,${this.id})"><i class="fas fa-palette"></i></p>
 	        		<button onclick="app.deleteNote(${this.id})" class="delete">Delete</button>
 				</div>
 		    </div>
