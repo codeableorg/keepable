@@ -31,7 +31,7 @@ class App {
     this.clean();
     this.notes.sort((a, b) => b.date - a.date).forEach((note) => {
       if(note.deleted){
-       this.trashNotesCoteiner.append(note.createCard());
+       this.trashNotesCoteiner.append(note.createTrashCard());
       }
     });
   }

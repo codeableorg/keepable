@@ -32,6 +32,15 @@ class Note {
    app.renderNotes();
   }
 
+  deleteTrashCard(){
+    app.notes.find((note,index,array)=>{
+      if(note.id === this.id){
+        array.splice(index,1);
+      };
+    })
+   app.trashRenderNotes();
+  }
+
   createCard() {
     const div = document.createElement('DIV');
     div.classList.add('note');
@@ -48,7 +57,25 @@ class Note {
       this.deleteCard();
     });
     return div;
-    
+  }
+
+  createTrashCard() {
+    const div = document.createElement('DIV');
+    div.classList.add('note');
+    div.style.background = this.color;
+    div.innerHTML = `
+      <p>${this.body}</p>
+      <div class="buttons">
+        <div class="button-palette"><img src="images/return.svg" alt="palette"></div>
+        <div class="button-trash"><img src="images/trash2.svg" alt="trash"></div>
+      </div>
+    `;
+    const btnReturn = div.querySelector(".button-patette");
+    consola.log(btnReturn);
+    btnReturn.addEventListener('click',()=>{
+      this.deleteTrashCard();
+    });
+    return div;
   }
 
 }
