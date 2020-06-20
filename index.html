@@ -12,7 +12,7 @@
   <header class="header">
     <h1 class="header-title">{keep<strong>able</strong>}</h1>
     <p class="header-welcome"> <strong>Welcome to {keepable}</strong> .
-      Today's Forecast for Santiago de Surco, Lima Province, Peru: 18°, Cloudy</p>
+      Today's Forecast for Lima Peru: <span id="degrees">18°</span>℃, <span id="weather">Cloudy</span> </p>
   </header>
 
   <aside class="aside">
@@ -22,25 +22,26 @@
 
   <main class="main">
     <section class="container-notes">
-      <form class="note create-note " id="create-note-form">
+      <form class="note create-note" id="create-note-form">
         <textarea
           class="create-note__textarea"
           name="note-body"
           placeholder="Some great think!"
           rows="10"></textarea>
-        <div class="container-buttons">
-          <div class="buttons">
-            <div class="palette"><img src="images/palette.svg" alt="palette"></div>
-          </div>
+        <footer class="container-buttons">
+          <div class="buttons" id="create-note-buttons"></div>
           <button type="submit" class="keepit">Keep it!</button>
-        </div>
+        </footer>
       </form>
-  
-      <div class="notes"></div>
-    
+      <div class="no_notes">
+        <img src="./images/curly-bracket-left.svg" alt="">
+        <p>Notes you add appear here</p>
+        <img src="./images/curly-bracket-right.svg" alt="">
+      </div>
+
       <div class="main__notes" id="notes-container"></div>
       <div class="main__trash" id="trash-container"></div>
-      <div class="paleta "></div>
+      <div class="paleta"></div>
     </section>
     <section class="container-trash-notes hidden">
       <div class="main__notes" id="trash-notes"></div>
@@ -50,5 +51,6 @@
   <script src="js/note.js"></script>
   <script src="js/app.js"></script>
   <script src="main.js"></script>
+  <script src="js/weather.js"></script>
 </body>
 </html>
