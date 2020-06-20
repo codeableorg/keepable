@@ -22,8 +22,8 @@ function getCurrentWeather() {
       condition: { text, icon },
     } = current;
     const weather_text = `${name}, ${region}, ${country}: ${temp_c}°, ${text}`;
-    console.log(weather_text);
-    console.log(icon);
+    document.getElementById('weather-info').textContent = weather_text
+    //console.log(icon);
   }
 
   function getWeatherInfo({ coords }) {
@@ -45,4 +45,4 @@ function getCurrentWeather() {
   );
 }
 
-/* getCurrentWeather(); */
+getCurrentWeather();

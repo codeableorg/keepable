@@ -1,3 +1,4 @@
+const COLORS = "white red orange yellow green lightgreen skyblue blue purple pink"
 const buildNote = (text,color) => ({text,color})
 const data = [];
 
@@ -36,7 +37,7 @@ function createNote(content, idx, name, color) {
   let controls = `<div class="btn-paleta btn-paleta2">
     <img src="/assets/icon-paleta2.png" alt="button-paleta2" />
     <div class="color-picker">
-    ${"white red orange yellow green lightgreen skyblue blue purple pink".split(' ').map(c => `<div class="color-picker__color ${c}"></div>`).join('')}</div>
+    ${COLORS.split(' ').map(c => `<div class="color-picker__color ${c}"></div>`).join('')}</div>
   </div>
   <button class="btn-trash2 delete">
     <img src="/assets/icon-trash2.png" alt="button-trash2" />
