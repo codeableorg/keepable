@@ -5,6 +5,12 @@ students in which users can post amazing notes.
 
 ![Main view](https://res.cloudinary.com/dotconde/image/upload/v1592461051/Main_lnvoyt.png)
 
+# Members
+
+- Albert Castellano
+- Benjamin Maguiña
+- Nicolle Quispe
+
 ## Instructions
 
 Fork [this repo](https://github.com/codeableorg/keepable) and work in your
