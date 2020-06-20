@@ -113,15 +113,6 @@ function createNote(note) {
 
   addOptionButtons(iconsContainer);
 
-  // const paletteImage = document.createElement('img');
-  // paletteImage.src = 'images/Frame 7.svg';
-  // paletteImage.id = 'colorSelector';
-  // iconsContainer.appendChild(paletteImage);
-
-  // const trashImage = document.createElement('img');
-  // trashImage.src = 'images/Frame 8.svg';
-  // iconsContainer.appendChild(trashImage);
-
   return noteContainer;
 }
 
@@ -147,13 +138,6 @@ trashSidebar.addEventListener('click', (event) => {
   notesSidebar.classList.remove('sidebar__list--active');
   trashSidebar.classList.add('sidebar__list--active');
 });
-
-// UNUSED FUNCTION
-// function showNotes() {
-//   const currentNote = notes.pop();
-//   console.log(currentNote.color);
-//   createNote(currentNote);
-// }
 
 //User can include custom color while creating a note y ya se agrega color a la nota que se crea.
 function openPaletteColor() {
