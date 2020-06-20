@@ -29,7 +29,7 @@ class Note {
         note.deleted = true;
       };
     })
-   app.renderNotes();
+    app.renderNotes();
   }
 
   recoverNote(){
@@ -57,7 +57,6 @@ class Note {
     div.innerHTML = `
       <p>${this.body}</p>
       <div class="buttons">
-        <div class="button-palette"><img src="images/palette.svg" alt="palette"></div>
         <div class="button-trash"><img src="images/trash2.svg" alt="trash"></div>
       </div>
     `;
@@ -65,6 +64,19 @@ class Note {
     btnTrash.addEventListener('click',()=>{
       this.deleteCard();
     });
+
+    const buttons = div.querySelector('.buttons');
+    buttons.prepend(Note.createButtonPalette());
+
+    const colorDivs = buttons.querySelectorAll('.button-palette__color');
+    colorDivs.forEach((colorDiv) => {
+      colorDiv.addEventListener('click', (e) => {
+        const color = colorDiv.style.background;
+        this.color = color;
+        div.style.background = color;
+      });
+    });
+
     return div;
   }
 
