@@ -157,7 +157,12 @@ function deleteNoteForever() {
         .getAttribute("data-index");
       notes.splice(currentNoteIndex, 1);
       clearElement(allNotes);
-      createAllNotes(notes);
+      createAllNotes(notes, false);
+      notesSidebar.classList.remove("sidebar__list--active");
+      trashSidebar.classList.add("sidebar__list--active");
+      deleteNoteForever();
+      showArrowUpButton();
+      recoverNote();
     });
   });
 }
