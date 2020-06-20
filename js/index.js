@@ -20,7 +20,7 @@ let state = {
     this.notes.push(new Note(title, content, color, this.count_notes));
     this.count_notes += 1;
   },
-  edit_note(title, content, id) {
+  edit_note(title, content, color, id) {
     const note_index = this.notes.findIndex(
       (el) => (el.index === id) & (el.trashed === false)
     );
@@ -30,6 +30,7 @@ let state = {
     }
     this.notes[note_index].title = title;
     this.notes[note_index].content = content;
+    this.notes[note_index].color = color;
   },
   trash_a_note(id) {
     const note_index = this.notes.findIndex(
@@ -297,9 +298,10 @@ function callback_show_modal(event) {
   modal_element.className = "modal";
   modal_element.innerHTML = `
     <div class="new_note_container modal-content"> 
-      <form action="" class="new_note" note_id="${note.index}">
+      <form action="" class="new_note ${note.color}" note_id="${note.index}">
         <input id="title" class="title" type="text" placeholder="The title for my new note">
         <textarea name="" id="textarea" cols="30" rows="10" placeholder="Some great think!"></textarea> 
+        <input id="color" type="hidden">
 
         <div class="new_note_footer">
           <div class="new_note_footer-icons">
@@ -307,18 +309,18 @@ function callback_show_modal(event) {
               <img class="palette_img" src="images/palette.png" alt="color palette">
               <div class="color_palette">
                 <div class="color_row_options">
-                  <div class="color_option white"></div>
-                  <div class="color_option rose"></div>
-                  <div class="color_option orange"></div>
-                  <div class="color_option yellow"></div>
-                  <div class="color_option green"></div>
+                  <div class="color_option pointer white"></div>
+                  <div class="color_option pointer rose"></div>
+                  <div class="color_option pointer orange"></div>
+                  <div class="color_option pointer yellow"></div>
+                  <div class="color_option pointer green"></div>
                 </div>
                 <div class="color_row_options">
-                  <div class="color_option turquoise"></div>
-                  <div class="color_option light_blue"></div>
-                  <div class="color_option purple"></div>
-                  <div class="color_option fuchsia"></div>
-                  <div class="color_option pale_rose"></div>
+                  <div class="color_option pointer turquoise"></div>
+                  <div class="color_option pointer light_blue"></div>
+                  <div class="color_option pointer purple"></div>
+                  <div class="color_option pointer fuchsia"></div>
+                  <div class="color_option pointer pale_rose"></div>
                 </div>
               </div>
             </div>
@@ -330,18 +332,18 @@ function callback_show_modal(event) {
         </div>
       </form>
     </div>`;
-  let modal_element_form = modal_element.querySelector("form");
-  let modal_element_input = modal_element.querySelector("#title");
-  let modal_element_text_area = modal_element.querySelector("#textarea");
-  let modal_element_button = modal_element.querySelector("BUTTON");
 
-  modal_element_form.style.backgroundColor = note.color;
-  modal_element_input.style.backgroundColor = note.color;
-  modal_element_text_area.style.backgroundColor = note.color;
-  modal_element_button.style.backgroundColor = note.color;
+  modal_element.querySelectorAll(".color_option").forEach((option) => {
+    let classOption = option.classList.item(2);
+    option.addEventListener('click', (event) => {
+      event.currentTarget.closest(".new_note").className = `new_note ${classOption}`; 
+      event.currentTarget.closest(".new_note").querySelector("#color").value = classOption;
+    });
+  });
 
   modal_element.querySelector("#textarea").value = note.content;
   modal_element.querySelector("#title").value = note.title;
+  modal_element.querySelector("#color").value = note.title;
   modal_element
     .querySelector(".trash")
     .parentNode.addEventListener("click", (event) =>
@@ -355,7 +357,8 @@ function callback_show_modal(event) {
     .addEventListener("submit", (event) => {
       let new_title = modal_element.querySelector("#title").value;
       let new_content = modal_element.querySelector("#textarea").value;
-      state.edit_note(new_title, new_content, note.index);
+      let new_color = modal_element.querySelector("#color").value;
+      state.edit_note(new_title, new_content, new_color, note.index);
       event.preventDefault();
       state.refresh_current_page();
     });
