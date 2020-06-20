@@ -27,6 +27,7 @@ class App {
     constructor() {
         this.vault = window.localStorage
 		this.cards = []
+		this.deleted_cards = []
 		this.card_count = 0
 		this.new_note_color = '#FFFFFF'
     }
@@ -46,6 +47,7 @@ class App {
     deleteNote(id) {
 		for (let i = 0; i < this.cards.length; i++) {
 			if (this.cards[i].id === id) {
+				this.deleted_cards.push(this.cards[i])
 				this.cards.splice(i, 1)
 			}
 		}
@@ -129,6 +131,12 @@ class App {
 	render() {
 		document.getElementById('notes').innerHTML = ``
 		for (const card of this.cards) {
+			document.getElementById('notes').innerHTML += card.html()
+		}
+	}
+	renderDeleted() {
+		document.getElementById('notes').innerHTML = ``
+		for (const card of this.deleted_cards) {
 			document.getElementById('notes').innerHTML += card.html()
 		}
 	}
