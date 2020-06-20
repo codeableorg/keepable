@@ -19,8 +19,8 @@ function addNote(trash = false, pinned = false) {
     title: noteTitle,
     body: noteBody,
     color: getComputedStyle(newNoteWrapper)["background-color"],
-    trash: this.trash,
-    pinned: this.pinned,
+    trash: trash,
+    pinned: pinned,
     updatedAt: Date.now(),
   };
 
@@ -75,22 +75,89 @@ function createNote(note) {
 
   const trashImage = document.createElement("img");
   trashImage.src = "images/Frame 8.svg";
-  trashImage.classList.add("button-trash");
+  trashImage.classList.add("button-delete");
   iconsContainer.appendChild(trashImage);
+
+  const arrowUpImage = document.createElement("img");
+  arrowUpImage.src = "images/Frame 9.svg";
+  arrowUpImage.classList.add("button-recover", "hidden");
+  iconsContainer.appendChild(arrowUpImage);
 
   return noteContainer;
 }
 
-function selectOneNote(notes, title) {
-  let selectedNote = notes.filter((note) => note.title === title);
-  console.log(selectedNote);
-}
-function deleteNote() {
-  const buttonTrash = document.querySelectorAll(".button-trash");
+function changeNoteTrashStatus(state, classname) {
+  const buttonTrash = document.querySelectorAll(classname);
   buttonTrash.forEach((button) => {
     button.addEventListener("click", (event) => {
-      const currentNoteContainer = event.target.closest(".note");
-      console.log(currentNoteContainer);
+      const currentNoteIndex = event.target
+        .closest(".note")
+        .getAttribute("data-index");
+      notes[currentNoteIndex].trash = state;
+
+      clearElement(allNotes);
+      createAllNotes(notes);
+      notesSidebar.classList.remove("sidebar__list--active");
+      trashSidebar.classList.add("sidebar__list--active");
+    });
+  });
+}
+
+function showArrowUpButton() {
+  const buttonTrash = document.querySelectorAll(".button-recover");
+  buttonTrash.forEach((button) => {
+    button.classList.remove("hidden");
+  });
+}
+
+function deleteNote() {
+  //changeNoteTrashStatus(true, ".button-delete");
+  const buttonTrash = document.querySelectorAll(".button-delete");
+  buttonTrash.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const currentNoteIndex = event.target
+        .closest(".note")
+        .getAttribute("data-index");
+      notes[currentNoteIndex].trash = true;
+      clearElement(allNotes);
+      createAllNotes(notes, false);
+      notesSidebar.classList.remove("sidebar__list--active");
+      trashSidebar.classList.add("sidebar__list--active");
+      deleteNoteForever();
+      showArrowUpButton();
+      recoverNote();
+    });
+  });
+}
+
+function recoverNote() {
+  //changeNoteTrashStatus(false, ".button-recover");
+  const buttonTrash = document.querySelectorAll(".button-recover");
+  buttonTrash.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const currentNoteIndex = event.target
+        .closest(".note")
+        .getAttribute("data-index");
+      notes[currentNoteIndex].trash = false;
+      clearElement(allNotes);
+      createAllNotes(notes);
+      trashSidebar.classList.remove("sidebar__list--active");
+      notesSidebar.classList.add("sidebar__list--active");
+      deleteNote();
+    });
+  });
+}
+
+function deleteNoteForever() {
+  const buttonTrash = document.querySelectorAll(".button-delete");
+  buttonTrash.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const currentNoteIndex = event.target
+        .closest(".note")
+        .getAttribute("data-index");
+      notes.splice(currentNoteIndex, 1);
+      clearElement(allNotes);
+      createAllNotes(notes);
     });
   });
 }
@@ -109,6 +176,7 @@ notesSidebar.addEventListener("click", (event) => {
   createAllNotes(notes);
   trashSidebar.classList.remove("sidebar__list--active");
   notesSidebar.classList.add("sidebar__list--active");
+  deleteNote();
 });
 
 trashSidebar.addEventListener("click", (event) => {
@@ -116,6 +184,9 @@ trashSidebar.addEventListener("click", (event) => {
   createAllNotes(notes, false);
   notesSidebar.classList.remove("sidebar__list--active");
   trashSidebar.classList.add("sidebar__list--active");
+  deleteNoteForever();
+  showArrowUpButton();
+  recoverNote();
 });
 
 // UNUSED FUNCTION
