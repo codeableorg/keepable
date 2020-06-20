@@ -38,6 +38,7 @@ noteSubmit.addEventListener('click', () => {
   clearElement(allNotes); // remove all notes to inmediately re-create them
   addNote();
   createAllNotes(notes);
+  deleteNote();
   newNoteWrapper.style.backgroundColor = '#ffffff';
 });
 
@@ -68,6 +69,7 @@ function addOptionButtons(parent) {
 
   const trashImage = document.createElement('img');
   trashImage.setAttribute('src', 'images/Frame 8.svg');
+  trashImage.classList.add('button-delete');
   trashButton.appendChild(trashImage);
 
   addColorButton('white', '#ffffff', paletteMenu);
@@ -111,7 +113,85 @@ function createNote(note) {
 
   addOptionButtons(iconsContainer);
 
+  const arrowUpImage = document.createElement('img');
+  arrowUpImage.src = 'images/Frame 9.svg';
+  arrowUpImage.classList.add('button-recover', 'hidden');
+  iconsContainer.appendChild(arrowUpImage);
+
   return noteContainer;
+}
+
+function changeNoteTrashStatus(state, classname) {
+  const buttonTrash = document.querySelectorAll(classname);
+  buttonTrash.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      const currentNoteIndex = event.target.closest('.note').getAttribute('data-index');
+      notes[currentNoteIndex].trash = state;
+
+      clearElement(allNotes);
+      createAllNotes(notes);
+      notesSidebar.classList.remove('sidebar__list--active');
+      trashSidebar.classList.add('sidebar__list--active');
+    });
+  });
+}
+
+function showArrowUpButton() {
+  const buttonTrash = document.querySelectorAll('.button-recover');
+  buttonTrash.forEach((button) => {
+    button.classList.remove('hidden');
+  });
+}
+
+function deleteNote() {
+  //changeNoteTrashStatus(true, ".button-delete");
+  const buttonTrash = document.querySelectorAll('.button-delete');
+  buttonTrash.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      const currentNoteIndex = event.target.closest('.note').getAttribute('data-index');
+      notes[currentNoteIndex].trash = true;
+      clearElement(allNotes);
+      createAllNotes(notes, false);
+      notesSidebar.classList.remove('sidebar__list--active');
+      trashSidebar.classList.add('sidebar__list--active');
+      deleteNoteForever();
+      showArrowUpButton();
+      recoverNote();
+    });
+  });
+}
+
+function recoverNote() {
+  //changeNoteTrashStatus(false, ".button-recover");
+  const buttonTrash = document.querySelectorAll('.button-recover');
+  buttonTrash.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      const currentNoteIndex = event.target.closest('.note').getAttribute('data-index');
+      notes[currentNoteIndex].trash = false;
+      clearElement(allNotes);
+      createAllNotes(notes);
+      trashSidebar.classList.remove('sidebar__list--active');
+      notesSidebar.classList.add('sidebar__list--active');
+      deleteNote();
+    });
+  });
+}
+
+function deleteNoteForever() {
+  const buttonTrash = document.querySelectorAll('.button-delete');
+  buttonTrash.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      const currentNoteIndex = event.target.closest('.note').getAttribute('data-index');
+      notes.splice(currentNoteIndex, 1);
+      clearElement(allNotes);
+      createAllNotes(notes, false);
+      notesSidebar.classList.remove('sidebar__list--active');
+      trashSidebar.classList.add('sidebar__list--active');
+      deleteNoteForever();
+      showArrowUpButton();
+      recoverNote();
+    });
+  });
 }
 
 // function to show all notes
@@ -131,6 +211,7 @@ notesSidebar.addEventListener('click', (event) => {
   createAllNotes(notes);
   trashSidebar.classList.remove('sidebar__list--active');
   notesSidebar.classList.add('sidebar__list--active');
+  deleteNote();
 });
 
 trashSidebar.addEventListener('click', (event) => {
@@ -138,6 +219,9 @@ trashSidebar.addEventListener('click', (event) => {
   createAllNotes(notes, false);
   notesSidebar.classList.remove('sidebar__list--active');
   trashSidebar.classList.add('sidebar__list--active');
+  deleteNoteForever();
+  showArrowUpButton();
+  recoverNote();
 });
 
 //User can include custom color while creating a note y ya se agrega color a la nota que se crea.

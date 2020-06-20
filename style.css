@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
 :root {
   --black: #1d2128;
@@ -15,7 +15,7 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background: var(--black);
   color: var(--white);
 }
@@ -50,8 +50,8 @@ body {
   grid-template-columns: 15% auto;
   grid-template-rows: 80px auto;
   grid-template-areas:
-    'header header'
-    'sidebar main';
+    "header header"
+    "sidebar main";
 }
 
 /* no-notes styles */
@@ -65,11 +65,11 @@ body {
 }
 
 .no-notes::before {
-  content: '{';
+  content: "{";
 }
 
 .no-notes::after {
-  content: '}';
+  content: "}";
 }
 
 .no-notes::before,
