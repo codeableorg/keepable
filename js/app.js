@@ -1,11 +1,11 @@
 class App {
-
   constructor({ notesContainer }) {
     if (App._instance) return App._instance;
     else App._instance = this;
     this.notesContainer = notesContainer;
     this.notes = [];
     this.trashNotesCoteiner = document.querySelector("#trash-notes");
+    this.message = document.querySelector('.no_notes');
   }
 
   createNote({ title = '', body, color }) {
@@ -26,6 +26,12 @@ class App {
         this.notesContainer.append(note.createCard());
       }
     });
+    console.log(app.notes);
+    if (this.notes.filter((note) => !note.deleted).length === 0) {
+      this.message.classList.remove('hidden');
+    } else {
+      this.message.classList.add('hidden');
+    }
   }
 
   trashRenderNotes() {

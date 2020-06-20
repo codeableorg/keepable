@@ -8,12 +8,12 @@ var app = new App({
   notesContainer: document.querySelector('#notes-container'),
 });
 
-
 const createNoteButtons = document.querySelector('#create-note-buttons');
 const buttonPalette = Note.createButtonPalette();
 createNoteButtons.append(buttonPalette);
 const createNoteForm = document.querySelector('#create-note-form');
 const colorButtons = createNoteButtons.querySelectorAll('.button-palette__color');
+
 colorButtons.forEach((colorButton) => {
   colorButton.addEventListener('click', (e) => {
     const color = e.target.style.backgroundColor;
