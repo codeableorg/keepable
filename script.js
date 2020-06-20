@@ -39,6 +39,8 @@ class App {
 			this.cards.push(card)
 			this.render()
 		}
+	document.getElementById('title').value = ''
+	document.getElementById('content').value = ''
     }
 
     deleteNote(id) {
