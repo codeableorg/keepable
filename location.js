@@ -1,8 +1,23 @@
 function renderAppView(view) {
   if (!view) throw new Error("must provide a view");
-  console.log("rendered view:", view);
+  render(view);
+  //console.log("rendered view:", view);
+  if (view == "default") {
+    deleteButtons = document.getElementsByClassName("delete");
+    permDeleteButtons = document.getElementsByClassName("permDelete");
+    recoverButtons = document.getElementsByClassName("recover");
+    [...deleteButtons].forEach((button) =>
+      button.addEventListener("click", softDelete)
+    );
+  }
   if (view == "trash") {
-    console.log("estas viendo los notes borrados");
+    //console.log("estas viendo los notes borrados");
+    [...permDeleteButtons].forEach((button) =>
+      button.addEventListener("click", permanentlyDelete)
+    );
+    [...recoverButtons].forEach((button) =>
+      button.addEventListener("click", recover)
+    );
   }
 }
 
@@ -18,7 +33,7 @@ function CreateAppRouter(fn, routes) {
     let { href: path } = window.location;
     path = path.replace(basePath, "");
 
-    console.log("passedin", currentRoute);
+    /* console.log("passedin", currentRoute); */
 
     for (const route in routes) {
       if (route === path) return fn(routes[route]);

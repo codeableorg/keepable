@@ -231,6 +231,14 @@ body {
   cursor: pointer;
   margin-left: 0.7rem;
 }
+.btn-recover {
+  width: 3.5rem;
+  background: none;
+  border: none;
+  outline: inherit;
+  cursor: pointer;
+  margin-left: 0.7rem;
+}
 
 /* END  TEMPLATE KEEP */
 

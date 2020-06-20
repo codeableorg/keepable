@@ -31,36 +31,38 @@
     <main class="site-main">
       <div class="content-main">
         <div class="content-main-slide">
-          <a class="slide-notes" href="/notes.html">
-            <img src="/assets/icon-curly-brackets.png" /> Notes</a
-          >
-          <a class="slide-trash" href="/trash.html">
-            <img src="/assets/icon-trash.png" /> Trash</a
-          >
+          <a class="slide-notes deep-link" href="/">
+            <img src="/assets/icon-curly-brackets.png" /> Notes</a>
+          <a class="slide-trash deep-link" href="/#trash">
+            <img src="/assets/icon-trash.png" /> Trash</a>
         </div>
 
         <div class="content-main-center">
           <div class="content-note">
-            <form action="#">
+            <form id="note-form" action="#">
               <textarea
                 class="textarea-keep"
+                name="note-body"
                 placeholder="Some great think!"
               ></textarea>
               <div class="content-buttons">
                 <button class="btn-paleta">
                   <img src="/assets/icon-paleta.png" alt="button-paleta" />
                 </button>
-                <button class="btn-keep">Keet it!</button>
+                <button type="submit" class="btn-keep">Keet it!</button>
               </div>
             </form>
           </div>
-          <div class="content-textnote">
-            <span class="span-curly">{</span>
-            <p>Notes you add appear here!</p>
-            <span class="span-curly">}</span>
+
+          <div id="list" class="content-addkeep">
           </div>
+
         </div>
       </div>
     </main>
+    <script src="script.js"></script>
+    <script src="note-form.js"></script>
+    <script src="weather.js"></script>
+    <script src="location.js"></script>
   </body>
 </html>

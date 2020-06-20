@@ -1,84 +1,95 @@
-const data = [
-    "nota 1",
-    "nota 2",
-    "nota 3"
-];
+const data = ["nota 1"];
 
-const trash_data = [
-    "jhbvddsfjd",
-    "sdijnf"
-];
+const trash_data = ["jhbvddsfjd"];
 
 function softDelete(e) {
-    const text = e.target.parentNode.childNodes[0].parentNode.parentNode.childNodes[0].innerHTML;
-    const idx = parseInt(e.target.parentNode.childNodes[0].parentNode.parentNode.id);
-    e.target.parentNode.parentNode.remove();
-    data.splice(idx, 1);
-    trash_data.push(text);
+  const noteEl = e.target.closest(".add-keep");
+  const text = noteEl.querySelector(".note-text").value;
+  const idx = parseInt(noteEl.dataset.id);
+  noteEl.remove();
+
+  data.splice(idx, 1);
+  trash_data.push(text);
 }
 
 function permanentlyDelete(e) {
-    const idx = parseInt(e.target.parentNode.childNodes[0].parentNode.parentNode.id);
-    e.target.parentNode.parentNode.remove();
-    trash_data.splice(idx, 1);
+  const noteEl = e.target.closest(".add-keep");
+  const idx = parseInt(noteEl.dataset.id);
+  noteEl.remove();
+  trash_data.splice(idx, 1);
 }
 
 function recover(e) {
-    const idx = parseInt(e.target.parentNode.childNodes[0].parentNode.parentNode.id);
-    e.target.parentNode.parentNode.remove();
-    data.push(trash_data[parseInt(idx)]);
-    trash_data.splice(idx, 1);
+  const noteEl = e.target.closest(".add-keep");
+  const idx = parseInt(noteEl.dataset.id);
+  noteEl.remove();
+  data.push(trash_data[idx]);
+  trash_data.splice(idx, 1);
 }
 
-function createNote(content, idx) {
-    return `<div id="${idx}" class="notas"><p>${content}</p></div>`;
+function createNote(content, idx, name) {
+  //return `<div id="${idx}" class="notas"><p>${content}</p></div>`;
+  const note = document.createElement("div");
+  let controls = `<button class="btn-paleta2">
+    <img src="/assets/icon-paleta2.png" alt="button-paleta2" />
+  </button>
+  <button class="btn-trash2 delete">
+    <img src="/assets/icon-trash2.png" alt="button-trash2" />
+  </button>`;
+
+  if (name === "trash") {
+    controls = `
+    <button class="btn-trash2 permDelete">
+        <img src="/assets/icon-trash2.png" alt="button-trash2" />
+      </button>
+    <button class="btn-recover recover">
+        <img src="/assets/icon-recover.svg" alt="button-trash2" />
+    </button>
+      `;
+  }
+
+  note.id = "keep-1";
+  note.dataset.id = idx;
+  note.className = "add-keep";
+  note.innerHTML = `
+    <textarea
+      class="keep keep-1 note-text"
+      placeholder="This is the body for the note."
+    >${content}</textarea>
+    <div class="content-buttons-keep">
+      ${controls}
+    </div>`;
+  /* console.log(note); */
+
+  return note;
 }
 
 function render(name) {
-    const list = document.getElementById('list');
-    [...list.childNodes].forEach(e => e.remove());
-    list.innerHTML = '';
-    if (!list) return;
-    let notes = data;
-    if(name == 'trash')
-        notes = trash_data;
-    const buttons = ['<span class="delete">delete</span>', '<span class="permDelete">perm delete</span>'];
-    notes.forEach((text, idx) => {
-        const note = createNote(text, idx);
-        const container = document.createElement('div');
-        container.innerHTML = note;
-        const button = document.createElement('span');
-        button.innerHTML = buttons[0];
-        container.childNodes[0].appendChild(button);
-        if(name == 'trash') {
-            const recover = document.createElement('span');
-            recover.innerHTML = '<span class="recover">recover</span>';
-            button.innerHTML = buttons[1];
-            container.childNodes[0].appendChild(recover);
-        }
-        list.appendChild(container);
-    });
-};
+  const list = document.getElementById("list");
+  [...list.childNodes].forEach((e) => e.remove());
+  list.innerHTML = "";
+  if (!list) return;
+  let notes = data;
+  if (!data.length && name != "trash") {
+    list.outerHTML = `<div id="list" class="content-textnote">
+      <span class="span-curly">{</span>
+      <p>Notes you add appear here!</p>
+      <span class="span-curly">}</span>
+    </div>`;
+    return;
+  }
+  list.className="content-addkeep"
+  if (name == "trash") notes = trash_data;
+  notes.forEach((text, idx) => {
+    const new_note = createNote(text, idx, name);
+    list.appendChild(new_note);
+  });
+}
 
-const views = ['data', 'trash']
+const views = ["default", "trash"];
 
 let currentView = 1;
 
 var deleteButtons;
 var permDeleteButtons;
 var recoverButtons;
-var changeViewButtons = document.getElementsByClassName("change_view");
-
-function changeView() {
-    currentView = currentView === 0 ? 1 : 0;
-    render(views[currentView]);
-    deleteButtons = document.getElementsByClassName("delete");
-    permDeleteButtons = document.getElementsByClassName("permDelete");
-    recoverButtons = document.getElementsByClassName("recover");
-    [...deleteButtons].forEach(button => button.addEventListener("click", softDelete));
-    [...permDeleteButtons].forEach(button => button.addEventListener("click", permanentlyDelete));
-    [...changeViewButtons].forEach(button => button.addEventListener("click", changeView));
-    [...recoverButtons].forEach(button => button.addEventListener("click", recover));
-}
-
-changeView();
