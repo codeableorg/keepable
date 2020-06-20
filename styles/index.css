@@ -26,7 +26,6 @@ header {
   grid-area: header;
   display: grid;
   grid-template-columns: min-content 1fr;
-
 }
 
 header img {
@@ -101,7 +100,6 @@ nav div button {
   align-self: center;
 }
 
-
 .new_note_container {
   display: flex;
   justify-content: center;
@@ -115,7 +113,7 @@ nav div button {
   border-radius: 8px;
   margin: 15px 0px;
   padding: 0px 20px;
-  box-shadow: 5px 5px 15px rgba(153, 155, 158, 0.85)
+  /*box-shadow: 5px 5px 15px rgba(153, 155, 158, 0.85);*/
 }
 
 .title {
@@ -165,7 +163,7 @@ nav div button {
   width: 260px;
   background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 5px 5px 15px rgba(153, 155, 158, 0.85); 
+  /* box-shadow: 5px 5px 15px rgba(153, 155, 158, 0.85);*/
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -200,7 +198,6 @@ nav div button {
 
 .note_footer_imgs {
   display: flex;
-  
 }
 
 .pointer {
@@ -289,3 +286,36 @@ nav div button {
   background-color: #FDCFE8;
 }
 
+ /*modal*/
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  margin: 15% auto;
+  height: 170px;
+  width: 600px;
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2),
+    0px 7px 20px 0px rgba(0, 0, 0, 0.17);
+}
+.modal-content form {
+  margin: 0;
+  height: 170px;
+}
+.modal-content .new_note_footer-icons {
+  display: flex;
+}
+
+/*edit icon*/
+.note .note_footer_imgs i {
+  color: #999b9e;
+}
+.pale_rose {
+  background-color: #fdcfe8;
+}
