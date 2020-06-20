@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+  --black: #1d2128;
+  --white: #ffffff;
+  --coral: #f28b82;
+  --orange: #fbbc04;
+  --yellow: #fff475;
+  --green: #ccff90;
+  --aquamarine: #a7ffeb;
+  --light-blue: #cbf0f8;
+  --blue: #aecbfa;
+  --purple: #d7aefb;
+  --pink: #fdcfe8;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: var(--black);
+  color: var(--white);
+}
+
+.unselected {
+  color: #999b9e;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.selected {
+  color: white;
+  background: #999b9e;
+}
+
+/* grid layout for container */
+.header {
+  grid-area: header;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.main {
+  grid-area: main;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 15% auto;
+  grid-template-rows: 80px auto;
+  grid-template-areas:
+    'header header'
+    'sidebar main';
+}
+
+/* no-notes styles */
+.no-notes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  width: 300px;
+}
+
+.no-notes::before {
+  content: '{';
+}
+
+.no-notes::after {
+  content: '}';
+}
+
+.no-notes::before,
+.no-notes::after {
+  font-size: 144px;
+  font-weight: bold;
+}
+
+/* header styles */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 3px solid var(--white);
+}
+
+.header__logo {
+  margin-left: 2vw;
+}
+
+.header__weather {
+  margin-left: 10vw;
+}
+
+/* sidebar styles */
+.sidebar {
+  height: 100%;
+  display: flex;
+  border-right: 3px solid var(--white);
+}
+
+.sidebar__list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+}
+
+.sidebar__item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 5vh;
+  margin: 5px auto;
+  cursor: pointer;
+}
+
+.sidebar__list--active {
+  background: #999b9e;
+  border-radius: 0px 25px 25px 0px;
+}
+
+.sidebar__list i {
+  margin-left: 2vw;
+  width: 22px;
+}
+
+.sidebar__text {
+  margin-left: 2vw;
+}
+
+/* main styles */
+.main {
+  margin: 0 auto;
+  height: 100%;
+  width: 90%;
+}
+
+.new-note {
+  position: relative;
+  width: 60%;
+  margin: 3vh auto;
+  padding: 1%;
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.note-color {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.note-color__menu {
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  width: 155px;
+  height: 65px;
+  background: white;
+  padding: 5px;
+}
+
+.note-color__menu > div {
+  height: 25px;
+  width: 25px;
+  border-radius: 100px;
+}
+
+.note-color__menu .white {
+  border: 2px solid #999b9e;
+}
+
+.new-note__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-note__input {
+  width: 95%;
+  margin: 1vh auto;
+  background: rgba(0, 0, 0, 0);
+}
+
+.new-note__submit {
+  align-self: flex-end;
+  margin: 2.5%;
+}
+
+.new-note__input,
+.new-note__submit {
+  border: none;
+  outline: none;
+}
+
+.notes,
+.all-notes,
+.notes__pinned,
+.notes__others {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1vw;
+  /* grid-template-rows: 80px auto; */
+}
+
+.note {
+  color: var(--black);
+  max-width: 260px;
+  height: 260px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.note__title {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+}
+
+.note__body {
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0.25px;
+}
+
+/* background colors */
+.white {
+  /* border: 1px solid #999b9e; */
+  background: var(--white);
+}
+
+.coral {
+  background: var(--coral);
+}
+
+.orange {
+  background: var(--orange);
+}
+
+.yellow {
+  background: var(--yellow);
+}
+
+.green {
+  background: var(--green);
+}
+
+.aquamarine {
+  background: var(--aquamarine);
+}
+
+.light-blue {
+  background: var(--light-blue);
+}
+
+.blue {
+  background: var(--blue);
+}
+
+.purple {
+  background: var(--purple);
+}
+
+.pink {
+  background: var(--pink);
+}
+
+.hidden {
+  display: none;
+}
+
+/* styles saida */
+.palette-colors {
+  width: 155px;
+  height: 65px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 5px;
+}
+
+.palette-colors .white {
+  border: 1px solid #999b9e;
+}
+
+.color {
+  width: 25px;
+  height: 25px;
+  border-style: none;
+  border-radius: 100px;
+}
+
+.form__background {
+  background-color: transparent;
+}

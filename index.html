@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.1/normalize.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/de8d320d41.js" crossorigin="anonymous"></script>
+    <title>Keepable</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="header__logo">
+          <a href="/">
+            <img src="/images/keepable.svg" alt="Keepable" />
+          </a>
+        </div>
+        <div class="header__weather">
+          Welcome to {keepable}. Today's Forecast for Santiago de Surco, Lima Province, Peru: 18°,
+          Cloudy
+        </div>
+      </header>
+
+      <aside class="sidebar">
+        <ul class="sidebar__list">
+          <li id="sidebar_notes" class="sidebar__item sidebar__list--active">
+            <i class="fas fa-brackets-curly"></i>
+            <span class="sidebar__text">Notes</span>
+          </li>
+          <li id="sidebar_trash" class="sidebar__item">
+            <i class="far fa-trash-alt"></i>
+            <span class="sidebar__text">Trash</span>
+          </li>
+        </ul>
+      </aside>
+
+      <section class="main">
+        <div class="new-note" id="new-note">
+          <form class="new-note__form form__background">
+            <input
+              type="text"
+              name="title"
+              id="note-title"
+              class="form__background new-note__input"
+              placeholder="Note title"
+            />
+            <input
+              type="text"
+              name="body"
+              id="note-body"
+              class="form__background new-note__input"
+              placeholder="Something great!"
+            />
+            <input
+              type="button"
+              id="note-submit"
+              value="Keep it!"
+              class="form__background new-note__submit"
+            />
+          </form>
+          <div class="new-note__color"><img src="images/Frame 7.svg" /></div>
+          <div class="palette-colors hidden">
+            <button class="color white" data-color="#ffffff"></button>
+            <button class="color coral" data-color="#f28b82"></button>
+            <button class="color orange" data-color="#fbbc04"></button>
+            <button class="color yellow" data-color="#fff475"></button>
+            <button class="color green" data-color="#ccff90"></button>
+            <button class="color aquamarine" data-color="#a7ffeb"></button>
+            <button class="color light-blue" data-color="#cbf0f8"></button>
+            <button class="color blue" data-color="#aecbfa"></button>
+            <button class="color purple" data-color="#d7aefb"></button>
+            <button class="color pink" data-color="#fdcfe8"></button>
+          </div>
+        </div>
+        <div class="all-notes"></div>
+      </section>
+    </div>
+  </body>
+  <script src="app.js"></script>
+  <script src="noNotes.js"></script>
+  <script src="notesHelpers.js"></script>
+</html>
