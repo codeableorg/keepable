@@ -1,5 +1,8 @@
 function emptyNotes() {
-  notes = [];
+  while (notes.length > 0) {
+    notes.pop();
+  }
+  saveOnLocalStorage();
 }
 
 function populateNotes() {
@@ -87,4 +90,5 @@ function populateNotes() {
   createAllNotes(notes);
   openPaletteColor();
   changeNoteColor();
+  saveOnLocalStorage();
 }

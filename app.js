@@ -1,4 +1,4 @@
-const notes = [];
+const notes = JSON.parse(localStorage.getItem('notes')) || [];
 const mainContainer = document.querySelector('.main');
 const allNotes = document.querySelector('.all-notes');
 const notesSidebar = document.querySelector('#sidebar_notes');
@@ -38,8 +38,6 @@ noteSubmit.addEventListener('click', () => {
   clearElement(allNotes); // remove all notes to inmediately re-create them
   addNote();
   createAllNotes(notes);
-  openPaletteColor();
-  changeNoteColor();
   newNoteWrapper.style.backgroundColor = '#ffffff';
 });
 
@@ -122,6 +120,9 @@ function createAllNotes(notes, trash = true) {
   notes.forEach((note) => {
     if (note.trash !== trash) createNote(note);
   });
+  openPaletteColor();
+  changeNoteColor();
+  saveOnLocalStorage();
 }
 
 // sidebar selector functions
@@ -146,7 +147,6 @@ function openPaletteColor() {
     button.addEventListener('click', () => button.nextElementSibling.classList.toggle('hidden'));
   });
 }
-
 openPaletteColor();
 
 //function to add the possibility to change all color notes
@@ -159,8 +159,18 @@ function changeNoteColor() {
       const color = buttonSelected.dataset.color;
       noteWrapper.style.backgroundColor = color;
       paletteColors.classList.toggle('hidden');
+
+      if (noteWrapper.getAttribute('data-index')) {
+        notes[noteWrapper.getAttribute('data-index')].color = color;
+        saveOnLocalStorage();
+      }
     });
   });
 }
-
 changeNoteColor();
+
+function saveOnLocalStorage() {
+  localStorage.setItem('notes', JSON.stringify(notes));
+}
+
+createAllNotes(notes);
