@@ -52,4 +52,22 @@ class Note {
     });
     return div;
   }
+
+  static createButtonPalette() {
+    const a = document.createElement('A');
+    a.classList.add('button-palette');
+    a.href = '#';
+    a.innerHTML = `
+      <img class="button-palette__image" src="images/palette.svg" alt="palette">
+      <div class="button-palette__colors">
+        ${Note.colors.map((color) => `
+          <label>
+            <div class="button-palette__color" style="background:${color}"></div>
+            <input class="create-note__radio" type="radio" name="color" value="${color}">
+          </label>
+        `).join('')}
+      </div>
+    `;
+    return a;
+  }
 }
