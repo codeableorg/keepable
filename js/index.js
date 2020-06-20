@@ -111,7 +111,11 @@ let state = {
 
   create_form: function (fragment) {
     const create_note_from_form = function (event) {
-      state.add_note(event.target.textarea.value);
+      console.log(event.target.querySelector("#title").value);
+      const title = event.target.querySelector("#title").value
+      const textarea = event.target.querySelector("#textarea").value
+      const color = event.target.querySelector("#color").value
+      state.add_note(title, textarea, color);
       state.render_note_page();
       event.preventDefault();
     }
@@ -120,13 +124,45 @@ let state = {
     div.className = 'new_note_container';
     div.innerHTML = 
       `<form action="" class="new_note">
-        <textarea name="note" id="textarea" cols="30" rows="10" placeholder="Some great think!"></textarea> 
-        <button>Keep it!</button>
+        <input id="title" class="title" type="text" placeholder="The title for my new note">
+        <textarea name="" id="textarea" cols="30" rows="10" placeholder="Some great think!"></textarea> 
+        <input id="color" type="hidden" value="n_white">
+
+        <div class="new_note_footer">
+          <div class="note_img palette">
+            <img class="palette_img" src="images/palette.png" alt="color palette">
+            <div class="color_palette">
+              <div class="color_row_options">
+                <div class="color_option n_white"></div>
+                <div class="color_option n_rose"></div>
+                <div class="color_option n_orange"></div>
+                <div class="color_option n_yellow"></div>
+                <div class="color_option n_green"></div>
+              </div>
+              <div class="color_row_options">
+                <div class="color_option n_turquoise"></div>
+                <div class="color_option n_light_blue"></div>
+                <div class="color_option n_purple"></div>
+                <div class="color_option n_fuchsia"></div>
+                <div class="color_option n_pale_rose"></div>
+              </div>
+            </div>
+          </div>
+          <button class="note_save">Keep it!</button>
+        </div>
       </form>`;
+    div.querySelectorAll(".color_option").forEach((option) => {
+      let classOption = option.classList.item(1);
+      option.addEventListener('click', (event) => {
+        event.currentTarget.closest(".new_note").className = `new_note ${classOption}`; 
+        event.currentTarget.closest(".new_note").querySelector("#color").value = classOption;
+      });
+    });
     fragment.append(div);
     fragment.firstChild.addEventListener('submit', (event) => create_note_from_form(event));
     return fragment;
   },
+
 
   generate_not_trashed_notes : function (fragment){
     const not_trashed_notes = this.notes.filter((el) => el.trashed===false);
@@ -161,12 +197,15 @@ let state = {
         });
         fragment.append(notes_container);
       }
-      
 
     } else {
-      let message = document.createElement('p');
-      message.innerText = 'no notes, create more please';
-      fragment.append(message);
+      let empty_message = document.createElement('div');
+      empty_message.className = 'empty_msg';
+      empty_message.innerHTML = 
+      `<img src="images/bracket_open.png" alt=""><p>Notes you add   <br>
+        appears here</p><img src="images/bracket_close.png" alt="">
+      </div>`;
+      fragment.append(empty_message);
     }
     
     return fragment;
@@ -211,42 +250,83 @@ function generate_note(note) {
   note_element.className = `note ${note.color}`;
   note_element.setAttribute("note_id", note.index);
 
-  let description = document.createElement('p');
-    description.innerText = `title: ${note.title}, content ${note.content}, color ${note.color}, id ${note.index}`;
-    note_element.append(description);
+  let header = document.createElement('div');
+  header.className = `note_header`;
+  header.innerHTML = 
+  `<h1 class="note_title">${note.title}</h1>
+  <img class="note_pin" src="images/pin.png" alt="">`;
+  note_element.append(header);
 
-  if (note.trashed) {
-    let delete_item = document.createElement('div');
-    delete_item.innerText = "Click para Eliminar permanentemente";
-    delete_item.addEventListener('click', (event) => callback_remove_trashed_note(event));
-    note_element.append(delete_item);
+  let note_body = document.createElement('p');
+  note_body.className = `note_body`;
+  note_body.innerText = `${note.content}`;
+  note_element.append(note_body);
 
-    let restore_item = document.createElement('div');
-    restore_item.innerText = "Click para restaurar";
-    restore_item.addEventListener('click', (event) => callback_restore_trashed_note(event));
-    note_element.append(restore_item);
-  } else {
-    let trash_item = document.createElement('div');
-    trash_item.innerText = "Click para Enviar a trash";
-    trash_item.addEventListener('click', (event) => callback_trash_the_note(event));
-    note_element.append(trash_item);
 
-    let pin_option_item = document.createElement('div');
-    if (note.pinned) {
-      pin_option_item.innerText = "Click para hacer unpin a una nota";
-      pin_option_item.addEventListener('click', (event) => callback_unpin_a_note(event));
-    } else {
-      pin_option_item.innerText = "Click para hacer pin a una nota";
-      pin_option_item.addEventListener('click', (event) => callback_pin_a_note(event));
-    }
-    note_element.append(pin_option_item);
-  }
+  let note_footer = document.createElement('div')
+  note_footer.className = `note_footer_imgs`;
+  note_footer.innerHTML = 
+  `<div class="note_img palette">
+    <img class="palette_img" src="images/palette.png" alt="color palette">
+    <div class="color_palette">
+      <div class="color_row_options">
+        <div class="color_option white"></div>
+        <div class="color_option rose"></div>
+        <div class="color_option orange"></div>
+        <div class="color_option yellow"></div>
+        <div class="color_option green"></div>
+      </div>
+      <div class="color_row_options">
+        <div class="color_option turquoise"></div>
+        <div class="color_option light_blue"></div>
+        <div class="color_option purple"></div>
+        <div class="color_option fuchsia"></div>
+        <div class="color_option pale_rose"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note_img">
+    <img class="trash" src="images/trash_can.png" alt="delete">
+  </div>`;
+  note_element.append(note_footer);
+
+
+
+
+
+  // if (note.trashed) {
+  //   let delete_item = document.createElement('div');
+  //   delete_item.innerText = "Click para Eliminar permanentemente";
+  //   delete_item.addEventListener('click', (event) => callback_remove_trashed_note(event));
+  //   note_element.append(delete_item);
+
+  //   let restore_item = document.createElement('div');
+  //   restore_item.innerText = "Click para restaurar";
+  //   restore_item.addEventListener('click', (event) => callback_restore_trashed_note(event));
+  //   note_element.append(restore_item);
+  // } else {
+  //   let trash_item = document.createElement('div');
+  //   trash_item.innerText = "Click para Enviar a trash";
+  //   trash_item.addEventListener('click', (event) => callback_trash_the_note(event));
+  //   note_element.append(trash_item);
+
+  //   let pin_option_item = document.createElement('div');
+  //   if (note.pinned) {
+  //     pin_option_item.innerText = "Click para hacer unpin a una nota";
+  //     pin_option_item.addEventListener('click', (event) => callback_unpin_a_note(event));
+  //   } else {
+  //     pin_option_item.innerText = "Click para hacer pin a una nota";
+  //     pin_option_item.addEventListener('click', (event) => callback_pin_a_note(event));
+  //   }
+  //   note_element.append(pin_option_item);
+  // }
 
   return note_element;
 }
 
-// state.add_note('holi');
-// state.add_note('woli', 'blue');
+// state.add_note('Titulo 1', 'Description de note 1', 'orange');
+// state.add_note('Titulo 2', 'Description de note 2', 'green');
 // state.add_note('note deleted', 'note-deleted-description', 'blue');
 // state.trash_a_note(2);
 
