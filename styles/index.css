@@ -167,3 +167,24 @@ nav div button {
   background: #999b9e;
   border-radius: 0px 25px 25px 0px;
 }
+
+/*modal*/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  margin: 20% auto;
+  padding: 20px;
+  width: 70%;
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2),
+    0px 7px 20px 0px rgba(0, 0, 0, 0.17);
+}
