@@ -85,4 +85,6 @@ function populateNotes() {
   });
   clearElement(allNotes);
   createAllNotes(notes);
+  openPaletteColor();
+  changeNoteColor();
 }

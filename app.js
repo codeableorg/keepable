@@ -165,6 +165,7 @@ function openPaletteColor() {
 
 openPaletteColor();
 
+//function to add the possibility to change all color notes
 function changeNoteColor() {
   document.querySelectorAll('.color').forEach((color) => {
     const paletteColors = color.closest('.palette-colors');
