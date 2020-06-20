@@ -38,7 +38,7 @@ class Note {
         note.deleted = false;
       };
     })
-   app.renderNotes();
+    app.trashRenderNotes();
   }
 
   deleteTrashCard(){
@@ -81,7 +81,7 @@ class Note {
       <div class="button-palette"><img src="images/return.svg" alt="palette"></div>
       </div>
     `;
- 
+
     const btnTrashPermanently = div.querySelector(".button-trash")
     btnTrashPermanently.addEventListener('click',()=>{
      this.deleteTrashCard();
