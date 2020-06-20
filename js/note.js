@@ -32,6 +32,24 @@ class Note {
    app.renderNotes();
   }
 
+  recoverNote(){
+    app.notes.forEach((note)=>{
+      if(note.id === this.id){
+        note.deleted = false;
+      };
+    })
+   app.renderNotes();
+  }
+
+  deleteTrashCard(){
+    app.notes.find((note,index,array)=>{
+      if(note.id === this.id){
+        array.splice(index,1);
+      };
+    })
+   app.trashRenderNotes();
+  }
+
   createCard() {
     const div = document.createElement('DIV');
     let message = document.querySelector('.no_notes');
@@ -48,6 +66,29 @@ class Note {
     const btnTrash = div.querySelector(".button-trash")
     btnTrash.addEventListener('click',()=>{
       this.deleteCard();
+    });
+    return div;
+  }
+
+  createTrashCard() {
+    const div = document.createElement('DIV');
+    div.classList.add('note');
+    div.style.background = this.color;
+    div.innerHTML = `
+      <p>${this.body}</p>
+      <div class="buttons">
+      <div class="button-trash"><img src="images/trash2.svg" alt="trash"></div>
+      <div class="button-palette"><img src="images/return.svg" alt="palette"></div>
+      </div>
+    `;
+ 
+    const btnTrashPermanently = div.querySelector(".button-trash")
+    btnTrashPermanently.addEventListener('click',()=>{
+     this.deleteTrashCard();
+    });
+    const btnRecover = div.querySelector(".button-palette");
+    btnRecover.addEventListener('click',()=>{
+      this.recoverNote();
     });
     return div;
   }
