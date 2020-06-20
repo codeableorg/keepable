@@ -43,4 +43,5 @@ btnNotes.addEventListener('click',()=>{
   btnTrashNotes.classList.remove("selected");
   containerTrash.classList.add("hidden");
   containerNotes.classList.remove("hidden");
+  app.renderNotes();
 } )

@@ -1,5 +1,5 @@
 class App {
-  
+
   constructor({ notesContainer }) {
     if (App._instance) return App._instance;
     else App._instance = this;
@@ -16,6 +16,7 @@ class App {
 
   clean() {
     this.notesContainer.innerHTML = '';
+    this.trashNotesCoteiner.innerHTML = '';
   }
 
   renderNotes() {
