@@ -284,6 +284,9 @@ body {
   font-weight: 700;
 }
 
+.hidden{
+  display: none;
+}
 .no_notes{
   display: flex;
   color: #fff;
@@ -294,10 +297,6 @@ body {
   align-items: center;
   margin: auto;
   padding-top: 150px;
-}
-
-.hidden{
-  display: none;
 }
 
 .extra{

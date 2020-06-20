@@ -1,9 +1,11 @@
 class App {
+  
   constructor({ notesContainer }) {
     if (App._instance) return App._instance;
     else App._instance = this;
     this.notesContainer = notesContainer;
     this.notes = [];
+    this.trashNotesCoteiner = document.querySelector("#trash-notes");
   }
 
   createNote({ title = '', body, color }) {
@@ -19,7 +21,19 @@ class App {
   renderNotes() {
     this.clean();
     this.notes.sort((a, b) => b.date - a.date).forEach((note) => {
-      this.notesContainer.append(note.createCard());
+      if(!note.deleted){
+        this.notesContainer.append(note.createCard());
+      }
     });
   }
+
+  trashRenderNotes() {
+    this.clean();
+    this.notes.sort((a, b) => b.date - a.date).forEach((note) => {
+      if(note.deleted){
+       this.trashNotesCoteiner.append(note.createCard());
+      }
+    });
+  }
+
 }
