@@ -43,6 +43,7 @@ class Note {
 
   createCard() {
     const div = document.createElement('DIV');
+    let message = document.querySelector('.no_notes');
     div.classList.add('note');
     div.style.background = this.color;
     div.innerHTML = `
@@ -52,6 +53,7 @@ class Note {
         <div class="button-trash"><img src="images/trash2.svg" alt="trash"></div>
       </div>
     `;
+    message.classList.add('hidden');
     const btnTrash = div.querySelector(".button-trash")
     btnTrash.addEventListener('click',()=>{
       this.deleteCard();
@@ -78,4 +80,21 @@ class Note {
     return div;
   }
 
+  static createButtonPalette() {
+    const a = document.createElement('A');
+    a.classList.add('button-palette');
+    a.href = '#';
+    a.innerHTML = `
+      <img class="button-palette__image" src="images/palette.svg" alt="palette">
+      <div class="button-palette__colors">
+        ${Note.colors.map((color) => `
+          <label>
+            <div class="button-palette__color" style="background:${color}"></div>
+            <input class="create-note__radio" type="radio" name="color" value="${color}">
+          </label>
+        `).join('')}
+      </div>
+    `;
+    return a;
+  }
 }
