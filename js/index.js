@@ -133,18 +133,18 @@ let state = {
             <img class="palette_img" src="images/palette.png" alt="color palette">
             <div class="color_palette">
               <div class="color_row_options">
-                <div class="color_option n_white"></div>
-                <div class="color_option n_rose"></div>
-                <div class="color_option n_orange"></div>
-                <div class="color_option n_yellow"></div>
-                <div class="color_option n_green"></div>
+                <div class="color_option white"></div>
+                <div class="color_option rose"></div>
+                <div class="color_option orange"></div>
+                <div class="color_option yellow"></div>
+                <div class="color_option green"></div>
               </div>
               <div class="color_row_options">
-                <div class="color_option n_turquoise"></div>
-                <div class="color_option n_light_blue"></div>
-                <div class="color_option n_purple"></div>
-                <div class="color_option n_fuchsia"></div>
-                <div class="color_option n_pale_rose"></div>
+                <div class="color_option turquoise"></div>
+                <div class="color_option light_blue"></div>
+                <div class="color_option purple"></div>
+                <div class="color_option fuchsia"></div>
+                <div class="color_option pale_rose"></div>
               </div>
             </div>
           </div>
