@@ -197,7 +197,7 @@ let state = {
       </div>`;
       fragment.append(empty_message);
     }
-    
+
     return fragment;
   },
 
@@ -227,12 +227,12 @@ function callback_restore_trashed_note(event) {
   state.restore_trashed_note(Number(event.currentTarget.parentNode.parentNode.getAttribute("note_id")))
 }
 
-function callback_pin_a_note(params) {
+function callback_pin_a_note(event) {
   state.pin_a_note(Number(event.currentTarget.parentNode.parentNode.getAttribute("note_id")))
 }
 
-function callback_unpin_a_note(params) {
-  state.unpin_a_note(Number(event.parentNode.currentTarget.parentNode.getAttribute("note_id")))
+function callback_unpin_a_note(event) {
+  state.unpin_a_note(Number(event.currentTarget.parentNode.parentNode.getAttribute("note_id")))
 }
 
 function generate_note(note) {
@@ -243,8 +243,7 @@ function generate_note(note) {
   let header = document.createElement('div');
   header.className = `note_header`;
   header.innerHTML = 
-  `<h1 class="note_title">${note.title}</h1>
-  <img class="note_pin" src="images/pin.png" alt="">`;
+  `<h1 class="note_title">${note.title}</h1>`;
   note_element.append(header);
 
   let note_body = document.createElement('p');
@@ -296,6 +295,17 @@ function generate_note(note) {
     delete_item.innerHTML = `<img class="trash" src="images/trash_can.png" alt="delete">`;
     delete_item.addEventListener('click', (event) => callback_trash_the_note(event));
     note_footer.append(delete_item);
+
+    let image_header = document.createElement('img');
+    image_header.className = 'note_pin pointer';
+    image_header.src = 'images/pin.png';
+    header.append(image_header);
+
+    if (note.pinned) {
+      header.querySelector(".pointer").addEventListener('click', (event) => callback_unpin_a_note(event));
+    } else {
+      header.querySelector(".pointer").addEventListener('click', (event) => callback_pin_a_note(event));
+    }
   }
 
   note_element.append(note_footer);
