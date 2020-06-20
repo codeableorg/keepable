@@ -35,6 +35,7 @@ class Note {
 
   createCard() {
     const div = document.createElement('DIV');
+    let message = document.querySelector('.no_notes');
     div.classList.add('note');
     div.style.background = this.color;
     div.innerHTML = `
@@ -44,12 +45,11 @@ class Note {
         <div class="button-trash"><img src="images/trash2.svg" alt="trash"></div>
       </div>
     `;
+    message.classList.add('hidden');
     const btnTrash = div.querySelector(".button-trash")
     btnTrash.addEventListener('click',()=>{
       this.deleteCard();
     });
     return div;
-    
   }
-
 }
