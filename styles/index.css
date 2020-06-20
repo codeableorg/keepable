@@ -24,6 +24,8 @@ body {
 
 header {
   grid-area: header;
+  display: grid;
+  grid-template-columns: min-content 1fr;
 }
 
 header img {
@@ -46,6 +48,13 @@ main {
 
 footer {
   grid-area: footer;
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
+footer .credits {
+  color: #ffffff;
+  text-decoration: none;
 }
 
 nav {
@@ -80,6 +89,17 @@ nav div button {
   border-radius: 0px 25px 25px 0px;
 }
 
+.empty_msg {
+  display: flex;
+  margin: auto;
+}
+
+.empty_msg p {
+  font-size: 36px;
+  line-height: 48px;
+  align-self: center;
+}
+
 .new_note_container {
   display: flex;
   justify-content: center;
@@ -87,23 +107,38 @@ nav div button {
 
 .new_note {
   position: relative;
-}
-
-#textarea {
   height: 150px;
   width: 600px;
   background-color: #ffffff;
   border-radius: 8px;
   margin: 15px 0px;
-  resize: none;
-  padding: 20px;
-  font-size: 18px;
+  padding: 0px 20px;
+  /*box-shadow: 5px 5px 15px rgba(153, 155, 158, 0.85);*/
 }
 
-.new_note button {
-  position: absolute;
-  top: 125px;
-  right: 20px;
+.title {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  width: 560px;
+  font-weight: bold;
+  border: none;
+}
+
+#textarea {
+  font-size: 18px;
+  border: none;
+  height: 80px;
+  width: 560px;
+  resize: none;
+}
+
+.new_note_footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.note_save {
   border: none;
   background-color: #ffffff;
   font-size: 18px;
@@ -111,8 +146,9 @@ nav div button {
 }
 
 .notes_container {
-  margin: 45px 0px 0px 0px;
+  margin: 45px 30px;
   display: grid;
+  gap: 20px;
   grid-template-columns: repeat(4, 1fr);
   grid-template-areas:
     "a1 a2 a3 a4"
@@ -124,67 +160,155 @@ nav div button {
   width: 260px;
   background-color: #ffffff;
   border-radius: 8px;
-  color: black;
+  /* box-shadow: 5px 5px 15px rgba(153, 155, 158, 0.85);*/
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
 }
 
-.red {
-  background-color: red;
+.note_header {
+  display: flex;
+  justify-content: space-between;
 }
 
-.blue {
-  background-color: blue;
+.note_title {
+  color: #000000;
+  font-size: 14px;
+  line-height: 20px;
+  align-self: center;
 }
 
-/*menu*/
-nav {
-  width: 14em;
-  margin-top: 1.5em;
+.note_pin {
+  height: 36px;
+  width: 36px;
+  top: -12px;
+  right: -12px;
+  position: relative;
 }
-nav div {
+
+.note_body {
+  font-size: 18px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.note_footer_imgs {
+  display: flex;
+}
+
+.pointer {
   cursor: pointer;
 }
-nav div button span,
-nav div button i {
-  margin-right: 20px;
-}
-nav div button i {
-  margin-left: 3px;
-}
-nav div button {
-  font-size: 20px;
-  color: white;
-  background: transparent;
-  border: none;
-  outline: 0px;
-  cursor: pointer;
+
+.note_img {
+  height: 36px;
+  width: 36px;
+  border-radius: 100px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 9px 0px 0px;
+  position: relative;
 }
 
-.menu-item {
-  margin-bottom: 1em;
-  padding: 10px 0px 10px 14px;
+.palette:hover .color_palette {
+  display: flex;
+  flex-direction: column;
+  height: 65px;
+  width: 155px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -65px;
 }
-.menu-state {
-  background: #999b9e;
-  border-radius: 0px 25px 25px 0px;
+
+.color_palette {
+  display: none;
+}
+
+.color_row_options {
+  display: flex;
+}
+
+.color_option {
+  border-radius: 100px;
+  height: 25px;
+  width: 25px;
+  border-radius: 100px;
+  margin: 2.5px;
+}
+
+.white {
+  border: 1px solid #999b9e;
+  background-color: #ffffff;
+}
+
+.rose {
+  background-color: #f28b82;
+}
+
+.orange {
+  background-color: #fbbc04;
+}
+
+.yellow {
+  background-color: #fff475;
+}
+
+.green {
+  background-color: #ccff90;
+}
+
+.turquoise {
+  background-color: #a7ffeb;
+}
+
+.light_blue {
+  background-color: #cbf0f8;
+}
+
+.purple {
+  background-color: #aecbfa;
+}
+
+.fuchsia {
+  background-color: #d7aefb;
 }
 
 /*modal*/
 .modal {
-  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
   top: 0;
-  height: 100%;
-  width: 100%;
-  overflow: auto;
+  height: 100vh;
+  width: 100vw;
   background: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
-  margin: 20% auto;
-  padding: 20px;
-  width: 70%;
+  margin: 15% auto;
+  height: 170px;
+  width: 600px;
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2),
     0px 7px 20px 0px rgba(0, 0, 0, 0.17);
+}
+.modal-content form {
+  margin: 0;
+  height: 170px;
+}
+.modal-content .new_note_footer-icons {
+  display: flex;
+}
+
+/*edit icon*/
+.note .note_footer_imgs i {
+  color: #999b9e;
+}
+.pale_rose {
+  background-color: #fdcfe8;
 }
