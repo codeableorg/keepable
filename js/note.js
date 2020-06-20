@@ -1,4 +1,5 @@
 class Note {
+  static id = 0;
   static colors = [
     '#FFFFFF', // default color
     '#F28B82',
@@ -13,6 +14,7 @@ class Note {
   ];
 
   constructor({ title = '', body, color }) {
+    this.id = ++Note.id;
     this.title = title;
     this.body = body;
     this.color = color;
@@ -21,7 +23,16 @@ class Note {
     this.date = new Date();
   }
 
-  // This method returns a <div class="note">
+  deleteCard(){
+    console.log(app.notes);
+    app.notes.find((note,index,array)=>{
+      if(note.id === this.id){
+        console.log(array.splice(index,1));
+      };
+    })
+   app.renderNotes();
+  }
+
   createCard() {
     const div = document.createElement('DIV');
     div.classList.add('note');
@@ -29,10 +40,16 @@ class Note {
     div.innerHTML = `
       <p>${this.body}</p>
       <div class="buttons">
-        <div class="palette"><img src="images/palette.svg" alt="palette"></div>
-        <div class="trash"><img src="images/trash2.svg" alt="trash"></div>
+        <div class="button-palette"><img src="images/palette.svg" alt="palette"></div>
+        <div class="button-trash"><img src="images/trash2.svg" alt="trash"></div>
       </div>
     `;
+    const btnTrash = div.querySelector(".button-trash")
+    btnTrash.addEventListener('click',()=>{
+      this.deleteCard();
+    });
     return div;
+    
   }
+
 }
