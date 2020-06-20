@@ -251,7 +251,6 @@ function generate_note(note) {
   note_body.innerText = `${note.content}`;
   note_element.append(note_body);
 
-
   let note_footer = document.createElement('div')
   note_footer.className = `note_footer_imgs`;
 
