@@ -343,7 +343,7 @@ function callback_show_modal(event) {
 
   modal_element.querySelector("#textarea").value = note.content;
   modal_element.querySelector("#title").value = note.title;
-  modal_element.querySelector("#color").value = note.title;
+  modal_element.querySelector("#color").value = note.color;
   modal_element
     .querySelector(".trash")
     .parentNode.addEventListener("click", (event) =>
