@@ -1,3 +1,8 @@
+# Integrantes
+- Alesssandro Chumpitaz
+- Joaquín Meza
+- Sebastian Zanabria
+
 # Keepable ✏️
 
 Keepable is a take-nothing service and productivity app designed by Codeable

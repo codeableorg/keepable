@@ -15,7 +15,7 @@ class Card {
 		    	</div>
 				<div class="card-options">
 					<p onclick="app.showPalette(event,${this.id})"><i class="fas fa-palette"></i></p>
-	        		<button onclick="app.deleteNote(${this.id})" class="delete">Delete</button>
+	        		<button onclick="app.deleteNote(${this.id})" class="delete"><i class="fa fa-trash-o"></i></button>
 				</div>
 		    </div>
 		    `
@@ -25,7 +25,8 @@ class Card {
 class App {
 
     constructor() {
-        this.vault = window.localStorage
+		this.vault = window.localStorage
+		this.pinned_cards = []
 		this.active_cards = []
 		this.deleted_cards = []
 		this.card_count = 0
@@ -33,6 +34,7 @@ class App {
 		this.render()
     }
     push_note() {
+		
         const title = document.getElementById('title').value;
         const content = document.getElementById('content').value;
 		if (title !== '' && content !== '') {
@@ -46,6 +48,7 @@ class App {
     }
 
     deleteNote(id) {
+
 		for (let i = 0; i < this.active_cards.length; i++) {
 			if (this.active_cards[i].id === id) {
 				this.deleted_cards.push(this.active_cards[i])
