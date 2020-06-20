@@ -66,10 +66,10 @@ function addOptionButtons(parent) {
   paletteMenu.classList.add('hidden');
 
   const trashButton = document.createElement('div');
+  trashButton.classList.add('button-delete');
 
   const trashImage = document.createElement('img');
   trashImage.setAttribute('src', 'images/Frame 8.svg');
-  trashImage.classList.add('button-delete');
   trashButton.appendChild(trashImage);
 
   addColorButton('white', '#ffffff', paletteMenu);
@@ -200,6 +200,9 @@ function createAllNotes(notes, trash = true) {
   notes.forEach((note) => {
     if (note.trash !== trash) createNote(note);
   });
+  deleteNote();
+  recoverNote();
+  deleteNoteForever();
   openPaletteColor();
   changeNoteColor();
   saveOnLocalStorage();
