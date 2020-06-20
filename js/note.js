@@ -32,6 +32,15 @@ class Note {
    app.renderNotes();
   }
 
+  recoverNote(){
+    app.notes.forEach((note)=>{
+      if(note.id === this.id){
+        note.deleted = false;
+      };
+    })
+   app.renderNotes();
+  }
+
   deleteTrashCard(){
     app.notes.find((note,index,array)=>{
       if(note.id === this.id){
@@ -68,14 +77,18 @@ class Note {
     div.innerHTML = `
       <p>${this.body}</p>
       <div class="buttons">
-        <div class="button-palette"><img src="images/return.svg" alt="palette"></div>
-        <div class="button-trash"><img src="images/trash2.svg" alt="trash"></div>
+      <div class="button-trash"><img src="images/trash2.svg" alt="trash"></div>
+      <div class="button-palette"><img src="images/return.svg" alt="palette"></div>
       </div>
     `;
-    const btnReturn = div.querySelector(".button-patette");
-    consola.log(btnReturn);
-    btnReturn.addEventListener('click',()=>{
-      this.deleteTrashCard();
+ 
+    const btnTrashPermanently = div.querySelector(".button-trash")
+    btnTrashPermanently.addEventListener('click',()=>{
+     this.deleteTrashCard();
+    });
+    const btnRecover = div.querySelector(".button-palette");
+    btnRecover.addEventListener('click',()=>{
+      this.recoverNote();
     });
     return div;
   }
