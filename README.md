@@ -4,7 +4,7 @@ Keepable is a take-nothing service and productivity app designed by Codeable
 students in which users can post amazing notes.
 
 ## Members (Group 40)
-* Marcelo uñez
+* Marcelo Nuñez
 * Rai Delgado
 * Ricardo Huamani
 
