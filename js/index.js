@@ -333,4 +333,4 @@ function generate_note(note) {
 // state.add_note('note deleted', 'note-deleted-description', 'blue');
 // state.trash_a_note(2);
 
-//click_notes()
+click_notes()
