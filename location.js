@@ -9,6 +9,18 @@ function renderAppView(view) {
     [...deleteButtons].forEach((button) =>
       button.addEventListener("click", softDelete)
     );
+    /* add color changer */
+    function addColorPicker(note) {
+      const colors = note.querySelectorAll('.color-picker div')
+      colors.forEach(function (color) {
+        color.onclick = function () {
+          const [_, color] = this.className.split(' ')
+          note.className = `add-keep ${color}`
+        }
+      })
+    }
+    const notes = document.querySelectorAll('.add-keep')
+    notes.forEach(addColorPicker)
   }
   if (view == "trash") {
     //console.log("estas viendo los notes borrados");

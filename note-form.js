@@ -1,4 +1,11 @@
 const form = document.getElementById("note-form");
+const picker = form.querySelectorAll('.color-picker div')
+
+picker.forEach(color => color.onclick = function(){
+  const [_, color] = this.className.split(' ')
+  form.nextColor = color;
+  form.parentElement.className = `content-note ${color}`
+})
 
 form.onsubmit = function (event) {
   event.preventDefault();

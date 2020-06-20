@@ -13,7 +13,7 @@ html {
 /* GLOBALS */
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
   line-height: 2;
   background-color: #1d2128;
@@ -118,6 +118,7 @@ body {
   resize: none;
   margin-top: 2rem;
   outline: inherit;
+  background: none;
 }
 
 .content-buttons {
@@ -131,7 +132,7 @@ body {
 }
 
 .btn-paleta {
-  background-color: #ffffff;
+  background-color: none;
   border: none;
   cursor: pointer;
   padding: 0;
@@ -191,6 +192,10 @@ body {
   background-color: #ffffff;
   box-shadow: 5px 5px 15px rgba(153, 155, 158, 0.85);
   border-radius: 1rem;
+}
+
+.add-keep textarea{
+  background: none;
 }
 
 .keep {
@@ -257,4 +262,66 @@ body {
 #keep-4,
 .keep-4 {
   background-color: #cbf0f8;
+}
+
+/* picker */
+.btn-paleta{
+  position: relative;
+  cursor: initial;
+}
+
+.color-picker {
+  position: absolute;
+  display: none;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 13.85rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 3px rgb(26, 26, 26);
+  padding: 4px 8px;
+}
+.btn-paleta:hover .color-picker{
+  display: flex;
+}
+.color-picker__color {
+  cursor: pointer;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  margin: .25rem .2rem;
+}
+.white {
+  background: #fff;
+  border: 1px solid #0003;
+}
+.keep-white {
+  background: #fff;
+}
+.red, .keep-red {
+  background: #f28b82;
+}
+.orange, .keep-orange {
+  background: #fbbc04;
+}
+.yellow, .keep-yellow {
+  background: #fff475;
+}
+.green, .keep-green {
+  background: #ccff90;
+}
+.lightgreen, .keep-lightgreen {
+  background: #a7ffeb;
+}
+.skyblue, .keep-skyblue {
+  background: #cbf0f8;
+}
+.blue, .keep-blue {
+  background: #aecbfa;
+}
+.purple, .keep-purple {
+  background: #d7aefb;
+}
+.pink, .keep-pink {
+  background: #fdcfe8;
 }
