@@ -1,18 +1,25 @@
+NodeList.prototype.find = Array.prototype.find;
 const btnNotes = document.querySelector('#btnNotes');
 const btnTrashNotes = document.querySelector('#btnTrashNotes');
 const containerNotes = document.querySelector('.container-notes');
 const containerTrash = document.querySelector('.container-trash-notes');
-NodeList.prototype.find = Array.prototype.find;
 
 var app = new App({
   notesContainer: document.querySelector('#notes-container'),
 });
 
-const createNoteButtons = document.querySelector('#create-note-buttons');
-const buttonPalette = Note.createButtonPalette()
-createNoteButtons.append(buttonPalette);
 
+const createNoteButtons = document.querySelector('#create-note-buttons');
+const buttonPalette = Note.createButtonPalette();
+createNoteButtons.append(buttonPalette);
 const createNoteForm = document.querySelector('#create-note-form');
+const colorButtons = createNoteButtons.querySelectorAll('.button-palette__color');
+colorButtons.forEach((colorButton) => {
+  colorButton.addEventListener('click', (e) => {
+    const color = e.target.style.backgroundColor;
+    createNoteForm.style.backgroundColor = color;
+  });
+});
 
 createNoteForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -26,6 +33,7 @@ createNoteForm.addEventListener('submit', (e) => {
   app.createNote({ body, color });
   textarea.value = '';
   radiobuttons[0].checked = true;
+  createNoteForm.style.backgroundColor = Note.colors[0];
   app.renderNotes();
 });
 
