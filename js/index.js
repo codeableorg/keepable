@@ -71,7 +71,6 @@ let state = {
       return;
     }
     this.notes[note_index].color = color;
-    this.refresh_current_page();
   },
   remove_trashed_note(id) {
     const note_index = this.notes.findIndex(
@@ -138,9 +137,10 @@ let state = {
   create_form: function (fragment) {
     const create_note_from_form = function (event) {
       console.log(event.target.querySelector("#title").value);
-      const title = event.target.querySelector("#title").value;
-      const textarea = event.target.querySelector("#textarea").value;
-      state.add_note(title, textarea);
+      const title = event.target.querySelector("#title").value
+      const textarea = event.target.querySelector("#textarea").value
+      const color = event.target.querySelector("#color").value
+      state.add_note(title, textarea, color);
       state.render_note_page();
       event.preventDefault();
     };
@@ -150,30 +150,38 @@ let state = {
     div.innerHTML = `<form action="" class="new_note">
         <input id="title" class="title" type="text" placeholder="The title for my new note">
         <textarea name="" id="textarea" cols="30" rows="10" placeholder="Some great think!"></textarea> 
+        <input id="color" type="hidden" value="n_white">
 
         <div class="new_note_footer">
           <div class="note_img palette">
             <img class="palette_img" src="images/palette.png" alt="color palette">
             <div class="color_palette">
               <div class="color_row_options">
-                <div class="color_option white"></div>
-                <div class="color_option rose"></div>
-                <div class="color_option orange"></div>
-                <div class="color_option yellow"></div>
-                <div class="color_option green"></div>
+                <div class="color_option pointer white"></div>
+                <div class="color_option pointer rose"></div>
+                <div class="color_option pointer orange"></div>
+                <div class="color_option pointer yellow"></div>
+                <div class="color_option pointer green"></div>
               </div>
               <div class="color_row_options">
-                <div class="color_option turquoise"></div>
-                <div class="color_option light_blue"></div>
-                <div class="color_option purple"></div>
-                <div class="color_option fuchsia"></div>
-                <div class="color_option pale_rose"></div>
+                <div class="color_option pointer turquoise"></div>
+                <div class="color_option pointer light_blue"></div>
+                <div class="color_option pointer purple"></div>
+                <div class="color_option pointer fuchsia"></div>
+                <div class="color_option pointer pale_rose"></div>
               </div>
             </div>
           </div>
           <button class="note_save">Keep it!</button>
         </div>
       </form>`;
+    div.querySelectorAll(".color_option").forEach((option) => {
+      let classOption = option.classList.item(2);
+      option.addEventListener('click', (event) => {
+        event.currentTarget.closest(".new_note").className = `new_note ${classOption}`; 
+        event.currentTarget.closest(".new_note").querySelector("#color").value = classOption;
+      });
+    });
     fragment.append(div);
     fragment.firstChild.addEventListener("submit", (event) =>
       create_note_from_form(event)
@@ -181,8 +189,9 @@ let state = {
     return fragment;
   },
 
-  generate_not_trashed_notes: function (fragment) {
-    const not_trashed_notes = this.notes.filter((el) => el.trashed === false);
+
+  generate_not_trashed_notes : function (fragment){
+    const not_trashed_notes = this.notes.filter((el) => el.trashed===false);
 
     if (not_trashed_notes.length !== 0) {
       const [not_pinned, pinned] = not_trashed_notes.reduce(
@@ -392,20 +401,28 @@ function generate_note(note) {
     palete_item.innerHTML = `<img class="palette_img" src="images/palette.png" alt="color palette">
     <div class="color_palette">
       <div class="color_row_options">
-        <div class="color_option white"></div>
-        <div class="color_option rose"></div>
-        <div class="color_option orange"></div>
-        <div class="color_option yellow"></div>
-        <div class="color_option green"></div>
+        <div class="color_option pointer white"></div>
+        <div class="color_option pointer rose"></div>
+        <div class="color_option pointer orange"></div>
+        <div class="color_option pointer yellow"></div>
+        <div class="color_option pointer green"></div>
       </div>
       <div class="color_row_options">
-        <div class="color_option turquoise"></div>
-        <div class="color_option light_blue"></div>
-        <div class="color_option purple"></div>
-        <div class="color_option fuchsia"></div>
-        <div class="color_option pale_rose"></div>
+        <div class="color_option pointer turquoise"></div>
+        <div class="color_option pointer light_blue"></div>
+        <div class="color_option pointer purple"></div>
+        <div class="color_option pointer fuchsia"></div>
+        <div class="color_option pointer pale_rose"></div>
       </div>
-    </div>`;
+    </div>`
+    palete_item.querySelectorAll(".color_option").forEach((option) => {
+      let classOption = option.classList.item(2);
+      option.addEventListener('click', (event) => {
+        event.currentTarget.closest(".note").className = `note ${classOption}`; 
+        state.change_color_of_note(note.index, classOption)
+      });
+    });
+
     note_footer.append(palete_item);
 
     let delete_item = document.createElement("div");
@@ -442,8 +459,8 @@ function generate_note(note) {
   return note_element;
 }
 
-state.add_note("Titulo 1", "Description de note 1", "orange");
-state.add_note("Titulo 2", "Description de note 2", "green");
+// state.add_note('Titulo 1', 'Description de note 1', 'orange');
+// state.add_note('Titulo 2', 'Description de note 2', 'green');
 // state.add_note('note deleted', 'note-deleted-description', 'blue');
 // state.trash_a_note(2);
 
