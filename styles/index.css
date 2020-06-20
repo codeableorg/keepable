@@ -203,6 +203,10 @@ nav div button {
   
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .note_img {
   height: 36px;
   width: 36px;

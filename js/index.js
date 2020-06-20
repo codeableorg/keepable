@@ -207,7 +207,7 @@ let state = {
       </div>`;
       fragment.append(empty_message);
     }
-    
+
     return fragment;
   },
 
@@ -226,23 +226,23 @@ let state = {
 //callbacks
 
 function callback_trash_the_note(event) {
-  state.trash_a_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+  state.trash_a_note(Number(event.currentTarget.parentNode.parentNode.getAttribute("note_id")))
 }
 
 function callback_remove_trashed_note(event) {
-  state.remove_trashed_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+  state.remove_trashed_note(Number(event.currentTarget.parentNode.parentNode.getAttribute("note_id")))
 }
 
 function callback_restore_trashed_note(event) {
-  state.restore_trashed_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+  state.restore_trashed_note(Number(event.currentTarget.parentNode.parentNode.getAttribute("note_id")))
 }
 
-function callback_pin_a_note(params) {
-  state.pin_a_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+function callback_pin_a_note(event) {
+  state.pin_a_note(Number(event.currentTarget.parentNode.parentNode.getAttribute("note_id")))
 }
 
-function callback_unpin_a_note(params) {
-  state.unpin_a_note(Number(event.currentTarget.parentNode.getAttribute("note_id")))
+function callback_unpin_a_note(event) {
+  state.unpin_a_note(Number(event.currentTarget.parentNode.parentNode.getAttribute("note_id")))
 }
 
 function generate_note(note) {
@@ -253,8 +253,7 @@ function generate_note(note) {
   let header = document.createElement('div');
   header.className = `note_header`;
   header.innerHTML = 
-  `<h1 class="note_title">${note.title}</h1>
-  <img class="note_pin" src="images/pin.png" alt="">`;
+  `<h1 class="note_title">${note.title}</h1>`;
   note_element.append(header);
 
   let note_body = document.createElement('p');
@@ -262,12 +261,26 @@ function generate_note(note) {
   note_body.innerText = `${note.content}`;
   note_element.append(note_body);
 
-
   let note_footer = document.createElement('div')
   note_footer.className = `note_footer_imgs`;
-  note_footer.innerHTML = 
-  `<div class="note_img palette">
-    <img class="palette_img" src="images/palette.png" alt="color palette">
+
+  if (note.trashed) {
+    let delete_item = document.createElement('div');
+    delete_item.className = `note_img pointer`;
+    delete_item.innerHTML = `<img class="trash" src="images/trash_can.png" alt="delete">`;
+    delete_item.addEventListener('click', (event) => callback_remove_trashed_note(event));
+    note_footer.append(delete_item);
+
+    let restore_item = document.createElement('div');
+    restore_item.className = `note_img pointer`;
+    restore_item.innerHTML = `<img class="restore" src="images/restore.svg" alt="restore">`;
+    restore_item.addEventListener('click', (event) => callback_restore_trashed_note(event));
+    note_footer.append(restore_item);
+  } else{
+    let palete_item = document.createElement('div');
+    palete_item .className = `note_img palette`;
+    palete_item.innerHTML = 
+    `<img class="palette_img" src="images/palette.png" alt="color palette">
     <div class="color_palette">
       <div class="color_row_options">
         <div class="color_option white"></div>
@@ -283,45 +296,28 @@ function generate_note(note) {
         <div class="color_option fuchsia"></div>
         <div class="color_option pale_rose"></div>
       </div>
-    </div>
-  </div>
+    </div>`
+    note_footer.append(palete_item);
 
-  <div class="note_img">
-    <img class="trash" src="images/trash_can.png" alt="delete">
-  </div>`;
+    let delete_item = document.createElement('div');
+    delete_item.className = `note_img pointer`;
+    delete_item.innerHTML = `<img class="trash" src="images/trash_can.png" alt="delete">`;
+    delete_item.addEventListener('click', (event) => callback_trash_the_note(event));
+    note_footer.append(delete_item);
+
+    let image_header = document.createElement('img');
+    image_header.className = 'note_pin pointer';
+    image_header.src = 'images/pin.png';
+    header.append(image_header);
+
+    if (note.pinned) {
+      header.querySelector(".pointer").addEventListener('click', (event) => callback_unpin_a_note(event));
+    } else {
+      header.querySelector(".pointer").addEventListener('click', (event) => callback_pin_a_note(event));
+    }
+  }
+
   note_element.append(note_footer);
-
-
-
-
-
-  // if (note.trashed) {
-  //   let delete_item = document.createElement('div');
-  //   delete_item.innerText = "Click para Eliminar permanentemente";
-  //   delete_item.addEventListener('click', (event) => callback_remove_trashed_note(event));
-  //   note_element.append(delete_item);
-
-  //   let restore_item = document.createElement('div');
-  //   restore_item.innerText = "Click para restaurar";
-  //   restore_item.addEventListener('click', (event) => callback_restore_trashed_note(event));
-  //   note_element.append(restore_item);
-  // } else {
-  //   let trash_item = document.createElement('div');
-  //   trash_item.innerText = "Click para Enviar a trash";
-  //   trash_item.addEventListener('click', (event) => callback_trash_the_note(event));
-  //   note_element.append(trash_item);
-
-  //   let pin_option_item = document.createElement('div');
-  //   if (note.pinned) {
-  //     pin_option_item.innerText = "Click para hacer unpin a una nota";
-  //     pin_option_item.addEventListener('click', (event) => callback_unpin_a_note(event));
-  //   } else {
-  //     pin_option_item.innerText = "Click para hacer pin a una nota";
-  //     pin_option_item.addEventListener('click', (event) => callback_pin_a_note(event));
-  //   }
-  //   note_element.append(pin_option_item);
-  // }
-
   return note_element;
 }
 
