@@ -7,8 +7,6 @@ const trashSidebar = document.querySelector('#sidebar_trash');
 // AÑADIR NOTAS
 const noteSubmit = document.getElementById('note-submit');
 
-const colorButton = document.querySelector('.new-note__color');
-const paletteColors = document.querySelector('.palette-colors');
 const newNoteWrapper = document.getElementById('new-note');
 
 function addNote(trash = false, pinned = false) {
@@ -19,8 +17,8 @@ function addNote(trash = false, pinned = false) {
     title: noteTitle,
     body: noteBody,
     color: getComputedStyle(newNoteWrapper)['background-color'],
-    trash: this.trash,
-    pinned: this.pinned,
+    trash: trash,
+    pinned: pinned,
     updatedAt: Date.now(),
   };
 
@@ -40,8 +38,54 @@ noteSubmit.addEventListener('click', () => {
   clearElement(allNotes); // remove all notes to inmediately re-create them
   addNote();
   createAllNotes(notes);
+  openPaletteColor();
+  changeNoteColor();
   newNoteWrapper.style.backgroundColor = '#ffffff';
 });
+
+// functions to add option buttons
+function addColorButton(color, hex, parent) {
+  const button = document.createElement('button');
+  button.classList.add('color');
+  button.classList.add(color);
+  button.setAttribute('data-color', hex);
+  parent.appendChild(button);
+}
+
+function addOptionButtons(parent) {
+  const paletteButton = document.createElement('div');
+  paletteButton.classList.add('new-note__color');
+  paletteButton.id = 'colorSelector';
+
+  const paletteImage = document.createElement('img');
+  paletteImage.setAttribute('src', 'images/Frame 7.svg');
+  paletteButton.appendChild(paletteImage);
+  parent.appendChild(paletteButton);
+
+  const paletteMenu = document.createElement('div');
+  paletteMenu.classList.add('palette-colors');
+  paletteMenu.classList.add('hidden');
+
+  const trashButton = document.createElement('div');
+
+  const trashImage = document.createElement('img');
+  trashImage.setAttribute('src', 'images/Frame 8.svg');
+  trashButton.appendChild(trashImage);
+
+  addColorButton('white', '#ffffff', paletteMenu);
+  addColorButton('coral', '#f28b82', paletteMenu);
+  addColorButton('orange', '#fbbc04', paletteMenu);
+  addColorButton('yellow', '#fff475', paletteMenu);
+  addColorButton('green', '#ccff90', paletteMenu);
+  addColorButton('aquamarine', '#a7ffeb', paletteMenu);
+  addColorButton('light-blue', '#cbf0f8', paletteMenu);
+  addColorButton('blue', '#aecbfa', paletteMenu);
+  addColorButton('purple', '#d7aefb', paletteMenu);
+  addColorButton('pink', '#fdcfe8', paletteMenu);
+  parent.appendChild(paletteMenu);
+
+  parent.appendChild(trashButton);
+}
 
 //show list of notes
 function createNote(note) {
@@ -67,14 +111,16 @@ function createNote(note) {
   iconsContainer.className = 'icons-container';
   noteContainer.appendChild(iconsContainer);
 
-  const paletteImage = document.createElement('img');
-  paletteImage.src = 'images/Frame 7.svg';
-  paletteImage.id = 'colorSelector';
-  iconsContainer.appendChild(paletteImage);
+  addOptionButtons(iconsContainer);
 
-  const trashImage = document.createElement('img');
-  trashImage.src = 'images/Frame 8.svg';
-  iconsContainer.appendChild(trashImage);
+  // const paletteImage = document.createElement('img');
+  // paletteImage.src = 'images/Frame 7.svg';
+  // paletteImage.id = 'colorSelector';
+  // iconsContainer.appendChild(paletteImage);
+
+  // const trashImage = document.createElement('img');
+  // trashImage.src = 'images/Frame 8.svg';
+  // iconsContainer.appendChild(trashImage);
 
   return noteContainer;
 }
@@ -111,16 +157,25 @@ trashSidebar.addEventListener('click', (event) => {
 
 //User can include custom color while creating a note y ya se agrega color a la nota que se crea.
 function openPaletteColor() {
-  colorButton.addEventListener('click', () => paletteColors.classList.toggle('hidden'));
+  const colorButtons = document.querySelectorAll('.new-note__color');
+  colorButtons.forEach((button) => {
+    button.addEventListener('click', () => button.nextElementSibling.classList.toggle('hidden'));
+  });
 }
 
 openPaletteColor();
 
-document.querySelectorAll('.color').forEach((color) =>
-  color.addEventListener('click', (event) => {
-    const buttonSelected = event.target;
-    const color = buttonSelected.dataset.color;
-    newNoteWrapper.style.backgroundColor = color;
-    paletteColors.classList.toggle('hidden');
-  })
-);
+function changeNoteColor() {
+  document.querySelectorAll('.color').forEach((color) => {
+    const paletteColors = color.closest('.palette-colors');
+    const noteWrapper = color.closest('article') || newNoteWrapper;
+    color.addEventListener('click', (event) => {
+      const buttonSelected = event.target;
+      const color = buttonSelected.dataset.color;
+      noteWrapper.style.backgroundColor = color;
+      paletteColors.classList.toggle('hidden');
+    });
+  });
+}
+
+changeNoteColor();
