@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/normalize.css" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <title>Keepable</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="content-header">
+        <div class="bar">
+          <a href="/">
+            <p class="bar-logo">{keep<span>able</span>}</p>
+          </a>
+          <p class="bar-welcome">
+            <span>Welcome to {keepable}</span>. Today's Forecast for Santiago de
+            Surco, Lima Province, Peru: 18º, Cloudy
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT MAIN  -->
+
+    <main class="site-main">
+      <div class="content-main">
+        <div class="content-main-slide">
+          <a class="slide-notes" href="/notes.html">
+            <img src="/assets/icon-curly-brackets.png" /> Notes</a
+          >
+          <a class="slide-trash" href="/trash.html">
+            <img src="/assets/icon-trash.png" /> Trash</a
+          >
+        </div>
+
+        <div class="content-main-center">
+          <div class="content-note">
+            <form action="#">
+              <textarea
+                class="textarea-keep"
+                placeholder="Some great think!"
+              ></textarea>
+              <div class="content-buttons">
+                <button class="btn-paleta">
+                  <img src="/assets/icon-paleta.png" alt="button-paleta" />
+                </button>
+                <button class="btn-keep">Keet it!</button>
+              </div>
+            </form>
+          </div>
+          <div class="content-textnote">
+            <span class="span-curly">{</span>
+            <p>Notes you add appear here!</p>
+            <span class="span-curly">}</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
